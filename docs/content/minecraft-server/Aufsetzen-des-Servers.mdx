@@ -1,0 +1,40 @@
+---
+sidebar_position: 1
+---
+
+> Alles was mit der Organisation des Minecraft-Servers zutun hat
+
+WIP: Doku Server-Setup
+Der Minecraft-Bedrock-Server wurde auf einer Linux-Maschine (Ubuntu 26.04.1 LTS) mithilfe von Docker installiert. Genutzt wurde das Docker-Image [ghcr.io/itzg/docker-minecraft-bedrock-server/](https://github.com/itzg/docker-minecraft-bedrock-server/pkgs/container/minecraft-bedrock-server). 
+Dies ist die `compose.yml`-Konfigurationsdatei für den Server:
+
+```yml
+services:
+  minecraft-bedrock-server:
+    container_name: "minecraft-bedrock-server"
+    image: ghcr.io/itzg/minecraft-bedrock-server
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+    environment:
+      EULA: "TRUE"
+      SERVER_PORT: "19132"
+      SERVER_PORT_V6: "19133"
+      ENABLE_BDS_V6BIND_FIX: "true"
+      ALLOW_LIST: "true"
+      ALLOW_CHEATS: "true"
+    ports:
+      - "19132:19132/udp"
+      - "19133:19133/udp"
+    volumes:
+      - ./data:/data
+    networks:
+      - mc-server
+
+networks:
+  mc-server:
+    driver: bridge
+    driver_opts:
+      com.docker.network.driver.mtu: "1400"
+```
+Um den Bedrock-Server öffentlich erreichbar zu machen, musste außerdem Port 19132 auf Seiten des VPS-Anbieters geöffnet werden. Auf dem Host selbst muss keine Firewall-Konfiguration vorgenommen werden, da der Docker-Daemon diese umgeht.
