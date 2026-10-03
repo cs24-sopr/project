@@ -1,0 +1,8 @@
+{
+  "label": "Minecraft-Server",
+  "position": 1,
+  "link": {
+    "type": "generated-index",
+    "description": "Alles, was infrastrukturell mit dem Minecraft-Server zutun hat."
+  }
+}
