@@ -2,10 +2,12 @@
 sidebar_position: 1
 ---
 
-> Alles was mit der Organisation des Minecraft-Servers zutun hat
+# Aufsetzen des Servers
 
-WIP: Doku Server-Setup
-Der Minecraft-Bedrock-Server wurde auf einer Linux-Maschine (Ubuntu 26.04.1 LTS) mithilfe von Docker installiert. Genutzt wurde das Docker-Image [ghcr.io/itzg/docker-minecraft-bedrock-server/](https://github.com/itzg/docker-minecraft-bedrock-server/pkgs/container/minecraft-bedrock-server). 
+Der Minecraft-Bedrock-Server wurde auf einer Linux-Maschine (Ubuntu 26.04.1 LTS) mithilfe von Docker installiert. 
+Genutzt wurde das Docker-Image [ghcr.io/itzg/docker-minecraft-bedrock-server/](https://github.com/itzg/docker-minecraft-bedrock-server/pkgs/container/minecraft-bedrock-server). 
+Mithilfe der `environment`-Variablen wurde sichergestellt, dass der Server auf dem Standardport nicht mit einer IPv6-Adresse lauscht, denn IPv6 sorgt bei solch einem Anwendungszweck oft zu Problemen.
+Ebenso musste die MTU auf 1400 angepasst werden, da der standard Docker-Network-Treiber eine höhere MTU ansetzt, was inkompatibel mit einem Bedrock-Server ist. 
 Dies ist die `compose.yml`-Konfigurationsdatei für den Server:
 
 ```yml
@@ -37,4 +39,8 @@ networks:
     driver_opts:
       com.docker.network.driver.mtu: "1400"
 ```
-Um den Bedrock-Server öffentlich erreichbar zu machen, musste außerdem Port 19132 auf Seiten des VPS-Anbieters geöffnet werden. Auf dem Host selbst muss keine Firewall-Konfiguration vorgenommen werden, da der Docker-Daemon diese umgeht.
+Um den Bedrock-Server öffentlich erreichbar zu machen, musste außerdem Port 19132 auf Seiten des VPS-Anbieters geöffnet werden.
+Auf dem Host selbst muss keine Firewall-Konfiguration vorgenommen werden, da der Docker-Daemon diese umgeht.
+Im Anschluss wurde ein DNS-Name für die IP-Adresse des Servers angelegt, wodurch der Server für Minecraft-Clients einfach erreichbar gemacht wurde. 
+(Minecraft-Clients wählen - wenn nicht anders spezifiziert - automatisch den Standardport für ihre Multiplayer-Server. 
+Also Port 25565 für die Java-Edition und Port 19132 für die Bedrock-Edition).
