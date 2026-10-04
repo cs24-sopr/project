@@ -1,24 +1,24 @@
 ---
-name: Aufgabe / Feature
-about: Standard-Template nach WAS, WIE und TEST
+name: Task / Feature
+about: Standard template with WHAT, HOW, and TEST sections
 title: '[TASK] '
 labels: ''
 assignees: ''
 ---
 
-## 📌 WAS (Ziel / Anforderung)
-<!-- Was soll gebaut, geändert oder behoben werden? Welches Problem lösen wir? -->
+## 📌 WHAT (Goal / Requirement)
+<!-- What should be built, changed, or fixed? What problem are we solving? -->
 - 
 
 ---
 
-## 🛠 WIE (Umsetzung / Technischer Ansatz)
-<!-- Wie soll es implementiert werden? Relevante Dateien, APIs, Architektur oder Schritte -->
+## 🛠 HOW (Implementation / Technical Approach)
+<!-- How should this be implemented? Relevant files, APIs, architecture, or steps -->
 - 
 
 ---
 
-## ✅ TEST / Erwartetes Verhalten (Akzeptanzkriterien)
-<!-- Wie wird überprüft, ob die Aufgabe erfolgreich erledigt ist? -->
-- [ ] Erwartetes Verhalten / Testfall 1
-- [ ] Testfall 2
+## ✅ TEST / Expected Behavior (Acceptance Criteria)
+<!-- How do we verify that this task is completed successfully? -->
+- Expected behavior / test case 1
+- Test case 2
