@@ -1,0 +1,8 @@
+{
+  "label": "Projekt Doku",
+  "position": 1,
+  "link": {
+    "type": "generated-index",
+    "description": "Alles was die Organisation selbst betrifft."
+  }
+}
