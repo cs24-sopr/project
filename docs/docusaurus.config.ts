@@ -43,7 +43,7 @@ const config: Config = {
                     routeBasePath: '/',
                     path: 'content',
                     editUrl:
-                        'https://github.com/cs24-sopr/project/tree/main/packages/',
+                        'https://github.com/cs24-sopr/project/tree/main/docs/',
                 },
             } satisfies Preset.Options,
         ],
