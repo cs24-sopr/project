@@ -33,6 +33,13 @@ Dies ist der verwendete Befehl um ein Backup zu erstellen:
 
 `split -b 2G` teilt das resultierende komprimierte Archiv ggfs. in Einzelteile auf
 
+### Sicherung
+
+Die entstandenen `.tar.zst` Dateien können dann gesichert werden.
+Hier wurden diese versioniert und auf Github als _Release_ publiziert:
+
+`gh release create v0.0.1 --title "Minecraft World v0.0.1" /opt/minecraft/some_minecraft_backup.tar.zst.*`
+
 ### Restore
 
 Um ein Backup wiederherzustellen werden die folgenden Schritte durchgeführt:
