@@ -1,0 +1,32 @@
+---
+sidebar_position: 2
+---
+
+# Backups
+
+Um Datenverlusten vorzubeugen, muss die Minecraft-Welt regelmäßig gesichert werden.
+Da für den Docker-Container ein sog. Bind-Mount verwendet wurde, kann die Welt direkt aus dem Ordner
+`/data/worlds/level/` exportiert werden. Dort befinden sich die "rohen" Spieldateien:
+
+```
+root@ubuntu:/opt/minecraft# ls data/worlds/level/
+db  level.dat  level.dat_old  levelname.txt
+```
+
+Um nun ein komprimiertes Archiv aus diesen Dateien zu erstellen musste folgendes bedacht werden:
+
+- Die Komprimierung muss eine sinnvolle Balance zwischem dem Komprimierungsfaktor und der Compute-Effizienz der Operation treffen.
+- Ein bereits in Linux integriertes Tool zum Komprimieren ist bevorzugt
+- Das Archiv muss, falls es größer als 2GiB ist, in mehrere Dateien aufgespaltet werden, da die Welt auf Github gesichert werden soll. Ein Angang darf dort maximal 2GiB groß sein.
+
+Die Entscheidung fiel aufgrund dieser Faktoren auf `tar` / `zst`:
+`sudo apt update && sudo apt install -y zstd`
+
+Dies ist der verwendete Befehl um ein Backup zu erstellen:
+`tar -cf - data/worlds/level | zstd -19 -T0 | split -b 2G -d - some_minecraft_backup.tar.zst.`
+
+`tar -cf` bündelt die Inhalte des Ordners in einen einzigen gebündelten Stream
+
+`zstd -19 -T0` komprimiert diesen so stark wie möglich unter Verwendung aller verfügbaren CPU-Threads
+
+`split -b 2G` teilt das resultierende komprimierte Archiv ggfs. in Einzelteile auf
