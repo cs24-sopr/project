@@ -8,6 +8,8 @@ Um Datenverlusten vorzubeugen, muss die Minecraft-Welt regelmäßig gesichert we
 Da für den Docker-Container ein sog. Bind-Mount verwendet wurde, kann die Welt direkt aus dem Ordner
 `/data/worlds/level/` exportiert werden. Dort befinden sich die "rohen" Spieldateien:
 
+### Komprimierung
+
 ```
 root@ubuntu:/opt/minecraft# ls data/worlds/level/
 db  level.dat  level.dat_old  levelname.txt
@@ -30,3 +32,35 @@ Dies ist der verwendete Befehl um ein Backup zu erstellen:
 `zstd -19 -T0` komprimiert diesen so stark wie möglich unter Verwendung aller verfügbaren CPU-Threads
 
 `split -b 2G` teilt das resultierende komprimierte Archiv ggfs. in Einzelteile auf
+
+### Restore
+
+Um ein Backup wiederherzustellen werden die folgenden Schritte durchgeführt:
+
+Erst wird der Server gestoppt
+
+```
+root@ubuntu:/opt/minecraft# docker compose down
+[+] down 2/2
+ ✔ Container minecraft-bedrock-server Removed                                                                                    0.7s
+ ✔ Network minecraft_bedrock-net      Removed
+```
+
+Im Anschluss wird der existierende Inhalt des `level` Ordners geleert
+
+```
+root@ubuntu:/opt/minecraft# rm -rf data/worlds/level/*
+root@ubuntu:/opt/minecraft# ls data/worlds/level/
+```
+
+Dann kann das Archiv in diesen Ordner entpackt, und der Server wieder gestartet werden
+
+```
+root@ubuntu:/opt/minecraft# cat a_minecraft_backup.tar.zst.* | tar -I zstd -xf - -C /opt/minecraft/
+root@ubuntu:/opt/minecraft# ls data/worlds/level/
+db  level.dat  level.dat_old  levelname.txt
+root@ubuntu:/opt/minecraft# docker compose up -d
+[+] up 2/2
+ ✔ Network minecraft_bedrock-net      Created                                                                                    0.0s
+ ✔ Container minecraft-bedrock-server Started                                                                                    0.3s
+```
