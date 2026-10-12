@@ -5,7 +5,7 @@ Guidelines for AI agents (and LLM-assisted workflows) contributing to this repos
 ## 1. No AI Slop & Clean Typography
 
 - **No Em-Dashes or En-Dashes:** Do NOT use em-dashes (`—`) or en-dashes (`–`). Use standard ASCII hyphens (`-`), colons, commas, or parentheses instead.
-- **Standard Punctuation:** Use standard ASCII quotes (`"` and `'`), never curly / smart quotes (`“`, `”`, `‘`, `’`) in code or markdown.
+- **Standard Punctuation:** Use standard ASCII quotes (`"` and `'`), never curly or smart quotes (`“`, `”`, `‘`, `’`, `„`) in code or markdown.
 - **No Buzzword Fluff:** Avoid generic AI filler words and cliches (e.g., *delve*, *testament*, *tapestry*, *crucial*, *vital*, *foster*, *streamline*, *robust*).
 - **Concise & Direct:** Be factual, precise, and direct. Omit conversational filler, sycophancy, and unnecessary meta-commentary ("Certainly!", "Here is a breakdown...", "In conclusion...").
 - **No Over-Formatting:** Do not bold words excessively. Do not spam decorative emojis in headings or lists.
