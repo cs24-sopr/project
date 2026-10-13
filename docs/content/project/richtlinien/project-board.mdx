@@ -10,7 +10,7 @@ Das zentrale Board für das gesamte Projekt ist unter folgendem Link erreichbar:
 
 - **Board-Link:** [GitHub Project Board #3](https://github.com/orgs/cs24-sopr/projects/3)
 
-Alle Teams arbeiten im selben Board. Getrennte Boards pro Team führen zu hohem Wartungsaufwand, Informationssilos und erschweren den teamübergreifenden Überblick.
+Alle Teams arbeiten im selben Board. Tickets für andere Teams werden also einfach in ihrem Repository angelegt und ihr Team zugewiesen.
 
 ## 1. Felder im Project Board
 
@@ -18,9 +18,9 @@ Jedes Issue wird über folgende Felder verwaltet:
 
 | Feld | Bedeutung & Optionen |
 | :--- | :--- |
-| **Assigned Team** | Ordnet das Issue eindeutig einem Team zu (z. B. Orga, Builder, Interaktionsprogrammierung, Asset-Design, Recherche, Story-Design). |
+| **Assigned Team** | Ordnet das Issue eindeutig einem Team zu. |
 | **Status** | Aktueller Bearbeitungsstand (siehe Workflow unten). |
-| **Story Points** | Schätzung des relativen Aufwands für die Aufgabe (z. B. 1, 2, 3, 5, 8). |
+| **Story Points** | Schätzung des relativen Aufwands für die Aufgabe. |
 | **Sprint** | Zugewiesener Sprint gemäß Namensschema `TEAMNAME-SPRINT-X` (z. B. `ORGA-SPRINT-1`). |
 | **Labels** | Können von jedem Team nach eigenem Bedarf flexibel definiert und genutzt werden (z. B. zur thematischen Unterteilung, für Feature-Typen oder Prioritäten). **Wichtig:** Labels sind nicht für die Teamzuweisung gedacht; dafür ist ausschließlich das Feld `Assigned Team` zu nutzen. |
 
@@ -31,8 +31,8 @@ Jedes Issue wird über folgende Felder verwaltet:
 ```
 
 - **`BACKLOG`:** Noch nicht in einem aktiven Sprint zugeteilt. Dient als Sammelbecken für Anforderungen und Ideen.
-- **`TODO`:** Für den anstehenden Sprint eingeplant und committet.
-- **`IN PROGRESS`:** Das Issue wird aktiv bearbeitet und ist der ausführenden Person zugewiesen (Assignee).
+- **`TODO`:** Für den anstehenden Sprint eingeplant.
+- **`IN PROGRESS`:** Das Issue wird aktiv bearbeitet und ist einer Person zugewiesen (Assignee).
 - **`DONE`:** Die Aufgabe ist vollständig fertiggestellt, gereviewt und abgenommen.
 
 ## 2. Views und ihre Nutzung
@@ -56,25 +56,3 @@ Das Board bietet drei primäre Views für unterschiedliche Phasen der Sprintarbe
 - **Inhalt:** Alle aktiven Issues des laufenden Sprints.
 - **Pflege:** Zu Beginn jedes neuen Sprints wird oben im Filter der aktuelle Sprintname aktualisiert (z. B. Filter von `ORGA-SPRINT-1` auf `ORGA-SPRINT-2` anpassen).
 - **Zweck:** Tägliches Arbeitsboard für das Team zur Nachverfolgung des Sprintfortschritts.
-
-## 3. Typischer Ablauf im Sprint-Zyklus
-
-1. **Backlog befüllen & schätzen:**
-   - Neues Issue erstellen.
-   - `Assigned Team` setzen.
-   - Story Points im Team besprechen und eintragen.
-   - Status bleibt auf `BACKLOG`, das `Sprint`-Feld bleibt zunächst leer.
-
-2. **Sprint Planning (View "Planning"):**
-   - Das Team wählt im View "Planning" die Aufgaben für den nächsten Sprint aus.
-   - Den ausgewählten Issues wird der neue Sprint zugewiesen (z. B. `BUILDER-SPRINT-1`).
-   - Status der ausgewählten Issues von `BACKLOG` auf `TODO` setzen.
-
-3. **Sprint-Durchführung (View "TEAM - Sprint"):**
-   - Im View "TEAM - Sprint" den Filter auf den aktuellen Sprint anpassen.
-   - Wer eine Aufgabe beginnt, weist sich als Assignee zu und schiebt das Issue auf `IN PROGRESS`.
-   - Nach erfolgreichem Test, PR-Merge oder Abnahme wird das Issue auf `DONE` gesetzt.
-
-4. **Sprint Review & Retro:**
-   - Im Review werden die auf `DONE` stehenden Issues präsentiert.
-   - Nicht fertiggestellte Issues verbleiben entweder im Backlog oder werden im nächsten Planning neu bewertet.
