@@ -1,0 +1,58 @@
+---
+sidebar_position: 3
+---
+
+# Anleitung: GitHub Project Board
+
+> Leitfaden zur Aufgaben- und Sprintverwaltung auf unserem zentralen Project Board.
+
+Das zentrale Board für das gesamte Projekt ist unter folgendem Link erreichbar:
+
+- **Board-Link:** [GitHub Project Board #3](https://github.com/orgs/cs24-sopr/projects/3)
+
+Alle Teams arbeiten im selben Board. Tickets für andere Teams werden also einfach in ihrem Repository angelegt und ihr Team zugewiesen.
+
+## 1. Felder im Project Board
+
+Jedes Issue wird über folgende Felder verwaltet:
+
+| Feld | Bedeutung & Optionen |
+| :--- | :--- |
+| **Assigned Team** | Ordnet das Issue eindeutig einem Team zu. |
+| **Status** | Aktueller Bearbeitungsstand (siehe Workflow unten). |
+| **Story Points** | Schätzung des relativen Aufwands für die Aufgabe. |
+| **Sprint** | Zugewiesener Sprint gemäß Namensschema `TEAMNAME-SPRINT-X` (z. B. `ORGA-SPRINT-1`). |
+| **Labels** | Können von jedem Team nach eigenem Bedarf flexibel definiert und genutzt werden (z. B. zur thematischen Unterteilung, für Feature-Typen oder Prioritäten). **Wichtig:** Labels sind nicht für die Teamzuweisung gedacht; dafür ist ausschließlich das Feld `Assigned Team` zu nutzen. |
+
+### Status-Workflow
+
+```
+[ BACKLOG ] --> [ TODO ] --> [ IN PROGRESS ] --> [ DONE ]
+```
+
+- **`BACKLOG`:** Noch nicht in einem aktiven Sprint zugeteilt. Dient als Sammelbecken für Anforderungen und Ideen.
+- **`TODO`:** Für den anstehenden Sprint eingeplant.
+- **`IN PROGRESS`:** Das Issue wird aktiv bearbeitet und ist einer Person zugewiesen (Assignee).
+- **`DONE`:** Die Aufgabe ist vollständig fertiggestellt, gereviewt und abgenommen.
+
+## 2. Views und ihre Nutzung
+
+Das Board bietet drei primäre Views für unterschiedliche Phasen der Sprintarbeit:
+
+### View 1: "Backlog"
+
+- **Inhalt:** Alle Issues sortiert nach ihrem Status.
+- **Filter:** Über die linke Leiste kann das jeweilige Team gefiltert werden.
+- **Zweck:** Pflege des Aufgabenpools, Schätzung von Story Points und Vorbereitung zukünftiger Arbeitspakete.
+
+### View 2: "Planning"
+
+- **Inhalt:** Alle Issues sortiert bzw. gruppiert nach ihrem zugewiesenen Sprint.
+- **Filter:** Über die linke Leiste kann das jeweilige Team ausgewählt werden.
+- **Zweck:** Schnelle Zuweisung von Issues zu Sprints während des Sprint Plannings sowie Kapazitätsübersicht über vergangene, aktuelle und kommende Sprints.
+
+### View 3: "TEAM - Sprint"
+
+- **Inhalt:** Alle aktiven Issues des laufenden Sprints.
+- **Pflege:** Zu Beginn jedes neuen Sprints wird oben im Filter der aktuelle Sprintname aktualisiert (z. B. Filter von `ORGA-SPRINT-1` auf `ORGA-SPRINT-2` anpassen).
+- **Zweck:** Tägliches Arbeitsboard für das Team zur Nachverfolgung des Sprintfortschritts.
