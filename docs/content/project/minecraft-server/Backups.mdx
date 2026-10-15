@@ -8,6 +8,8 @@ Um Datenverlusten vorzubeugen, muss die Minecraft-Welt regelmäßig gesichert we
 Da für den Docker-Container ein sog. Bind-Mount verwendet wurde, kann die Welt direkt aus dem Ordner
 `/data/worlds/level/` exportiert werden. Dort befinden sich die "rohen" Spieldateien:
 
+### Komprimierung
+
 ```
 root@ubuntu:/opt/minecraft# ls data/worlds/level/
 db  level.dat  level.dat_old  levelname.txt
@@ -30,3 +32,76 @@ Dies ist der verwendete Befehl um ein Backup zu erstellen:
 `zstd -19 -T0` komprimiert diesen so stark wie möglich unter Verwendung aller verfügbaren CPU-Threads
 
 `split -b 2G` teilt das resultierende komprimierte Archiv ggfs. in Einzelteile auf
+
+### Sicherung
+
+Die entstandenen `.tar.zst` Dateien können dann gesichert werden.
+Hier wurden diese versioniert und auf Github als _Release_ publiziert:
+
+`gh release create v0.0.1 --title "Minecraft World v0.0.1" /opt/minecraft/some_minecraft_backup.tar.zst.*`
+
+### Automatisierung
+
+Um die obigen Schritte regelmäßig und automatisch ausführen zu lassen, wurde ein Script angelegt und ein kleiner sog. cronjob auf dem Linux-Host angelegt.
+
+Das Script führt die Schritte nacheinander aus und nutzt die Github-CLI um den Release hochzuladen.
+
+```bash
+#!/usr/bin/bash
+
+DATE=$(date +"%Y.%m.%d.%H%M")
+WORKING_DIR="/tmp/mc_backup_$DATE"
+BACKUP_DIR="/opt/minecraft/data/worlds/"
+
+mkdir -p $WORKING_DIR
+
+cd $WORKING_DIR
+
+echo "Creating archive..."
+tar -cf - -C $BACKUP_DIR level | zstd -19 -T0 | split -b 2G -d - minecraft_backup_$DATE.tar.zst.
+echo "Done."
+
+echo "Publishing to Github..."
+gh release create $DATE --title "Minecraft World $DATE" \
+  --repo cs24-sopr/project \
+  --notes "Automated scripted backup of the minecraft world" $WORKING_DIR/minecraft_backup_$DATE.tar.zst.*
+echo "Finished."
+```
+
+Der Cronjob führt das Script täglich um 4 Uhr aus.
+
+```cron
+0 4 *   *   *     /usr/bin/bash /root/Scripts/mc-world-gh-release.sh
+```
+
+### Restore
+
+Um ein Backup wiederherzustellen werden die folgenden Schritte durchgeführt:
+
+Erst wird der Server gestoppt
+
+```
+root@ubuntu:/opt/minecraft# docker compose down
+[+] down 2/2
+ ✔ Container minecraft-bedrock-server Removed                                                                                    0.7s
+ ✔ Network minecraft_bedrock-net      Removed
+```
+
+Im Anschluss wird der existierende Inhalt des `level` Ordners geleert
+
+```
+root@ubuntu:/opt/minecraft# rm -rf data/worlds/level/*
+root@ubuntu:/opt/minecraft# ls data/worlds/level/
+```
+
+Dann kann das Archiv in diesen Ordner entpackt, und der Server wieder gestartet werden
+
+```
+root@ubuntu:/opt/minecraft# cat a_minecraft_backup.tar.zst.* | tar -I zstd -xf - -C /opt/minecraft/
+root@ubuntu:/opt/minecraft# ls data/worlds/level/
+db  level.dat  level.dat_old  levelname.txt
+root@ubuntu:/opt/minecraft# docker compose up -d
+[+] up 2/2
+ ✔ Network minecraft_bedrock-net      Created                                                                                    0.0s
+ ✔ Container minecraft-bedrock-server Started                                                                                    0.3s
+```
