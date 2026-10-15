@@ -40,6 +40,16 @@ Hier wurden diese versioniert und auf Github als _Release_ publiziert:
 
 `gh release create v0.0.1 --title "Minecraft World v0.0.1" /opt/minecraft/some_minecraft_backup.tar.zst.*`
 
+### Automatisierung
+
+Um die obigen Schritte regelmäßig und automatisch ausführen zu lassen, wurde ein kleiner sog. cronjob auf dem Linux-Host angelegt.
+
+```cron
+0 4 *   *   *     /usr/bin/bash /root/Scripts/mc-world-gh-release.sh
+```
+
+Dieser führt das Script welches die Welt sichert und in einen neuen Github-Release hochlädt täglich um 4 Uhr aus.
+
 ### Restore
 
 Um ein Backup wiederherzustellen werden die folgenden Schritte durchgeführt:
