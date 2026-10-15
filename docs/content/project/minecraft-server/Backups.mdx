@@ -42,13 +42,37 @@ Hier wurden diese versioniert und auf Github als _Release_ publiziert:
 
 ### Automatisierung
 
-Um die obigen Schritte regelmäßig und automatisch ausführen zu lassen, wurde ein kleiner sog. cronjob auf dem Linux-Host angelegt.
+Um die obigen Schritte regelmäßig und automatisch ausführen zu lassen, wurde ein Script angelegt und ein kleiner sog. cronjob auf dem Linux-Host angelegt.
+
+Das Script führt die Schritte nacheinander aus und nutzt die Github-CLI um den Release hochzuladen.
+
+```bash
+#!/usr/bin/bash
+
+DATE=$(date +"%Y.%m.%d.%H%M")
+WORKING_DIR="/tmp/mc_backup_$DATE"
+BACKUP_DIR="/opt/minecraft/data/worlds/"
+
+mkdir -p $WORKING_DIR
+
+cd $WORKING_DIR
+
+echo "Creating archive..."
+tar -cf - -C $BACKUP_DIR level | zstd -19 -T0 | split -b 2G -d - minecraft_backup_$DATE.tar.zst.
+echo "Done."
+
+echo "Publishing to Github..."
+gh release create $DATE --title "Minecraft World $DATE" \
+  --repo cs24-sopr/project \
+  --notes "Automated scripted backup of the minecraft world" $WORKING_DIR/minecraft_backup_$DATE.tar.zst.*
+echo "Finished."
+```
+
+Der Cronjob führt das Script täglich um 4 Uhr aus.
 
 ```cron
 0 4 *   *   *     /usr/bin/bash /root/Scripts/mc-world-gh-release.sh
 ```
-
-Dieser führt das Script welches die Welt sichert und in einen neuen Github-Release hochlädt täglich um 4 Uhr aus.
 
 ### Restore
 
