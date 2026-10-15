@@ -1,0 +1,55 @@
+name: "Anfrage: Uni-Informationen"
+description: "Informationen zu Studiengängen oder Gebäuden für das Minecraft-Addon anfragen."
+title: "[Info-Anfrage]: "
+labels: ["research", "addon-content"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Nutze dieses Formular, wenn du Details zu Studiengängen, Räumen oder Gebäuden benötigst, um sie im Minecraft-Addon umzusetzen.
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Kategorie
+      description: Worum geht es in der Anfrage?
+      options:
+        - "Studiengang (Module, Lehrinhalte, Fakten)"
+        - "Gebäude / Campus (Räume, Grundriss, Architektur)"
+        - "Sonstiges"
+    validations:
+      required: true
+
+  - type: input
+    id: target_name
+    attributes:
+      label: Name des Studiengangs oder Gebäudes
+      placeholder: "z. B. Informatik B.Sc. oder Haus A / Hauptgebäude"
+    validations:
+      required: true
+
+  - type: textarea
+    id: needed_info
+    attributes:
+      label: Welche konkreten Daten werden benötigt?
+      description: Was genau soll recherchiert werden? (z. B. Raumaufteilung, historische Daten, Modulinhalte)
+      placeholder: "Wir brauchen die genaue Etagenaufteilung von Haus B und Fotos der Fassade..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: addon_usage
+    attributes:
+      label: Geplante Umsetzung im Addon
+      description: Wie und wo soll die Info im Minecraft-Addon verwendet werden?
+      placeholder: "z. B. NPC-Dialogzeilen, Lore-Buch, Beschilderung, 1:1-Blocknachbau"
+    validators: 
+      requiered: false
+
+  - type: textarea
+    id: references
+    attributes:
+      label: Bereits vorhandene Links / Quellen (optional)
+      placeholder: "Links zur Modulseite, Raumpläne oder Fotos falls schon vorhanden"
+    validations:
+      required: false
