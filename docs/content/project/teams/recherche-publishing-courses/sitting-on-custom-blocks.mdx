@@ -1,0 +1,30 @@
+---
+title: Sitting on Custom Blocks
+sidebar_label: Sitting on Blocks
+---
+
+# Sitting on Custom Blocks
+
+> **Related Issue:** [cs24-sopr/recherche#4](https://github.com/cs24-sopr/recherche/issues/4)
+
+## Research Summary
+
+### Feasibility (Asset Team)
+- **Direct implementation in `block.json`:** Not possible, as custom Bedrock blocks do not support the `minecraft:rideable` component.
+
+### Implementation Workflow possible Solution
+1. **Asset Team:**
+   - Create the 3D model and textures in Blockbench.
+   - Provide standard `chair.block.json` (geometry, material, collision box).
+2. **Coding Team (`Coding interactions`):**
+   - Define an invisible dummy entity with `minecraft:rideable`.
+   - Use Bedrock Script API to listen for block interaction (`onInteract`).
+   - Spawn the dummy entity at the seat position and attach the player (`.addRider()`).
+   - Despawn the entity upon player dismount.
+  
+### The Conclusion
+Unfortunately, it’s not possible to simply add logic directly to the asset in the Bedrock version to allow players to sit on the custom chairs. Based on the results of our research, we’ve asked the asset team to continue working on it. Once they’re done, the development team will need to create a script so that the desired behavior can be implemented. 
+
+### Resources
+- **Issue:** [#4 - Research how PC can sit on blocks](https://github.com/cs24-sopr/recherche/issues/4)
+- **Research** https://github.com/SpraxDev/BetterChairs
