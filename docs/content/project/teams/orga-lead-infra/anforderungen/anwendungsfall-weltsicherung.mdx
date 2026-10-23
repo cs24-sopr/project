@@ -1,0 +1,79 @@
+---
+sidebar_position: 2
+---
+
+# Anwendungsfall: Weltsicherung und Rollback (orga#21)
+
+> Spezifikation des Anwendungsfalls zur Datensicherung und Wiederherstellung
+> der gemeinsamen Server-Welt im Modul 5CS-SOPR-50.
+
+- **Kennung:** `orga#21`
+- **Titel:** Automatische Weltsicherung und Rollback im Fehlerfall
+- **Akteur(e):** Server-Administrator (Orga-Team), Bauteam-Mitglied
+- **Ziel der Akteure:** Schutz vor Datenverlust durch nächtliche Sicherung
+  und gezielten Rollback im Falle von Baufehlern oder Beschädigungen.
+
+### Kurzbeschreibung
+
+Das System exportiert im Hintergrund jede Nacht automatisch den aktuellen
+Stand der Minecraft-Welt aus dem Docker-Container und lädt diesen als Release
+zu GitHub hoch. Tritt ein gravierender Baufehler oder Datenverlust auf, kann
+der Administrator einen verifizierten Stand gezielt wiederherstellen.
+
+### Auslöser (Trigger)
+
+- **Reguläre Sicherung:** Zeitgesteuerter Cronjob auf dem Server (nächtlich).
+- **Rollback:** Meldung eines gravierenden Baufehlers durch das Bauteam.
+
+### Vorbedingungen
+
+- Der Minecraft Bedrock Server läuft im Docker-Container auf dem VPS.
+- Die Verzeichnisse der Bedrock-Welt sind als Host-Volume gemountet.
+- Ein GitHub Personal Access Token mit Rechten für Releases ist hinterlegt.
+
+### Standardablauf (Hauptszenario - Automatische Sicherung)
+
+1. Der Cronjob startet jede Nacht um 03:00 Uhr das Sicherungsskript.
+2. Das Skript archiviert den Verzeichnisbaum `/data/worlds/level/`.
+3. Das Skript prüft, ob das Archiv kleiner als 2 GiB ist.
+4. Das Skript erzeugt einen Versions-Tag nach dem Schema `YYYY.MM.DD.HHMM`.
+5. Das Skript lädt das Archiv über die GitHub API als Release-Asset hoch.
+6. Das System protokolliert den erfolgreichen Export im System-Log.
+
+### Alternative und Ausnahmeabläufe
+
+- **3a. Archiv überschreitet 2 GiB:**
+    1. Das Skript bricht den Upload ab.
+    2. Das System sendet eine Benachrichtigung an den Administrator.
+- **5a. GitHub API vorübergehend nicht erreichbar:**
+    1. Das Skript wiederholt den Uploadversuch nach 5 Minuten.
+    2. Schlägt der Versuch wiederholt fehl, bleibt das Archiv lokal gesichert.
+
+### Szenario: Manueller Rollback
+
+1. Das Bauteam meldet einen fehlerhaften Weltstand an das Orga-Team.
+2. Der Administrator stoppt den Docker-Container des Bedrock-Servers.
+3. Der Administrator lädt das gewünschte Backup-Archiv von GitHub Releases.
+4. Der Administrator ersetzt das Weltverzeichnis mit dem extrahierten Stand.
+5. Der Administrator startet den Container neu und verifiziert den Stand.
+6. Das Bauteam prüft und bestätigt die erfolgreiche Wiederherstellung.
+
+### Nachbedingungen
+
+- **Erfolgszustand Sicherung:** Ein neues GitHub Release mit dem Welt-Archiv
+  ist öffentlich im Repository verfügbar.
+- **Erfolgszustand Rollback:** Der Server läuft mit dem intakten Weltstand,
+  Bautätigkeiten können fortgesetzt werden.
+- **Abbruchzustand:** Der laufende Serverbetrieb wird bei fehlgeschlagener
+  Sicherung nicht unterbrochen.
+
+### Zugeordnete Anforderungen
+
+- Funktionale Anforderung: `orga#21`
+- Qualitätsanforderung: `orga#21` (Rollback in unter 30 Minuten durchführbar)
+- Randbedingung: `orga#21` (Maximal 2 GiB pro Release-Artefakt)
+
+### Betroffene Teams & Schnittstellen
+
+- **Teams:** Orga-Team (Betrieb), Builder-Team (Nutzer der Welt)
+- **Schnittstelle:** `orga#21` (Bereitstellung konsistenter Weltstände)

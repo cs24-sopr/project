@@ -1,0 +1,48 @@
+---
+sidebar_position: 7
+---
+
+# Vorlage: Schnittstellenvereinbarung
+
+> Entspricht `Schnittstellenvereinbarung.docx` aus den Vorlesungsunterlagen.
+
+```markdown
+# [TEAM#Issue-ID]: [Titel der Schnittstelle]
+
+- **Kennung:** `TEAM#Issue-ID` (z. B. `assets#34` oder `builder#12`)
+- **Anbieter (lieferndes Team):** [Team A]
+- **Nachfrager (empfangendes Team):** [Team B]
+- **Benötigt bis:** [Datum / Meilenstein]
+
+### Historie
+| Version | Datum | Issue-ID | Änderung |
+| :--- | :--- | :--- | :--- |
+| 1.0 | [Datum] | - | Erstanlage |
+
+### Status
+- [ ] vorgeschlagen
+- [ ] abgestimmt
+- [ ] vereinbart
+- [ ] umgesetzt (inkl. Tests und Abnahme)
+
+---
+
+### Gegenstand der Schnittstelle
+- **Was wird ausgetauscht / vereinbart?** [Kurzbeschreibung]
+- **Was stellt der Anbieter bereit?** [z. B. 3D-Modelle für Dozenten-NPCs]
+- **Was darf der Nachfrager erwarten?** [Qualität, Konventionen, Vollständigkeit]
+
+### Technische Parameter & Formate
+- **Dateiformat:** [z. B. `.gltf`, `.json`, `.png`, Lua-Table]
+- **Ablagepfad im Repository:** [z. B. `mods/campus/textures/`]
+- **Namenskonvention:** [z. B. `npc_<dozent_nachname>.gltf`]
+- **Maße / Koordinaten / Schema:** [z. B. 1 Block = 1 Meter, Spawn-Koordinaten]
+
+### Verantwortlichkeiten
+- **Anbieter:** [Name der Ansprechperson]
+- **Nachfrager:** [Name der Ansprechperson]
+
+### Zugehörige Anforderungen & Issues
+- Anforderungen des Anbieters: `assets#12`
+- Anforderungen des Nachfragers: `builder#5`
+```

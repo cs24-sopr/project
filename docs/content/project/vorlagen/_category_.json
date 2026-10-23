@@ -1,0 +1,8 @@
+{
+  "label": "Vorlagen",
+  "position": 5,
+  "link": {
+    "type": "generated-index",
+    "description": "Einheitliche Dokumentvorlagen für Anforderungen, wöchentliche Updates, Schnittstellen und Change Requests im Markdown-Format."
+  }
+}

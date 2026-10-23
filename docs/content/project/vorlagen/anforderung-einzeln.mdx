@@ -1,0 +1,57 @@
+---
+sidebar_position: 6
+---
+
+# Vorlage: Einzelanforderung (Detailblatt)
+
+> Entspricht `Anforderung_einzeln.docx` aus den Vorlesungsunterlagen.
+
+```markdown
+# [TEAM#Issue-ID]: [Titel der Anforderung]
+
+- **Kennung:** `TEAM#Issue-ID` (z. B. `coding#14`)
+- **Titel:** [Kurzer, präziser Titel]
+
+### Historie
+| Version | Datum | Issue-ID | Änderung |
+| :--- | :--- | :--- | :--- |
+| 1.0 | [Datum] | - | Erstanlage |
+
+### Typ & Status
+- **Typ:**
+  - [ ] Funktional - Funktion oder Verhalten, das das System leisten muss
+  - [ ] Nichtfunktional - Qualitätsmerkmal oder Systemeigenschaft
+  - [ ] Schnittstelle - Anforderung an die Kommunikation zwischen Komponenten
+  - [ ] Randbedingung - Vorgabe oder Einschränkung, die eingehalten werden muss
+- **Status:**
+  - [ ] vorgeschlagen
+  - [ ] vereinbart
+  - [ ] in Umsetzung
+  - [ ] umgesetzt (inkl. Test und Abnahme)
+  - [ ] abgelehnt
+- **Priorität:**
+  - [ ] `Urgent`
+  - [ ] `High`
+  - [ ] `Medium`
+  - [ ] `Low`
+
+---
+
+### Anforderung
+Das System muss [präzises, prüfbares und lösungsneutrales Verhalten beschreiben].
+
+### Begründung / Quelle
+Warum wird diese Anforderung benötigt? Welcher Zweck wird erfüllt?
+
+### Zugehöriger Use Case / User Story
+- Verweis auf Use Case: `story#5` (oder übergeordnetes Issue)
+
+### Akzeptanzkriterium
+Woran wird objektiv geprüft, dass die Anforderung erfüllt ist?
+- [ ] Kriterium 1: [Bedingung und erwartetes Ergebnis]
+- [ ] Kriterium 2: [Messbarer Wert oder Testschritt]
+
+### Betroffene Teams & Schnittstellen
+- Teams: [z. B. Coding, Builder]
+- Schnittstelle: `assets#10`
+```
