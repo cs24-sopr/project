@@ -1,0 +1,61 @@
+---
+sidebar_position: 3
+---
+
+# Einzelanforderung: Automatisierter Welt-Export (orga#21)
+
+> Detail-Spezifikation der funktionalen Anforderung an die Backup-Pipeline
+> im Modul 5CS-SOPR-50.
+
+- **Kennung:** `orga#21`
+- **Titel:** Automatisierter nächtlicher Welt-Export zu GitHub Releases
+
+### Historie
+| Version | Datum | Issue-ID | Änderung |
+| :--- | :--- | :--- | :--- |
+| 1.0 | 12.10.2026 | `#21` | Erstanlage und Umsetzung der Pipeline |
+
+### Typ & Status
+- **Typ:**
+  - [x] Funktional - Funktion oder Verhalten, das das System leisten muss
+  - [ ] Nichtfunktional - Qualitätsmerkmal oder Systemeigenschaft
+  - [ ] Schnittstelle - Anforderung an die Kommunikation zwischen Komponenten
+  - [ ] Randbedingung - Vorgabe oder Einschränkung, die eingehalten werden muss
+- **Status:**
+  - [ ] vorgeschlagen
+  - [ ] vereinbart
+  - [ ] in Umsetzung
+  - [x] umgesetzt (inkl. Test und Abnahme)
+  - [ ] abgelehnt
+- **Priorität:**
+  - [ ] `Urgent`
+  - [x] `High`
+  - [ ] `Medium`
+  - [ ] `Low`
+
+---
+
+### Anforderung
+Das System muss einmal täglich automatisch ein komprimiertes Archiv des
+aktuellen Weltenordners `/data/worlds/level/` erstellen und dieses als
+GitHub Release unter Verwendung eines Datums-Tags hochladen.
+
+### Begründung / Quelle
+Das Bauteam und das Coding-Team arbeiten kontinuierlich auf dem Server. Ohne
+automatisierte, versionierte Backups führen Fehlkonfigurationen oder
+Zerstörungen zu unwiederbringlichem Datenverlust. GitHub Releases bieten
+einen transparenten Download für alle Teammitglieder.
+
+### Zugehöriger Use Case / User Story
+- Verweis auf Use Case:
+  [orga#21: Weltsicherung und Rollback](./anwendungsfall-weltsicherung.mdx)
+
+### Akzeptanzkriterien
+- [x] Kriterium 1: Nächtlicher Cronjob erzeugt täglich ein Backup-Archiv.
+- [x] Kriterium 2: Das Archiv wird als GitHub Release hochgeladen.
+- [x] Kriterium 3: Die Tag-Benennung folgt dem Schema `YYYY.MM.DD.HHMM`.
+- [x] Kriterium 4: Rollback-Anleitung existiert in der Dokumentation.
+
+### Betroffene Teams & Schnittstellen
+- **Teams:** Organisation (Betrieb), Builder (Konsument), Coding (Konsument)
+- **Schnittstelle:** `orga#21` (Bereitstellung konsistenter Weltstände)

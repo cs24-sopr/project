@@ -1,0 +1,7 @@
+# Temporary lecture materials and docx sources
+temp_dokumente/
+
+# OS and Editor files
+.DS_Store
+*.swp
+*~

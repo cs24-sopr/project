@@ -6,49 +6,111 @@ sidebar_position: 1
 
 ## 1. Team-Stammdaten
 
-* **Teammitglieder:** Jässin, Lucas, Rick
+* **Team:** Organisation, Leitung und Infrastruktur
+* **Teammitglieder:** Jässin Aouani, Lucas Hummitzsch, Rick (AimPizza)
 * **Datum:** 14.10.2026
 
 ## 2. Was? (Aufgabenpaket)
 
-* **Bezeichnung des Aufgabenpakets:** Organisation der Teams und IT-Infrastruktur
+* **Bezeichnung des Aufgabenpakets:**
+Organisation, Projektinfrastruktur, Serverbetrieb und Requirements & Integration
+(RI)
+
 * **Beschreibung & Einzelaufgaben:**
-- Herbeiführen und Dokumentation von Entscheidungen
-- Einrichtung der benötigten Werkzeuge
-- Bereitstellung des development-Servers
-- Unterstützung beim Einhalten der deadlines
+Das Team verantwortet die technische und organisatorische Basis für alle anderen
+Teams des Softwareprojekts. Dazu gehören das Aufsetzen und Betreiben des
+Minecraft-Servers, automatisierte Backup- und Export-Pipelines, die
+Dokumentationsplattform (Docusaurus) sowie das agile Projektboard. Zusätzlich
+übernimmt das Team die Querschnittsaufgabe "Requirements and Integration" (RI)
+nach Vorgabe unserer Betreuerin.
+
+### Scope
+* **In Scope:**
+  - Bereitstellung, Konfiguration und Betrieb des Minecraft-Bedrock-Servers
+  - Automatisierte Backup- und Export-Pipelines für Server-Welten und Resource-
+    Packs
+  - Bereitstellung und Pflege der Docusaurus-Dokumentation und GitHub-
+    Infrastruktur
+  - Steuerung des zentralen GitHub Project Boards und Definition von
+    Arbeitsstandards
+  - Querschnittsaufgabe RI: Koordination von Schnittstellen, Change Requests und
+    wöchentliches Reporting an unsere Betreuerin
+* **Out of Scope:**
+  - Gebäude- und Landschaftsbau (Zuständigkeit Bau-Team)
+  - Erstellung von 3D-Modellen, Texturen und Animationen (Zuständigkeit Asset-
+    Team)
+  - Interaktions- und Quest-Programmierung (Zuständigkeit Coding-Team)
+  - Recherche von Studiengängen und Storyline (Zuständigkeit Recherche- & Story-
+    Team)
+
+### Einzelaufgaben
+- Herbeiführen und Dokumentation zentraler Entscheidungen
+- Aufsetzen und Absichern des Minecraft-Servers (Bedrock)
+- Einrichtung von Backup- und Wiederherstellungsskripten
+- Konfiguration der CI/CD-Pipelines für Docusaurus und World-Exports
+- Erstellung und Pflege der Dokumentationsvorlagen für alle Teams
+- Wöchentliche Statusaggregation und Reporting an unsere Betreuerin
+- Koordination teamübergreifender Schnittstellen und Meilensteine
 
 ## 3. Wofür? (Ziel & Ergebnis)
 
-* **Ergebnis (Output):** Dokumentation, Dienste, Workflows
-* **Wirkung (Outcome):** eine Umgebung, in der produktives Arbeiten möglich ist
+* **Ergebnis (Output):**
+Ein hochverfügbarer Minecraft-Server inklusive Backup-Pipeline, die Docusaurus-
+Dokumentationsseite, ein gepflegtes GitHub Project Board sowie das vollständige
+RI-Gesamtdokument und die Verzeichnisse.
+
+* **Wirkung (Outcome):**
+Alle 6 Teams können barrierefrei, sicher und synchron am gemeinsamen Produkt
+arbeiten, neue Entwicklungsstände testen und Änderungen nachvollziehbar
+dokumentieren.
+
+* **Nutzen für die DHSN (Benefit):**
+Eine verlässliche technische Basis und ein geordnetes Projektmanagement
+minimieren Ausfallzeiten, verhindern Datenverlust und stellen sicher, dass das
+Endprodukt für die Außendarstellung der Hochschule pünktlich und voll
+funktionsfähig geliefert wird.
 
 ## 4. Wie? (Vorgehensmodell / SDLC)
 
-* **Gewähltes SDLC-Modell:** agil, an Scrum orientiert (siehe [agiles-arbeiten](../../richtlinien/agiles-arbeiten.mdx))
-* **Begründung der Modellwahl:** Wir legen Wert auf Anpassungsfähigkeit und praxisnahe Organisationsstruktur.
+* **Gewähltes SDLC-Modell:**
+Kanban / agiler Service-Ablauf (orientiert an den allgemeinen Richtlinien)
+
+* **Begründung der Modellwahl:**
+Infrastruktur- und Organisationsaufgaben fallen kontinuierlich und
+bedarfsorientiert an (Zugangseinrichtungen, Bugfixes, Deployments, Support für
+Nachbarteams, wöchentliche Updates). Kanban ermöglicht eine flexible
+Priorisierung über das GitHub Board nach `urgent`, `high`, `medium` und `low`
+ohne starre Sprintbindung.
 
 ## 5. Wer? (Verantwortung)
 
-* **Ansprechperson / Kontakt:** [Lucas](https://github.com/TheItsNameless)
+* **Ansprechperson / Kontakt:**
+Teamleitung & RI-Koordination: [Lucas](https://github.com/TheItsNameless)
 
 ## 6. Schnittstellen & Abhängigkeiten
 
 ### Eingangsschnittstellen (Was benötigt Ihr Team von anderen Teams?)
 
-allgemein:
-- Transparenz: Wir benötigen Einblick in Ziele und Fortschritte der Teams
-- Partizipation: 
-    - Umfragen: Teilnahme
-    - Probleme / Fragen: rechtzeitige und lösungsorientierte Meldung 
+* **Allgemein:**
+  - Transparenz: Einblick in Ziele und Fortschritte aller Teams
+  - Partizipation bei Umfragen und rechtzeitige Meldung von Blockern
+
+* **Spezifische Zuarbeiten:**
+  - Alle Teams: Wöchentliche Status-Updates, Anforderungen und
+    Schnittstellenmeldungen
+  - Asset-Team: Bereitgestellte Resource- und Behavior-Packs zur Einbindung in
+    den Server
+  - Coding-Team: Fertig konfigurierte Skripte / Mods
+  - Bau-Team: Koordinaten und Spawn-Punkte für Server-Konfiguration
 
 ### Ausgangsschnittstellen (Was liefert Ihr Team an andere Teams?)
 
-- Zugang zu benötigten Diensten
-- Richtlinien für die Zusammenarbeit
+* **Empfangende Teams:**
+  - Alle Teams: Zugang zu benötigten Diensten (Bedrock Server, VPS, Kalender),
+    Dokumentationsinfrastruktur, Backup-Sicherheit und Richtlinien
+  - Betreuerin: Wöchentliche Statusberichte und RI-Gesamtdokumentation
 
-
-* **Verantwortung für Schnittstellenabsprachen:** [Rick](https://github.com/Aimpizza)
-- Anfragen anderer Teams bearbeiten
-- rechtzeitigen Erhalt der Eingangsleistungen koordinieren / offene Leistungen überblicken
-
+* **Verantwortung für Schnittstellenabsprachen:**
+[Rick](https://github.com/Aimpizza) und
+[Lucas](https://github.com/TheItsNameless) (zentral über das RI-Register und
+GitHub Issues)

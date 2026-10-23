@@ -1,0 +1,104 @@
+---
+sidebar_position: 9
+---
+
+# Vorlage: RI Gesamtdokument (nur Orga)
+
+> Entspricht `Spezialaufgabe_RI_Gesamtdokument.docx` aus den Vorlesungsunterlagen.
+
+:::info Nur für das Organisationsteam (@cs24-sopr/orga)
+Dieses Dokument wird vom Orga-Team für die Querschnittsaufgabe "Requirements and
+Integration" geführt und spätestens zur Abschlusspräsentation bei unserer
+Betreuerin eingereicht.
+:::
+
+```markdown
+# Gesamtprodukt - Aufgabe "Requirements and Integration"
+
+- **Projekt:** Virtuelle DHSN-Welt (Minecraft / Luanti)
+- **RI-Team:** Organisation, Leitung und Infrastruktur (@cs24-sopr/orga)
+- **Stand:** [Datum]
+
+## Änderungshistorie
+
+| Version | Datum | Änderung | Autor |
+| :--- | :--- | :--- | :--- |
+| 1.0 | [Datum] | Erstanlage | [Name] |
+
+---
+
+## 1. Produktüberblick
+
+Was ist das gemeinsame Minecraft/Luanti-Produkt?
+[Kurzbeschreibung der virtuellen DHSN-Welt, Zielgruppe und Gesamterlebnis]
+
+## 2. Produktziele
+
+- **Output:** [Gemeinsames Gesamtergebnis aller Teams]
+- **Outcome:** [Wirkung beim Besucher/Spieler]
+- **Benefit für die DHSN:** [Strategischer Nutzen, Image, Bewerbergewinnung]
+
+## 3. Arbeitspakete
+
+| Team | Arbeitspaket | Verantwortlich | SDLC-Modell |
+| :--- | :--- | :--- | :--- |
+| Orga-Team | Organisation, Leitung und Infrastruktur | [Name] | agil / Kanban |
+| Recherche-Team | Recherche, Publishing und Studiengänge | [Name] | agil / SCRUM |
+| Builder-Team | Bauen der Campuswelt | [Name] | agil / SCRUM |
+| Coding-Team | Interaktionsprogrammierung | [Name] | agil / SCRUM |
+| Asset-Team | Design und Bereitstellung von Assets | [Name] | agil / SCRUM |
+| Story-Team | Inhalt und Story-Design | [Name] | agil / SCRUM |
+
+## 4. Gesamtanforderungen
+
+Anforderungen, die das Gesamtprodukt oder mehrere Arbeitspakete betreffen:
+
+| Kennung | Gesamtanforderung | Betroffene Teams |
+| :--- | :--- | :--- |
+| `orga#4` | Die virtuelle Welt muss auf dem dedizierten Server stabil laufen. | Alle Teams |
+| `orga#7` | Alle Inhalte und Gebäude müssen dem Corporate Design der DHSN entsprechen. | Recherche, Assets, Builder |
+
+## 5. Produktkontext und Architektur
+
+Überblick über das Zusammenspiel der Komponenten (Server, Mods, Assets, Bauwerke, Story):
+[Architektur- und Komponentenübersicht / Diagramm]
+
+## 6. Schnittstellen
+
+Überblick über die wichtigsten interdisziplinären Schnittstellen:
+
+| Kennung | Anbieter | Nachfrager | Gegenstand / Daten |
+| :--- | :--- | :--- | :--- |
+| `assets#1` | Asset-Design | Bau-Team | 3D-Modelle & Blöcke |
+| `assets#2` | Asset-Design | Coding | Entitäten & Animationen |
+| `recherche#3` | Recherche | Story-Design | Studiengangsdaten & Quizfragen |
+| `story#4` | Story-Design | Coding | Questabläufe & Dialogtexte |
+| `orga#5` | Orga-Team | Alle Teams | Serverzugang & Backup-Pipeline |
+
+## 7. Gemeinsame Meilensteine und Termine
+
+| Termin | Meilenstein / Ereignis | Betroffene Teams |
+| :--- | :--- | :--- |
+| **30.10.2026** | Abgabe Aufgabe 1: Aufgabenpakete & Vorgehen (`team-goals.mdx`) | Alle Teams |
+| **30.10.2026** | Start der wöchentlichen Statusberichte an die Betreuerin | Orga-Team |
+| **Prüfungszeitraum** | Einreichung Gesamtdokumentation & Abschlusspräsentationen | Alle Teams |
+
+## 8. Relevante Änderungen
+
+| Kennung | Änderung | Betroffene Teams |
+| :--- | :--- | :--- |
+| - | Keine bisher | - |
+
+## 9. Wichtige Entscheidungen (Decision Log)
+
+| Datum | Fragestellung & Entscheidung | Beteiligte Teams |
+| :--- | :--- | :--- |
+| [Datum] | Wahl der Plattform: Minecraft Bedrock / Luanti | Alle |
+| [Datum] | Markdown im Git-Repo statt Word-Dokumente | Alle, Betreuerin |
+
+## 10. Projektweite offene Punkte
+
+| Kennung / Frage | Offener Punkt | Verantwortlich | Frist |
+| :--- | :--- | :--- | :--- |
+| `orga#10` | [Offene Frage oder Blocker] | [Name / Team] | [Datum] |
+```

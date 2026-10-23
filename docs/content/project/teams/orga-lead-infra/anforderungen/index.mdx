@@ -1,0 +1,148 @@
+---
+sidebar_position: 1
+---
+
+# Anforderungsdokument: Organisation & Infrastruktur
+
+- **Team:** Organisation, Leitung und Infrastruktur
+- **SDLC-Modell:** agil / Kanban
+- **Aktuelle Iteration:** 1.1 (Sprint 2 laufend, Sprint 1 abgeschlossen)
+- **Stand:** 23.10.2026
+- **Verantwortliche:** Lucas Hummitzsch, Jassin, Rick
+
+## Änderungshistorie
+
+| Iteration | Datum      | Änderung                               | Autor            | Issue-ID  |
+| :-------- | :--------- | :------------------------------------- | :--------------- | :-------- |
+| 1.0       | 15.10.2026 | Erstanlage des Dokuments               | Lucas Hummitzsch | -         |
+| 1.1       | 23.10.2026 | Einarbeitung aller Sprint-1-Ergebnisse | Lucas Hummitzsch | `orga#37` |
+
+## 1. Zweck und Ziel
+
+Das Arbeitspaket Organisation und Infrastruktur stellt die technische
+Plattform (Server, Backups, CI/CD) sowie die organisatorischen Werkzeuge
+(Board, Vorlagen, RI-Register) für alle Projektteams bereit.
+
+- **Output:** Produktiver Minecraft-Bedrock-Server, automatische
+  Backup-Pipeline, Docusaurus-Dokumentation, gepflegtes Project Board.
+- **Outcome:** Alle Teams können parallel ohne Datenverlust arbeiten und
+  ihre Stände regelmäßig einspielen.
+- **Benefit:** Gewährleistung der Projektergebnisse für die DHSN Leipzig.
+
+## 2. Produkt- und Arbeitspaketbeschreibung
+
+Bereitstellung von Entwicklungs- und Testumgebungen für die virtuelle
+DHSN-Welt, Sicherstellung des Datenbestands sowie Übernahme der
+Querschnittsaufgabe Requirements and Integration (RI).
+
+## 3. Scope
+
+### In Scope
+
+- Server-Setup und Konfiguration (Bedrock Dedicated Server)
+- Automatische World-Backups und Exporte zu GitHub Releases
+- Docusaurus-Plattform im GitHub Repository mit GitHub Pages Deployment
+- Standardisierte Issue-Templates und GitHub Project Board Konfiguration
+- Team- und Gesamtprojektkalender für agiles Arbeiten
+- RI-Gesamtübersicht und wöchentliches Reporting an die Betreuerin
+
+### Out of Scope
+
+- Erstellung spielinhaltlicher Modelle, Gebäude und Quests.
+- Direkte Implementierung von Skripten oder Gameloops (Aufgabe Coding).
+
+## 4. Stakeholder und Akteure
+
+| Stakeholder / Akteur                                     | Rolle / Interesse                                                  |
+| :------------------------------------------------------- | :----------------------------------------------------------------- |
+| Projektteams (Builder, Coding, Assets, Story, Recherche) | Stabile Serverumgebung und klare Dokumentationsvorgaben            |
+| Betreuerin                                               | Wöchentliche Transparenz über Projektfortschritt und Anforderungen |
+| DHSN Leipzig                                             | Reibungsloser Ablauf und erfolgreiches Endprodukt                  |
+
+## 5. Kontext
+
+Das Team bildet das organisatorische und technische Fundament. Alle
+anderen Teams sind direkt von der Infrastruktur und den Absprachen
+abhängig.
+
+## 6. Anwendungsfälle (Use Cases) - Backlog
+
+Detaillierte Anwendungsfall-Spezifikationen werden als eigenständige
+Dokumente geführt (siehe [Weltsicherung und Rollback][ref-uc-weltsicherung]).
+
+| Kennung   | Use Case                                           | Akteur(e)             | Ziel                                                 |
+| :-------- | :------------------------------------------------- | :-------------------- | :--------------------------------------------------- |
+| `orga#4`  | Server-Zugriff für Entwicklung und Bau             | Builder, Coding       | Gemeinsames Bauen und Testen in der Serverwelt       |
+| `orga#21` | [Weltsicherung und Rollback][ref-uc-weltsicherung] | Server-Admin, Builder | Wiederherstellung fehlerfreier Weltstände            |
+| `orga#38` | Aufgaben- und Sprintverwaltung                     | Alle Teammitglieder   | Transparente Aufgabenplanung im GitHub Project Board |
+| `orga#39` | Terminplanung für Rituale                          | Alle Teams, Orga      | Koordination von Plannings, Standups und Reviews     |
+| `orga#10` | Beauftragung von Custom Assets                     | Builder, Assets       | Strukturierte Bestellung benötigter 3D-Modelle       |
+
+## 7. Funktionale Anforderungen - Backlog
+
+Detaillierte Einzelblätter zu komplexen Anforderungen werden als
+Unterseiten gepflegt (siehe [orga#21 Welt-Export][ref-ea-weltexport]).
+
+| Kennung                        | Anforderung (Das System muss...)                                      | Priorität | Status      | Zugehöriger Use Case |
+| :----------------------------- | :-------------------------------------------------------------------- | :-------- | :---------- | :------------------- |
+| `orga#1`                       | Einheitliche Issue-Templates für Aufgaben und Features bereitstellen. | High      | DONE        | `orga#38`            |
+| `orga#2`                       | Angepasste Board-Views für jedes einzelne Team anbieten.              | High      | DONE        | `orga#38`            |
+| `orga#3`                       | Best-Practices und Onboarding-Hilfen in der Dokumentation führen.     | Medium    | DONE        | `orga#38`            |
+| `orga#4`                       | Den Minecraft Bedrock Dedicated Server stabil bereitstellen.          | Urgent    | DONE        | `orga#4`             |
+| `orga#6`                       | Die Docusaurus-Plattform bei Pushs auf `main` automatisiert deployen. | High      | DONE        | `orga#38`            |
+| `orga#7`                       | Die Namensfindung und das Branding mit allen Teams abstimmen.         | Medium    | DONE        | `orga#38`            |
+| `orga#10`                      | Ein zentrales Request-Board für Asset-Bestellungen bereitstellen.     | Medium    | DONE        | `orga#10`            |
+| `orga#20`                      | Externe Google Docs und Tabellen vollständig ins Git überführen.      | Medium    | DONE        | `orga#6`             |
+| [`orga#21`][ref-ea-weltexport] | Nächtliche Exporte der Minecraft-Welt zu GitHub Releases hochladen.   | High      | DONE        | `orga#21`            |
+| `orga#35`                      | Wichtige Einstiegslinks direkt auf der Docs-Homepage verlinken.       | Low       | DONE        | `orga#6`             |
+| `orga#37`                      | Markdown-Vorlagen für alle regelmäßigen Abgaben bereitstellen.        | High      | IN PROGRESS | `orga#38`            |
+| `orga#38`                      | Das GitHub Project Board mit Sprints, Teams und Views konfigurieren.  | High      | DONE        | `orga#38`            |
+| `orga#39`                      | Einen geteilten Kalender mit Team-Unterkalendern einrichten.          | Medium    | DONE        | `orga#39`            |
+| `orga#34`                      | Eine automatische Deployment-Pipeline für Resource-Packs bauen.       | Medium    | TODO        | `orga#4`             |
+| `orga#54`                      | GitHub Milestones für alle Abgabefristen und Meilensteine anlegen.    | Medium    | TODO        | `orga#38`            |
+
+## 8. Nichtfunktionale Anforderungen - Backlog
+
+| Kennung   | Anforderung (Qualitätsmerkmal)                                                  | Priorität | Status | Prüfkriterium      |
+| :-------- | :------------------------------------------------------------------------------ | :-------- | :----- | :----------------- |
+| `orga#4`  | Verfügbarkeit des Servers von mindestens 98 % während der Arbeitsphasen.        | High      | DONE   | Uptime-Prüfung     |
+| `orga#21` | Ein Backup-Rollback muss innerhalb von maximal 30 Minuten durchführbar sein.    | High      | DONE   | Test-Rollback      |
+| `orga#21` | Release-Artefakte dürfen das GitHub-Dateilimit von 2 GiB nicht überschreiten.   | High      | DONE   | Prüfung Dateigröße |
+| `orga#9`  | Externe Software-Abhängigkeiten müssen automatisiert auf Lücken geprüft werden. | Medium    | TODO   | Dependabot aktiv   |
+
+## 9. Schnittstellen - Backlog
+
+| Kennung   | Partner-Team     | Gegenstand / Daten                                          | Richtung     | Status          |
+| :-------- | :--------------- | :---------------------------------------------------------- | :----------- | :-------------- |
+| `orga#4`  | Alle Teams       | Bereitstellung von Serverzugängen und Portfreigaben         | Ausgang      | Umgesetzt       |
+| `orga#10` | Builder, Assets  | Infrastruktur für Block- und Modell-Bestellungen            | Koordination | Umgesetzt       |
+| `orga#21` | Builder, Coding  | Bereitstellung konsistenter Weltstände als Release-Artefakt | Ausgang      | Umgesetzt       |
+| `orga#34` | Asset-Design     | Automatisches Deployment veröffentlichter Resource-Packs    | Eingang      | In Abstimmung   |
+| `orga#37` | Betreuerin       | Wöchentliches Status- und Anforderungs-Update per Mail      | Ausgang      | Ab 30.10. aktiv |
+
+## 10. Randbedingungen - Backlog
+
+| Kennung   | Vorgabe / Einschränkung                                      | Typ             | Begründung                    |
+| :-------- | :----------------------------------------------------------- | :-------------- | :---------------------------- |
+| `orga#4`  | Plattform: Minecraft Bedrock Dedicated Server auf Ubuntu VPS | Technisch       | Vorgabe des Modulprojekts     |
+| `orga#21` | GitHub Release Asset-Limit: Maximal 2 GiB pro Datei          | Technisch       | Limitierung der GitHub API    |
+| `orga#37` | Dokumentation ausschließlich in Markdown im Git-Repository   | Organisatorisch | Vereinbarung mit der Betreuerin |
+
+## 11. Abnahmekriterien
+
+- Der Bedrock-Server läuft stabil und ist für berechtigte Personen erreichbar.
+- Welt-Backups werden automatisiert exportiert und als Release bereitgestellt.
+- Docusaurus wird bei Commits auf `main` automatisch gebaut und publiziert.
+- Project Board, Kalender und Vorlagen sind vollständig einsatzbereit.
+- Das wöchentliche Reporting an die Betreuerin startet fristgerecht
+  zum 30.10.2026.
+
+## 12. Annahmen und offene Punkte
+
+| Kennung / Frage | Fragestellung / Annahme                                                | Zuständig        | Frist      |
+| :-------------- | :--------------------------------------------------------------------- | :--------------- | :--------- |
+| `orga#34`       | Wie genau synchronisiert der Bedrock-Server neue Resource-Packs?       | Jassin, Aljoscha | 28.10.2026 |
+| `orga#54`       | Welche Meilensteine müssen neben der Abschlussabgabe definiert werden? | Lucas            | 30.10.2026 |
+
+[ref-uc-weltsicherung]: ./anwendungsfall-weltsicherung.mdx
+[ref-ea-weltexport]: ./einzelanforderung-weltexport.mdx
