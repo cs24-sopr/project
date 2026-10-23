@@ -4,8 +4,10 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
+const PROJECT_NAME = 'DHSN-Craft';
+
 const config: Config = {
-    title: 'Some Project name', // TODO
+    title: PROJECT_NAME, // TODO
     favicon: 'img/favicon.ico', // TODO
 
     // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
@@ -14,7 +16,7 @@ const config: Config = {
     },
 
     // TODO: Set the production url of your site here
-    url: 'https://your-docusaurus-site.example.com',
+    url: 'https://cs24-sopr.github.io',
 
     // Set the /<baseUrl>/ pathname under which your site is served
     // For GitHub pages deployment, it is often '/<projectName>/'
@@ -56,7 +58,7 @@ const config: Config = {
             respectPrefersColorScheme: true,
         },
         navbar: {
-            title: 'some name',
+            title: PROJECT_NAME,
             logo: {
                 alt: 'Site Logo',
                 // TODO: actual logo?

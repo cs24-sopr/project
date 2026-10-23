@@ -1,0 +1,25 @@
+# Sitzen auf benutzerdefinierten Blöcken
+
+> **Zugehöriges Issue:** [cs24-sopr/recherche#4](https://github.com/cs24-sopr/recherche/issues/4)
+
+## Recherche-Zusammenfassung
+
+### Machbarkeit (Asset-Team)
+- **Direkte Implementierung in `block.json`:** Nicht möglich, da benutzerdefinierte Bedrock-Blöcke die Komponente `minecraft:rideable` nicht unterstützen.
+
+### Möglicher Lösungsansatz / Implementierungs-Workflow
+1. **Asset-Team:**
+   - 3D-Modell und Texturen in Blockbench erstellen.
+   - Standard-`chair.block.json` bereitstellen (Geometrie, Material, Kollisionsbox).
+2. **Entwickler-Team (`Coding interactions`):**
+   - Ein unsichtbares Dummy-Entity mit `minecraft:rideable` definieren.
+   - Bedrock Script API nutzen, um auf Block-Interaktionen zu lauschen (`onInteract`).
+   - Dummy-Entity an der Sitzposition spawnen und den Spieler darauf platzieren (`.addRider()`).
+   - Entity despawnen, sobald der Spieler absteigt.
+  
+### Fazit
+Leider ist es in der Bedrock-Edition nicht möglich, die Sitzlogik direkt im Asset zu hinterlegen, damit Spieler auf den benutzerdefinierten Stühlen sitzen können. Basierend auf unseren Rechercheergebnissen haben wir das Asset-Team gebeten, wie gewohnt weiterzuarbeiten. Sobald die Assets fertig sind, muss das Entwickler-Team ein Script schreiben, um das gewünschte Verhalten umzusetzen. 
+
+### Ressourcen
+- **Issue:** [#4 - Research how PC can sit on blocks](https://github.com/cs24-sopr/recherche/issues/4)
+- **Recherche:** https://github.com/SpraxDev/BetterChairs
