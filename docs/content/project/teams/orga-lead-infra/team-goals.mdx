@@ -13,22 +13,24 @@ sidebar_position: 1
 ## 2. Was? (Aufgabenpaket)
 
 * **Bezeichnung des Aufgabenpakets:**
-Organisation, Projektinfrastruktur, Serverbetrieb und Requirements & Integration
-(RI)
+Organisation, Projektinfrastruktur, Entwicklungs-Server, AddOn-Packaging und
+Requirements & Integration (RI)
 
 * **Beschreibung & Einzelaufgaben:**
 Das Team verantwortet die technische und organisatorische Basis für alle anderen
-Teams des Softwareprojekts. Dazu gehören das Aufsetzen und Betreiben des
-Minecraft-Servers, automatisierte Backup- und Export-Pipelines, die
-Dokumentationsplattform (Docusaurus) sowie das agile Projektboard. Zusätzlich
-übernimmt das Team die Querschnittsaufgabe "Requirements and Integration" (RI)
-nach Vorgabe unserer Betreuerin.
+Teams des Softwareprojekts. Dazu gehören das Bereitstellen und Betreiben des
+Minecraft-Entwicklungsservers für den gemeinsamen Bau, automatisierte Backup-,
+Packaging- und Export-Pipelines für das final herunterladbare Minecraft Bedrock
+AddOn und Welt-Template, die Dokumentationsplattform (Docusaurus) sowie das
+agile Projektboard. Zusätzlich übernimmt das Team die Querschnittsaufgabe
+"Requirements and Integration" (RI) nach Vorgabe unserer Betreuerin.
 
 ### Scope
 * **In Scope:**
-  - Bereitstellung, Konfiguration und Betrieb des Minecraft-Bedrock-Servers
-  - Automatisierte Backup- und Export-Pipelines für Server-Welten und Resource-
-    Packs
+  - Bereitstellung, Konfiguration und Betrieb des Minecraft-Bedrock-Servers als
+    kollaborative Entwicklungsumgebung für die Teams
+  - Automatisierte Backup-, Packaging- und Export-Pipelines für Server-Welten,
+    Resource-Packs und das finale Bedrock AddOn zum Herunterladen
   - Bereitstellung und Pflege der Docusaurus-Dokumentation und GitHub-
     Infrastruktur
   - Steuerung des zentralen GitHub Project Boards und Definition von
@@ -45,9 +47,10 @@ nach Vorgabe unserer Betreuerin.
 
 ### Einzelaufgaben
 - Herbeiführen und Dokumentation zentraler Entscheidungen
-- Aufsetzen und Absichern des Minecraft-Servers (Bedrock)
+- Aufsetzen und Absichern des Minecraft-Entwicklungsservers (Bedrock)
 - Einrichtung von Backup- und Wiederherstellungsskripten
-- Konfiguration der CI/CD-Pipelines für Docusaurus und World-Exports
+- Konfiguration der CI/CD-Pipelines für Docusaurus, AddOn-Packaging und
+  World-Exports
 - Erstellung und Pflege der Dokumentationsvorlagen für alle Teams
 - Wöchentliche Statusaggregation und Reporting an unsere Betreuerin
 - Koordination teamübergreifender Schnittstellen und Meilensteine
@@ -55,20 +58,22 @@ nach Vorgabe unserer Betreuerin.
 ## 3. Wofür? (Ziel & Ergebnis)
 
 * **Ergebnis (Output):**
-Ein hochverfügbarer Minecraft-Server inklusive Backup-Pipeline, die Docusaurus-
-Dokumentationsseite, ein gepflegtes GitHub Project Board sowie das vollständige
-RI-Gesamtdokument und die Verzeichnisse.
+Ein herunterladbares Minecraft Bedrock AddOn (inklusive Welt-Template) zum
+virtuellen Nachbau der DHSN Leipzig, ein stabiler Entwicklungs-Server für die
+Bauphase, die Docusaurus-Dokumentationsseite, ein gepflegtes GitHub Project
+Board sowie das vollständige RI-Gesamtdokument und die Verzeichnisse.
 
 * **Wirkung (Outcome):**
-Alle 6 Teams können barrierefrei, sicher und synchron am gemeinsamen Produkt
-arbeiten, neue Entwicklungsstände testen und Änderungen nachvollziehbar
-dokumentieren.
+Interessierte und Studierende können das AddOn selbstständig herunterladen und
+lokal auf ihren Endgeräten erkunden; alle 6 Teams können während der Entwicklung
+barrierefrei, sicher und synchron am gemeinsamen Produkt arbeiten.
 
 * **Nutzen für die DHSN (Benefit):**
-Eine verlässliche technische Basis und ein geordnetes Projektmanagement
-minimieren Ausfallzeiten, verhindern Datenverlust und stellen sicher, dass das
-Endprodukt für die Außendarstellung der Hochschule pünktlich und voll
-funktionsfähig geliefert wird.
+Ein selbst installierbares AddOn ermöglicht eine ortsunabhängige,
+niederschwellige Verbreitung für Studieninteressierte (z. B. im Rahmen von
+Aktionstagen wie dem Tag der offenen Tür), während ein geordnetes
+Projektmanagement Datenverlust verhindert und die pünktliche Fertigstellung
+sichert.
 
 ## 4. Wie? (Vorgehensmodell / SDLC)
 
@@ -107,7 +112,8 @@ Teamleitung & RI-Koordination: [Lucas](https://github.com/TheItsNameless)
 
 * **Empfangende Teams:**
   - Alle Teams: Zugang zu benötigten Diensten (Bedrock Server, VPS, Kalender),
-    Dokumentationsinfrastruktur, Backup-Sicherheit und Richtlinien
+    Export des AddOns, Dokumentationsinfrastruktur, Backup-Sicherheit und
+    Richtlinien
   - Betreuerin: Wöchentliche Statusberichte und RI-Gesamtdokumentation
 
 * **Verantwortung für Schnittstellenabsprachen:**
