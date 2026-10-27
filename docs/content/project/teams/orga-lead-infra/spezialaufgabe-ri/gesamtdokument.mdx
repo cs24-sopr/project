@@ -2,12 +2,12 @@
 sidebar_position: 2
 ---
 
-# RI Gesamtdokument: Virtuelle DHSN-Welt
+# RI Gesamtdokument: Virtueller Nachbau der DHSN Leipzig
 
 > Gesamtprodukt-Dokumentation im Rahmen der Spezialaufgabe "Requirements and
 > Integration" für unsere Betreuerin.
 
-- **Projekt:** Virtuelle DHSN-Welt (Minecraft Bedrock)
+- **Projekt:** Virtueller Nachbau der DHSN Leipzig (Minecraft Bedrock)
 - **RI-Team:** Organisation, Leitung und Infrastruktur (@cs24-sopr/orga)
 - **Aktuelle Version:** 1.0
 - **Stand:** 15.10.2026
@@ -16,40 +16,40 @@ sidebar_position: 2
 
 | Version | Datum | Änderung | Autor |
 | :--- | :--- | :--- | :--- |
-| 1.0 | 15.10.2026 | Erstanlage des RI-Gesamtdokuments | Lucas Hummitzsch |
+| 1.0 | 15.10.2026 | Erstanlage des RI-Gesamtdokuments | Lucas |
 
 ---
 
 ## 1. Produktüberblick
 
-Die "Virtuelle DHSN-Welt" ist ein interaktives Minecraft-Erlebnis, das den
-Campus der Staatlichen Studienakademie / Dualen Hochschule Sachsen (DHSN) in
-Leipzig virtuell erlebbar macht. Besucher und Studieninteressierte können den
-Campus erkunden, die Räumlichkeiten und Labore besichtigen, Dozierenden in Form
-von NPCs begegnen und über Minispiele und Quests die verschiedenen Studiengänge
-kennenlernen.
+Der "Virtuelle Nachbau der DHSN Leipzig" ist ein interaktives
+Minecraft-Erlebnis, das den Campus der Staatlichen Studienakademie Leipzig /
+Dualen Hochschule Sachsen (DHSN) virtuell erlebbar macht. Besucher und
+Studieninteressierte können den Campus erkunden, die Räumlichkeiten und Labore
+besichtigen, Dozierenden in Form von NPCs begegnen und über Minispiele und
+Quests die verschiedenen Studiengänge kennenlernen.
 
 ## 2. Produktziele
 
 - **Output:** Eine vollständige, interaktive Minecraft-Bedrock-Welt mit
-  originalgetreuen Gebäuden, Custom-Assets, NPCs, Dialogen und Quests, betrieben
-  auf einem dedizierten Server.
+  originalgetreuem Gebäude, Custom-Assets, NPCs, Dialogen und Quests,
+  installierbar als AddOn.
 - **Outcome:** Spielerische, motivierende und barrierearme Erkundung des
   Studienstandorts und der Studiengänge für Interessierte und Studierende.
-- **Benefit:** Erhöhung des Bekanntheitsgrads der DHSN Leipzig, zielgerichtete
-  Bewerbergewinnung und innovative Präsentation auf Bildungsmessen und
+- **Benefit:** Erhöhung des Bekanntheitsgrads der DHSN Leipzig und
+  zielgerichtete Bewerbergewinnung; möglicherweise Vorstellung im Rahmen von
   Aktionstagen (z. B. Tag der offenen Tür).
 
 ## 3. Arbeitspakete & Teams
 
 | Team | Arbeitspaket | Verantwortlich | SDLC-Modell |
 | :--- | :--- | :--- | :--- |
-| Orga-Team | Organisation, Leitung und Infrastruktur | Lucas Hummitzsch | Kanban / Service |
+| Orga-Team | Organisation, Leitung und Infrastruktur | Lucas | Kanban / Service |
 | Recherche-Team | Recherche, Publishing und Studiengänge | TBD | Scrumban / Kanban |
-| Builder-Team | Bauen der Campuswelt | Lilly Tschampke | noch offen (TBD) |
+| Builder-Team | Bauen der Campuswelt | TBD | noch offen (TBD) |
 | Coding-Team | Interaktionsprogrammierung | TBD | noch offen (TBD) |
-| Asset-Team | Design und Bereitstellung von Assets | Yoshi / Linda | noch offen (TBD) |
-| Story-Team | Inhalt und Story-Design | Lukas Lehmann | inkrementell / agil |
+| Asset-Team | Design und Bereitstellung von Assets | TBD | noch offen (TBD) |
+| Story-Team | Inhalt und Story-Design | TBD | inkrementell / agil |
 
 ## 4. Gesamtanforderungen
 
@@ -58,24 +58,26 @@ betreffen:
 
 | Kennung | Gesamtanforderung | Betroffene Teams | Status | Priorität |
 | :--- | :--- | :--- | :--- | :--- |
-| `orga#4` | Der Server muss stabil laufen und gleichzeitige Verbindungen von mindestens 15 Spielern flüssig unterstützen. | Orga, alle Teams | umgesetzt (Server aktiv) | Urgent |
+| `orga#4` | Der Entwicklungs-Server muss stabil laufen, damit alle Teams kollaborativ am AddOn arbeiten können. | Orga, alle Teams | umgesetzt (Server aktiv) | Urgent |
 | `assets#7` | Alle Custom-Texturen, Blöcke und Modelle müssen stilistisch konsistent sein und dem Erscheinungsbild der DHSN entsprechen. | Assets, Builder, Recherche | in Abstimmung | High |
 | `recherche#23` | Die Wissensvermittlung zu den Studiengängen (Informatik, Technik, Wirtschaft) muss inhaltlich korrekt und didaktisch aufbereitet sein. | Recherche, Story, Coding | in Recherche | High |
 | `orga#21` | Es muss eine automatisierte Sicherung (Backup & Rollback) vorliegen, um Baufortschritte und Spielstände zu sichern. | Orga, Builder | umgesetzt | High |
 
 ## 5. Produktkontext und Architektur
 
-Das Produkt gliedert sich in folgende Hauptkomponenten:
-1. **Server & Infrastruktur (Orga):** Dedicated Server, Backup-Pipeline,
-   Docusaurus-Plattform.
-2. **Welt & Architektur (Builder):** Campusgebäude, Außenanlagen, Raumaufteilung
-   nach realen Grundrissen.
-3. **Visuelle Elemente & Identität (Assets):** 3D-Modelle für Lehrende,
-   Einrichtungsgegenstände, Texturen und Sounds.
-4. **Story & Content (Recherche & Story):** Studiengangsdaten, Quest-Storylines,
-   Dialoge und Rätsel.
-5. **Gameplay & Logik (Coding):** Interaktionsmechaniken, Dialogsysteme,
-   Minispiele und Event-Hooks.
+Das Gesamtprodukt ist ein eigenständig installierbares Minecraft Bedrock
+AddOn (bestehend aus Welt-Template, Resource-Pack und Behavior-Pack). Die
+Komponenten gliedern sich wie folgt:
+1. **Entwicklungsumgebung & Packaging (Orga):** Entwicklungs-Server für den
+   Bau, Export- und Packaging-Pipeline zum herunterladbaren AddOn, Docusaurus.
+2. **Welt & Architektur (Builder):** Campusgebäude, Außenanlagen und
+   Raumaufteilung der DHSN Leipzig als bauliche Basis des AddOns.
+3. **Visuelle Elemente & Identität (Assets):** Resource-Pack mit 3D-Modellen
+   für Lehrende, Einrichtungsgegenständen, Texturen und Sounds.
+4. **Story & Content (Recherche & Story):** Studiengangsdaten,
+   Quest-Storylines, Dialoge und Rätsel.
+5. **Gameplay & Logik (Coding):** Behavior-Pack mit Interaktionsmechaniken,
+   Dialogsystemen, Minispielen und Event-Hooks.
 
 ## 6. Zentrale Schnittstellen
 

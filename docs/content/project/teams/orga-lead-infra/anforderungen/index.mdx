@@ -8,38 +8,42 @@ sidebar_position: 1
 - **SDLC-Modell:** agil / Kanban
 - **Aktuelle Iteration:** 1.1 (Sprint 2 laufend, Sprint 1 abgeschlossen)
 - **Stand:** 23.10.2026
-- **Verantwortliche:** Lucas Hummitzsch, Jassin, Rick
+- **Verantwortliche:** Lucas, Jassin, Rick
 
 ## Änderungshistorie
 
-| Iteration | Datum      | Änderung                               | Autor            | Issue-ID  |
-| :-------- | :--------- | :------------------------------------- | :--------------- | :-------- |
-| 1.0       | 15.10.2026 | Erstanlage des Dokuments               | Lucas Hummitzsch | -         |
-| 1.1       | 23.10.2026 | Einarbeitung aller Sprint-1-Ergebnisse | Lucas Hummitzsch | `orga#37` |
+| Iteration | Datum      | Änderung                               | Autor | Issue-ID  |
+| :-------- | :--------- | :------------------------------------- | :---- | :-------- |
+| 1.0       | 15.10.2026 | Erstanlage des Dokuments               | Lucas | -         |
+| 1.1       | 23.10.2026 | Einarbeitung aller Sprint-1-Ergebnisse | Lucas | `orga#37` |
 
 ## 1. Zweck und Ziel
 
 Das Arbeitspaket Organisation und Infrastruktur stellt die technische
-Plattform (Server, Backups, CI/CD) sowie die organisatorischen Werkzeuge
-(Board, Vorlagen, RI-Register) für alle Projektteams bereit.
+Plattform (Entwicklungsserver, AddOn-Packaging, CI/CD) sowie die
+organisatorischen Werkzeuge (Board, Vorlagen, RI-Register) für alle
+Projektteams bereit.
 
-- **Output:** Produktiver Minecraft-Bedrock-Server, automatische
-  Backup-Pipeline, Docusaurus-Dokumentation, gepflegtes Project Board.
-- **Outcome:** Alle Teams können parallel ohne Datenverlust arbeiten und
-  ihre Stände regelmäßig einspielen.
+- **Output:** Automatisierte Export-Pipeline für das herunterladbare
+  Minecraft Bedrock AddOn / Welt-Template, stabiler Entwicklungs-Server für
+  den Bau, Docusaurus-Dokumentation, gepflegtes Project Board.
+- **Outcome:** Studieninteressierte können das AddOn selbst herunterladen und
+  lokal spielen; alle Teams können parallel ohne Datenverlust zusammenarbeiten.
 - **Benefit:** Gewährleistung der Projektergebnisse für die DHSN Leipzig.
 
 ## 2. Produkt- und Arbeitspaketbeschreibung
 
-Bereitstellung von Entwicklungs- und Testumgebungen für die virtuelle
-DHSN-Welt, Sicherstellung des Datenbestands sowie Übernahme der
+Bereitstellung von Entwicklungs- und Testumgebungen für den virtuellen
+Nachbau der DHSN Leipzig, Sicherstellung des Datenbestands sowie Übernahme der
 Querschnittsaufgabe Requirements and Integration (RI).
 
 ## 3. Scope
 
 ### In Scope
 
-- Server-Setup und Konfiguration (Bedrock Dedicated Server)
+- Server-Setup und Konfiguration (Bedrock Dedicated Server als
+  Entwicklungsumgebung)
+- Packaging- und Export-Pipeline für das finale Bedrock AddOn zum Herunterladen
 - Automatische World-Backups und Exporte zu GitHub Releases
 - Docusaurus-Plattform im GitHub Repository mit GitHub Pages Deployment
 - Standardisierte Issue-Templates und GitHub Project Board Konfiguration
@@ -55,7 +59,7 @@ Querschnittsaufgabe Requirements and Integration (RI).
 
 | Stakeholder / Akteur                                     | Rolle / Interesse                                                  |
 | :------------------------------------------------------- | :----------------------------------------------------------------- |
-| Projektteams (Builder, Coding, Assets, Story, Recherche) | Stabile Serverumgebung und klare Dokumentationsvorgaben            |
+| Projektteams (Builder, Coding, Assets, Story, Recherche) | Stabile Entwicklungsumgebung, AddOn-Export und Dokumentation       |
 | Betreuerin                                               | Wöchentliche Transparenz über Projektfortschritt und Anforderungen |
 | DHSN Leipzig                                             | Reibungsloser Ablauf und erfolgreiches Endprodukt                  |
 
