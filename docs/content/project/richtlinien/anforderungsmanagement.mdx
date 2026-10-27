@@ -16,7 +16,8 @@ Orga-Team koordiniert wird.
 
 ## 1. Grundprinzip: Vier Ebenen sauber trennen
 
-Um Missverständnisse und verfrühte Lösungsfestlegungen zu vermeiden, müssen vier Begriffe strikt getrennt werden:
+Um Missverständnisse und verfrühte Lösungsfestlegungen zu vermeiden, müssen vier
+Begriffe strikt getrennt werden:
 
 | Ebene | Frage | Beschreibung | Beispiel |
 | :--- | :--- | :--- | :--- |
@@ -26,12 +27,15 @@ Um Missverständnisse und verfrühte Lösungsfestlegungen zu vermeiden, müssen 
 | **4. Lösung** | Wie wird die Anforderung technisch umgesetzt? | Konkrete technische Umsetzung (Mod, Skript, Plugin, Konfiguration). | "Wir nutzen Mod A und konfigurieren Quests über JSON-Dateien." |
 
 :::warning Wichtig
-Anforderungen beschreiben das **WAS** (fachlicher Bedarf), nicht das **WIE** (technische Lösung). Die technische Lösung kann sich ändern, während die Anforderung bestehen bleibt.
+Anforderungen beschreiben das **WAS** (fachlicher Bedarf), nicht das **WIE**
+(technische Lösung). Die technische Lösung kann sich ändern, während die
+Anforderung bestehen bleibt.
 :::
 
 ## 2. Element-Kennungen: TEAM#Issue-ID
 
-Wir nutzen **keine Typ-Kürzel** (wie `FR-`, `NFR-`, `UC-`, `IF-`, `CR-`), sondern referenzieren ausnahmslos jedes Element über das einheitliche Schema:
+Wir nutzen **keine Typ-Kürzel** (wie `FR-`, `NFR-`, `UC-`, `IF-`, `CR-`),
+sondern referenzieren ausnahmslos jedes Element über das einheitliche Schema:
 
 ```text
 TEAM#Issue-ID
@@ -47,21 +51,28 @@ Beispiele:
 
 ### Vorteile
 - Keine künstlichen, parallelen Nummernkreise.
-- Eindeutige Traceability zwischen Dokumentation, Git-Commits, Pull Requests und dem GitHub Project Board.
+- Eindeutige Traceability zwischen Dokumentation, Git-Commits, Pull Requests und
+  dem GitHub Project Board.
 - Direkte Verknüpfung mit den Verantwortlichen und Diskussionen im Issue.
 
 ## 3. Typisierung von Anforderungen
 
-Im GitHub-Issue oder in den Tabellenspalten kann zur fachlichen Einordnung der Typ vermerkt werden (jedoch ohne Auswirkung auf die Kennung):
+Im GitHub-Issue oder in den Tabellenspalten kann zur fachlichen Einordnung der
+Typ vermerkt werden (jedoch ohne Auswirkung auf die Kennung):
 
-- **Funktional:** Konkretes Systemverhalten oder Aktion (z. B. "Der Server speichert den Fortschritt alle 5 Minuten").
-- **Nichtfunktional:** Qualitätseigenschaften (z. B. Ladezeit unter 3 Sekunden, intuitive Bedienbarkeit).
-- **Randbedingung:** Gesetzte Rahmenbedingungen (z. B. Luanti Version 5.x, Open-Source-Lizenzen).
-- **Schnittstelle:** Vereinbarte Daten- oder Leistungsübergaben zwischen zwei Teams.
+- **Funktional:** Konkretes Systemverhalten oder Aktion (z. B. "Der Server
+  speichert den Fortschritt alle 5 Minuten").
+- **Nichtfunktional:** Qualitätseigenschaften (z. B. Ladezeit unter 3 Sekunden,
+  intuitive Bedienbarkeit).
+- **Randbedingung:** Gesetzte Rahmenbedingungen (z. B. Minecraft Bedrock
+  Version 1.21.x, Lizenzen).
+- **Schnittstelle:** Vereinbarte Daten- oder Leistungsübergaben zwischen zwei
+  Teams.
 
 ## 4. Priorisierung
 
-Die Priorisierung erfolgt einheitlich nach der vierstufigen Skala des GitHub Project Boards:
+Die Priorisierung erfolgt einheitlich nach der vierstufigen Skala des GitHub
+Project Boards:
 
 | Priorität | Bedeutung | Verwendung |
 | :--- | :--- | :--- |
@@ -72,16 +83,20 @@ Die Priorisierung erfolgt einheitlich nach der vierstufigen Skala des GitHub Pro
 
 ## 5. Statusmodell und Lebenszyklus
 
-Die Bearbeitung spiegelt sich im Status des GitHub-Issues auf dem Project Board wider:
+Die Bearbeitung spiegelt sich im Status des GitHub-Issues auf dem Project Board
+wider:
 
 ```text
 [BACKLOG] -> [TODO] -> [IN PROGRESS] -> [DONE]
 ```
 
-- **BACKLOG:** Vorgeschlagene Idee oder Anforderung, im Team oder mit Stakeholdern noch in Klärung.
-- **TODO:** Fachlich abgestimmt, Akzeptanzkriterien definiert und für den aktuellen Sprint eingeplant.
+- **BACKLOG:** Vorgeschlagene Idee oder Anforderung, im Team oder mit
+  Stakeholdern noch in Klärung.
+- **TODO:** Fachlich abgestimmt, Akzeptanzkriterien definiert und für den
+  aktuellen Sprint eingeplant.
 - **IN PROGRESS:** Aktiv in Entwicklung / Bearbeitung.
-- **DONE:** Fertig implementiert, getestet und gemäß teaminterner Definition of Done (DoD) abgenommen.
+- **DONE:** Fertig implementiert, getestet und gemäß teaminterner Definition of
+  Done (DoD) abgenommen.
 
 ## 6. Qualitätskriterien für eine Anforderung
 
@@ -90,23 +105,30 @@ Eine saubere Anforderung erfüllt folgende Kriterien:
 1. **Eindeutig referenzierbar:** Verknüpft mit `TEAM#Issue-ID`.
 2. **Verständlich:** Präzise formuliert ohne teaminternen Fachjargon.
 3. **Notwendig:** Es gibt eine klare Begründung (Zweck für das Gesamtprodukt).
-4. **Prüfbar / Testbar:** Es existieren konkrete Akzeptanzkriterien. Frage: "Woran prüfen wir bei der Abnahme, ob die Anforderung erfüllt ist?"
-5. **Lösungsneutral:** Gibt das gewünschte Verhalten vor, nicht die Codezeile oder das konkrete Mod-Detail.
+4. **Prüfbar / Testbar:** Es existieren konkrete Akzeptanzkriterien. Frage:
+   "Woran prüfen wir bei der Abnahme, ob die Anforderung erfüllt ist?"
+5. **Lösungsneutral:** Gibt das gewünschte Verhalten vor, nicht die Codezeile
+   oder das konkrete Mod-Detail.
 
 ## 7. Schnittstellenmanagement (Inter-Team)
 
-Teams entwickeln Produktteile nicht isoliert. Sobald ein Team Daten, Assets oder Funktionen eines anderen Teams benötigt, wird eine Schnittstellenvereinbarung als Issue angelegt und dokumentiert.
+Teams entwickeln Produktteile nicht isoliert. Sobald ein Team Daten, Assets oder
+Funktionen eines anderen Teams benötigt, wird eine Schnittstellenvereinbarung
+als Issue angelegt und dokumentiert.
 
 ### Pflichtfragen für jede Schnittstelle
 
 - **Wer liefert?** (Anbieter-Team)
 - **Wer benötigt?** (Nachfrager-Team)
-- **Was wird geliefert?** (Gegenstand, z. B. 3D-Modell, Datentabelle, Event-Hook)
+- **Was wird geliefert?** (Gegenstand, z. B. 3D-Modell, Datentabelle,
+  Event-Hook)
 - **In welchem Format?** (Dateiformat, Namenskonvention, Koordinaten, Schema)
 - **Bis wann?** (Fertigstellungstermin / Meilenstein)
 - **Wer ist verantwortlich?** (Benannte Ansprechpersonen beider Teams)
 
-Schnittstellen werden dem Orga-Team gemeldet, um das zentrale Interface-Register aktuell zu halten. Vorlage: siehe [Schnittstellenvereinbarung](../vorlagen/schnittstellenvereinbarung.mdx).
+Schnittstellen werden dem Orga-Team gemeldet, um das zentrale Interface-Register
+aktuell zu halten. Vorlage: siehe
+[Schnittstellenvereinbarung](../vorlagen/schnittstellenvereinbarung.mdx).
 
 ## 8. Regelmäßige Abgaben & Updates
 
