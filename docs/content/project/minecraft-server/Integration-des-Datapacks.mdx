@@ -1,3 +1,30 @@
 ---
 sidebar_position: 2
 ---
+
+## Neue Versionen des Datapacks
+
+Um den Prozess der Veröffentlichung des Resource-Packs und des Behavior-Packs (gebündelt "Datapack")
+zu automatisieren, wurde ein Github Workflow angelegt. Dieser wird stets ausgeführt, wenn ein neuer Commit
+entsteht. Allerdings wird eine neue Version des Datapacks nur unter bestimmten Bedingungen erstellt.
+
+1. Die Versionen des Resource-Packs und des Behavior-Packs (jeweils spezifiziert in deren `manifest.json`) wurden erhöht. Sie sind nun höher als die Version des aktuellen Releases
+2. Die Versionen des Resource-Packs und des Behavior-Packs sind identisch. Dies verhindert, dass eine neue Version veröffentlicht wird, obwohl erst eine der beiden Komponenten aktualisiert wurde
+
+Falls diese Bedingungen nicht zutreffen, wird der Workflow hier abgebrochen.
+
+Soll ein neuer Release generiert werden, so werden die Packs lediglich in eine `.zip` komprimiert und an einen neuen Github-Release angehangen.
+
+## Automatisches Deployment auf dem Minecraft-Server
+
+Um ein neues Datapack schnellstmöglich und automatisch auf dem Minecraft-Server zu installieren, sobald eine neue Version veröffentlich wurde, wurde ein Webhook verwendet.
+Auf dem Server lauscht auf Port 9000 der Webhook-Empfänger (mithilfe des Pakets `webhook`).
+
+Wenn ein neuer Release generiert wurde, schickt Github eine Authentifizierte Webhook-Nachricht an den Server.
+Nachdem der Server den HMAC abgeglichen hat (um sicher zu stellen, dass die Nachricht tatsächlich von Github kam), wird der Server:
+
+1. die neuste Version des Datapacks herunterladen
+2. die `.zip` extrahieren
+3. die Dateien in `/resource_packs` und `/behavior_packs` platzieren
+4. die Versionsnummer des verwendeten Pakets in `/worlds/level/world_resource_packs.json` und `/worlds/level/world_behavior_packs.json` aktualisieren
+5. den Minecraft-Server neustarten
