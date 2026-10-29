@@ -15,10 +15,33 @@ Falls diese Bedingungen nicht zutreffen, wird der Workflow hier abgebrochen.
 
 Soll ein neuer Release generiert werden, so werden die Packs lediglich in eine `.zip` komprimiert und an einen neuen Github-Release angehangen.
 
+Um folgende Schritte des Workflows nur unter bestimmten Bedingungen weiter auszuführen, wurde die YAML-Anweisung `verify-conditions:` im Workflow verwendet.
+Für das Vergleichen der Versions-Strings wurde ein Python-Script mit dem `semver` Packet verwendet.
+
 ## Automatisches Deployment auf dem Minecraft-Server
 
 Um ein neues Datapack schnellstmöglich und automatisch auf dem Minecraft-Server zu installieren, sobald eine neue Version veröffentlich wurde, wurde ein Webhook verwendet.
 Auf dem Server lauscht auf Port 9000 der Webhook-Empfänger (mithilfe des Pakets `webhook`).
+
+```json
+[
+  {
+    "id": "dhsn-datapack-github-release",
+    "execute-command": "/root/Scripts/deploy-datapack.sh",
+    "command-working-directory": "/root",
+    "trigger-rule": {
+      "match": {
+        "type": "payload-hmac-sha256",
+        "secret": "<redacted>",
+        "parameter": {
+          "source": "header",
+          "name": "X-Hub-Signature-256"
+        }
+      }
+    }
+  }
+]
+```
 
 Wenn ein neuer Release generiert wurde, schickt Github eine Authentifizierte Webhook-Nachricht an den Server.
 Nachdem der Server den HMAC abgeglichen hat (um sicher zu stellen, dass die Nachricht tatsächlich von Github kam), wird der Server:
@@ -28,3 +51,38 @@ Nachdem der Server den HMAC abgeglichen hat (um sicher zu stellen, dass die Nach
 3. die Dateien in `/resource_packs` und `/behavior_packs` platzieren
 4. die Versionsnummer des verwendeten Pakets in `/worlds/level/world_resource_packs.json` und `/worlds/level/world_behavior_packs.json` aktualisieren
 5. den Minecraft-Server neustarten
+
+```bash
+#!/bin/bash
+
+export HOME=/root
+MC_SERVER_DIR="/opt/minecraft"
+
+cd /tmp
+rm -f ./dhsn-datapack-*.zip
+rm -rf resource_pack behavior_pack
+
+gh release download --repo cs24-sopr/dhsn-minecraft-assets --pattern "*dhsn-datapack*.zip"
+
+FILE=$(ls dhsn-datapack-*.zip 2>/dev/null | head -n 1)
+[[ "$FILE" =~ ([0-9]+\.[0-9]+\.[0-9]+) ]] && VERSION="${BASH_REMATCH[1]}"
+
+unzip -o ./dhsn-datapack*.zip
+
+cd $MC_SERVER_DIR
+docker compose down
+
+rm -rf data/resource_packs/dhsn* data/behavior_packs/dhsn*
+mv /tmp/resource_pack data/resource_packs/dhsn-resource-pack
+mv /tmp/behavior_pack data/behavior_packs/dhsn-behavior-pack
+
+jq --arg v "$VERSION" '
+  .[0].version = ($v | split(".") | map(tonumber))
+' data/worlds/level/world_resource_packs.json > tmp.json && mv tmp.json data/worlds/level/world_resource_packs.json
+
+jq --arg v "$VERSION" '
+  .[0].version = ($v | split(".") | map(tonumber))
+' data/worlds/level/world_behavior_packs.json > tmp.json && mv tmp.json data/worlds/level/world_behavior_packs.json
+
+docker compose up -d
+```
