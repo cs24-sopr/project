@@ -34,17 +34,17 @@ der Administrator einen verifizierten Stand gezielt wiederherstellen.
 ### Standardablauf (Hauptszenario - Automatische Sicherung)
 
 1. Der Cronjob startet jede Nacht um 03:00 Uhr das Sicherungsskript.
-2. Das Skript archiviert den Verzeichnisbaum `/data/worlds/level/`.
-3. Das Skript prüft, ob das Archiv kleiner als 2 GiB ist.
+2. Das Skript archiviert und komprimiert den Verzeichnisbaum
+   `/data/worlds/level/`.
+3. Überschreitet das Archiv 2 GiB, teilt das Skript die Datei
+   automatisch in Multipart-Dateien auf (max. 2 GiB pro Datei).
 4. Das Skript erzeugt einen Versions-Tag nach dem Schema `YYYY.MM.DD.HHMM`.
-5. Das Skript lädt das Archiv über die GitHub API als Release-Asset hoch.
+5. Das Skript lädt das Archiv bzw. alle Multipart-Teile über die GitHub API
+   als Release-Assets hoch.
 6. Das System protokolliert den erfolgreichen Export im System-Log.
 
 ### Alternative und Ausnahmeabläufe
 
-- **3a. Archiv überschreitet 2 GiB:**
-    1. Das Skript bricht den Upload ab.
-    2. Das System sendet eine Benachrichtigung an den Administrator.
 - **5a. GitHub API vorübergehend nicht erreichbar:**
     1. Das Skript wiederholt den Uploadversuch nach 5 Minuten.
     2. Schlägt der Versuch wiederholt fehl, bleibt das Archiv lokal gesichert.
@@ -53,15 +53,17 @@ der Administrator einen verifizierten Stand gezielt wiederherstellen.
 
 1. Das Bauteam meldet einen fehlerhaften Weltstand an das Orga-Team.
 2. Der Administrator stoppt den Docker-Container des Bedrock-Servers.
-3. Der Administrator lädt das gewünschte Backup-Archiv von GitHub Releases.
-4. Der Administrator ersetzt das Weltverzeichnis mit dem extrahierten Stand.
+3. Der Administrator lädt das gewünschte Backup-Archiv (oder alle
+   Multipart-Teile) von GitHub Releases herunter.
+4. Der Administrator führt eventuelle Multipart-Teile zusammen und ersetzt
+   das Weltverzeichnis mit dem extrahierten Stand.
 5. Der Administrator startet den Container neu und verifiziert den Stand.
 6. Das Bauteam prüft und bestätigt die erfolgreiche Wiederherstellung.
 
 ### Nachbedingungen
 
-- **Erfolgszustand Sicherung:** Ein neues GitHub Release mit dem Welt-Archiv
-  ist öffentlich im Repository verfügbar.
+- **Erfolgszustand Sicherung:** Ein neues GitHub Release mit den
+  Backup-Dateien ist öffentlich im Repository verfügbar.
 - **Erfolgszustand Rollback:** Der Server läuft mit dem intakten Weltstand,
   Bautätigkeiten können fortgesetzt werden.
 - **Abbruchzustand:** Der laufende Serverbetrieb wird bei fehlgeschlagener
@@ -71,7 +73,7 @@ der Administrator einen verifizierten Stand gezielt wiederherstellen.
 
 - Funktionale Anforderung: `orga#21`
 - Qualitätsanforderung: `orga#21` (Rollback in unter 30 Minuten durchführbar)
-- Randbedingung: `orga#21` (Maximal 2 GiB pro Release-Artefakt)
+- Randbedingung: `orga#21` (Aufteilung in Multipart-Dateien ab 2 GiB)
 
 ### Betroffene Teams & Schnittstellen
 
