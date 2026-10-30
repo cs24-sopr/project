@@ -1,0 +1,47 @@
+---
+sidebar_position: 5
+---
+
+# Qualitätsmanagement
+
+> Verbindliche Leitplanken für die Qualitätssicherung im Projekt.
+
+Qualität entsteht in jedem Team und in jedem Arbeitsschritt. Die folgenden
+Regeln legen fest, wie wir Ergebnisse prüfen und wie wir mit gefundenen
+Fehlern umgehen.
+
+## 1. Drei Testinstanzen
+
+| Instanz | Wer prüft? | Wann? | Fokus | Nachweis |
+| :--- | :--- | :--- | :--- | :--- |
+| **1. Funktionalität im Pull Request** | Coding-Team | Bei jedem Pull Request | Funktionieren die Änderungen wie beschrieben? Treten Regressionen auf? | Checkliste im Pull Request |
+| **2. Story-Prüfung** | Story-Team | Sobald ein Story-Umfang umgesetzt ist | Passen Inhalt, Ablauf und Inszenierung zur Story? | Prüf-Template des Story-Teams (siehe [definition-of-done-for-quest-creation.md](https://github.com/cs24-sopr/story/blob/main/.github/ISSUE_TEMPLATE/definition-of-done-for-quest-creation.md)) |
+| **3. Unabhängige Gameplay-Prüfung** | Teamübergreifende Testergruppe | Wöchentlich, wenn relevante Änderungen vorhanden sind | Gesamtstand aus Sicht der SpielerInnen | [Gameplay-Test-Report](../vorlagen/test-report.mdx) |
+
+Die dritte Instanz ist die abschließende Prüfung. Ablauf, Zuständigkeiten und
+Vorlage sind im
+[Leitfaden: Gameplay Tests](../statusberichte/gameplay-tests/README.mdx)
+dokumentiert.
+
+## 2. Grundregeln
+
+- **Anforderungen prüfen:** Testet gegen die dokumentierten Anforderungen und
+  Akzeptanzkriterien, nicht gegen Vermutungen.
+- **Nachweise festhalten:** Dokumentiert Testergebnisse so, dass andere sie
+  nachvollziehen können (Reproduktionsschritte, Screenshots, Logs).
+- **Fehler als Issue erfassen:** Jeder Fehler wird als GitHub Issue
+  angelegt und dem zuständigen Team zugewiesen.
+- **Keine stillen Ausnahmen:** Wird ein Test nicht durchgeführt oder ein
+  Befund bewusst akzeptiert, wird die Entscheidung kurz begründet.
+
+## 3. Zusammenspiel der Instanzen
+
+Die drei Instanzen ergänzen sich:
+
+- Der Test im Pull Request fängt Fehler früh und nah an der Änderung ab.
+- Die Story-Prüfung sichert Inhalt, Ablauf und Inszenierung ab.
+- Die unabhängige Gameplay-Prüfung deckt Lücken im Gesamtstand auf.
+
+Die unabhängige Prüfung ersetzt nicht die Prüfung im Pull Request oder die
+Story-Prüfung. Jede Instanz hat ihren eigenen Fokus und ihren eigenen
+Nachweis.
