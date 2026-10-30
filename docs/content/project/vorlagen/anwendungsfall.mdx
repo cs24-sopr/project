@@ -1,0 +1,51 @@
+---
+sidebar_position: 4
+---
+
+# Vorlage: Anwendungsfall (Use Case)
+
+> Entspricht `Anwendungsfall.docx` aus den Vorlesungsunterlagen.
+
+```markdown
+# [TEAM#Issue-ID]: [Titel des Use Cases]
+
+- **Kennung:** `TEAM#Issue-ID` (z. B. `story#27`)
+- **Titel:** [Prägnanter Titel]
+- **Akteur(e):** [z. B. Spieler / Studieninteressierter / Administrator]
+- **Ziel der Akteure:** [Was möchte die handelnde Person konkret erreichen?]
+
+### Kurzbeschreibung
+[1 bis 3 Sätze zur Zusammenfassung des Interaktionsablaufs]
+
+### Auslöser (Trigger)
+[Was löst den Anwendungsfall aus? z. B. Klick auf NPC, Betreten eines Raums,
+Chat-Befehl]
+
+### Vorbedingungen
+- [Vorbedingung 1, z. B. Spieler hat den Campus betreten]
+- [Vorbedingung 2, z. B. Quest A wurde zuvor erfolgreich abgeschlossen]
+
+### Standardablauf (Hauptszenario)
+1. Der Akteur nähert sich dem Objekt / NPC.
+2. Das System öffnet den Dialog bzw. zeigt das Menü an.
+3. Der Akteur wählt Option X aus.
+4. Das System verarbeitet die Auswahl und aktualisiert den Spielzustand.
+5. Das System bestätigt den erfolgreichen Abschluss mit einer Rückmeldung.
+
+### Alternative und Ausnahmeabläufe
+- **3a. Akteur bricht den Dialog ab:** Das System schließt das Menü; kein
+  Zustand ändert sich.
+- **4a. Inventar ist voll:** Das System gibt eine Fehlermeldung aus und
+  verweigert die Übergabe.
+
+### Nachbedingungen
+- **Erfolgszustand:** Der neue Zustand (z. B. Quest angenommen, Item erhalten)
+  ist gespeichert.
+- **Abbruchzustand:** Der Ausgangszustand bleibt vollständig unverändert.
+
+### Zugeordnete Anforderungen
+- Anforderungen: `coding#10`, `coding#12`
+
+### Betroffene Teams & Schnittstellen
+- [z. B. Asset-Design liefert Modell, Coding implementiert Logik]
+```

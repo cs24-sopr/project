@@ -1,0 +1,130 @@
+---
+sidebar_position: 1
+---
+
+# Anleitung: Dokumente ausfüllen
+
+> Kompakter Leitfaden für alle Teams: Welche Dokumente müssen wann und wie im
+> Markdown-Format ausgefüllt werden?
+
+Diese Anleitung basiert auf den Vorgaben unserer Betreuerin und den
+Vereinbarungen mit dem Orga-/RI-Team. Alle Vorlagen liegen im Markdown-Format
+vor und können direkt in die jeweiligen Team-Ordner unter
+`docs/content/project/teams/<team>/` kopiert und gepflegt werden.
+
+---
+
+## 1. Konventionen für alle Dokumente
+
+- **Workflow & Element-Kennungen:** GitHub Issues sind unser zentraler
+  operativer Arbeitsablauf für alle Aufgaben, Anforderungen und Änderungen.
+  Jedes Dokumentationselement (Anforderung, Use Case, Schnittstelle, Change
+  Request) ist direkt an ein Issue gekoppelt und nutzt das Schema
+  `TEAM#Issue-ID` (z. B. `builder#12`, `assets#5`, `coding#18`, `orga#4`).
+  Es gibt **keine Typ-Kürzel** (kein `FR-`, `UC-`, `IF-`, `CR-`). Die
+  Markdown-Dokumente dienen der formalen Dokumentation und werden aus den
+  Issues abgeleitet.
+- **Priorisierung:** Erfolgt einheitlich nach der Skala: `Low`, `Medium`,
+  `High`, `Urgent`.
+- **Format:** Alle Dokumente werden im Markdown-Format (`.md` oder `.mdx`)
+  gepflegt.
+
+---
+
+## 2. Übersicht & Fristen
+
+:::info
+**Feste Prüfungstermine**
+
+Die Abschlusspräsentationen (Prüfungstermine) finden am **09.12.2026** bzw.
+**11.12.2026** statt. Die geforderten Dokumente sind spätestens zur
+Präsentation mitzubringen bzw. am Vortag (08.12. bzw. 10.12.2026)
+elektronisch einzureichen.
+:::
+
+| Dokument | Wer? | Bis wann? / Rhythmus | Wohin im Repo? |
+| :--- | :--- | :--- | :--- |
+| **Aufgabenpaket & Vorgehen (`team-goals.mdx`)** | Jedes Team | **30.10.2026** (Aufgabe 1) | `docs/content/project/teams/<team>/team-goals.mdx` |
+| **[Wöchentliches Team-Update](./team-update.mdx)** | Jedes Team | **Wöchentlich ab 30.10.2026** | `docs/content/project/statusberichte/<team>/` |
+| **[Anforderungsdokument](./anforderungsdokument.mdx)** | Jedes Team | **09.12. / 11.12.2026** (Vortag elektronisch) | `docs/content/project/teams/<team>/anforderungen/` |
+| **[Schnittstellenvereinbarung](./schnittstellenvereinbarung.mdx)** | Betroffene Teams | **Bei Bedarf**, sobald Abhängigkeiten entstehen | Im Team-Ordner oder beim RI-Team eingereicht |
+| **[Change Request](./change-request.mdx)** | Betroffene Teams | **Bei Bedarf**, wenn vereinbarte Schnittstellen/Anforderungen sich ändern | Im Team-Ordner oder beim RI-Team eingereicht |
+| **[RI-Dokumente][ref-ri-gesamtdokument]** | **Nur Orga-Team** | Wöchentlich & final **09.12. / 11.12.2026** | `docs/content/project/teams/orga-lead-infra/spezialaufgabe-ri/` |
+
+---
+
+## 3. Schritt für Schritt: So füllst du die Dokumente aus
+
+### Schritt 1: Aufgabenpaket & Vorgehen (`team-goals.mdx`) bis 30.10.2026
+Jedes Team hat in seinem Ordner bereits eine Datei `team-goals.mdx`. Diese muss
+bis zum 30.10.2026 vollständig ausgefüllt sein:
+- **Teammitglieder:** Wer gehört zum Team?
+- **Was? (Aufgabenpaket):** Kurzbeschreibung, Scope (In Scope / Out of Scope)
+  und Einzelaufgaben.
+- **Wofür? (Ziel):** Dreiteilung (Output / Outcome / Benefit) beachten:
+  - *Output:* Was erzeugt ihr konkret (z. B. 3D-Modelle, Skripte, Bauwerke)?
+  - *Outcome:* Was bewirkt das beim Spieler/Besucher in der Welt?
+  - *Benefit:* Welchen Nutzen hat die DHSN davon (z. B. Studienwerbung)?
+- **Wie? (SDLC):** Vorgehensmodell (z. B. SCRUM, Kanban, agil) mit Begründung.
+- **Schnittstellen:** Erste bekannte Ein- und Ausgangsschnittstellen zu
+  Nachbarteams.
+
+### Schritt 2: Wöchentliche Updates (ab 30.10.2026)
+Ab dem 30.10.2026 benötigt das RI-Team wöchentlich eine kurze Statusmeldung
+jedes Teams, um das Gesamtreporting an die Betreuerin zu erstellen:
+- Kopiere die Vorlage **[Wöchentliches Team-Update](./team-update.mdx)**.
+- Setze die Ampel: 🟢 (stabil), 🟡 (Risiken/Klärung), 🔴 (Blocker).
+- Nenne die bearbeiteten / erledigten GitHub-Issues im Format `TEAM#Issue-ID`.
+- Halte fest, ob sich Anforderungen oder Schnittstellen geändert haben.
+
+### Schritt 3: Anforderungsdokument (`anforderungen.mdx`)
+- Nutze die Vorlage **[Anforderungsdokument](./anforderungsdokument.mdx)**.
+- Halte funktionale Anforderungen, nichtfunktionale Anforderungen und
+  Randbedingungen fest.
+- Kennzeichnung immer als `TEAM#Issue-ID`.
+- Prioritäten: `Low`, `Medium`, `High`, `Urgent`.
+- **Finale Abgabe:** Spätestens zur Abschlusspräsentation am 09.12.2026 bzw.
+  11.12.2026 (am Tag vorher elektronisch einreichen) inklusive aller Anhänge
+  (ausgearbeitete Use Cases und Einzelanforderungen).
+
+### Schritt 4: Schnittstellen und Änderungen dokumentieren
+- **Schnittstelle nötig?** Wenn du Daten, Blöcke oder Skripte von einem
+  Nachbarteam benötigst, legt ein GitHub Issue an (Kennung `TEAM#Issue-ID`)
+  und nutzt die **[Schnittstellenvereinbarung][ref-schnittstelle]** zur
+  formalen Festhaltung.
+- **Wichtige Änderung?** Wenn ein Feature wegfällt oder eine Schnittstelle
+  umgebaut werden muss, dokumentiert die Diskussion im zugehörigen Issue und
+  nutzt den **[Change Request][ref-change]** zur Abstimmung mit dem RI-Team.
+
+---
+
+## 4. Referenz: Abgabefertige Dokumentation des Orga-Teams
+
+Das Organisationsteam hat seine Dokumente für Sprint 1 bereits vollständig
+und abgabefertig im Repository abgelegt. Alle anderen Teams können sich bei
+ihren eigenen Abgaben direkt an diesen echten Projektständen orientieren:
+
+- **[Anforderungsdokument (Organisation & Infrastruktur)][ref-bsp-anf]:**
+  Vollständiges Hauptdokument mit Zweck, Scopes, Akteuren, Use Cases,
+  funktionalen und nichtfunktionalen Anforderungen, Schnittstellen und
+  Randbedingungen.
+- **[Anwendungsfall: Weltsicherung & Rollback][ref-bsp-uc]:**
+  Vollständig ausgearbeiteter Anwendungsfall (`orga#21`) mit Vorbedingungen,
+  Hauptszenario, Rollback-Ablauf und Nachbedingungen.
+- **[Einzelanforderung: Welt-Export][ref-bsp-ea]:**
+  Ausgearbeitetes Detailblatt (`orga#21`) mit Akzeptanzkriterien, Status und
+  Schnittstellenbezug.
+- **[Wöchentliches Update: KW 41-42 (Sprint 1)][ref-bsp-upd]:**
+  Offizieller Statusbericht des Teams mit Ampelstatus, erledigten Issues
+  (`#1` bis `#39`) und Risikobewertung.
+
+[ref-schnittstelle]: ./schnittstellenvereinbarung.mdx
+[ref-change]: ./change-request.mdx
+[ref-ri-gesamtdokument]:
+  ../teams/orga-lead-infra/spezialaufgabe-ri/gesamtdokument.mdx
+[ref-bsp-anf]: ../teams/orga-lead-infra/anforderungen/index.mdx
+[ref-bsp-uc]:
+  ../teams/orga-lead-infra/anforderungen/anwendungsfall-weltsicherung.mdx
+[ref-bsp-ea]:
+  ../teams/orga-lead-infra/anforderungen/einzelanforderung-weltexport.mdx
+[ref-bsp-upd]: ../statusberichte/orga-lead-infra/sprint-1.mdx

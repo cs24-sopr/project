@@ -1,0 +1,119 @@
+---
+sidebar_position: 2
+---
+
+# RI Gesamtdokument: Virtueller Nachbau der DHSN Leipzig
+
+> Gesamtprodukt-Dokumentation im Rahmen der Spezialaufgabe "Requirements and
+> Integration" für unsere Betreuerin.
+
+- **Projekt:** Virtueller Nachbau der DHSN Leipzig (Minecraft Bedrock)
+- **RI-Team:** Organisation, Leitung und Infrastruktur (@cs24-sopr/orga)
+- **Aktuelle Version:** 1.0
+- **Stand:** 15.10.2026
+
+## Änderungshistorie
+
+| Version | Datum | Änderung | Autor |
+| :--- | :--- | :--- | :--- |
+| 1.0 | 15.10.2026 | Erstanlage des RI-Gesamtdokuments | Lucas |
+
+---
+
+## 1. Produktüberblick
+
+Der "Virtuelle Nachbau der DHSN Leipzig" ist ein interaktives
+Minecraft-Erlebnis, das den Campus der Staatlichen Studienakademie Leipzig /
+Dualen Hochschule Sachsen (DHSN) virtuell erlebbar macht. Besucher und
+Studieninteressierte können den Campus erkunden, die Räumlichkeiten und Labore
+besichtigen, Dozierenden in Form von NPCs begegnen und über Minispiele und
+Quests die verschiedenen Studiengänge kennenlernen.
+
+## 2. Produktziele
+
+- **Output:** Eine vollständige, interaktive Minecraft-Bedrock-Welt mit
+  originalgetreuem Gebäude, Custom-Assets, NPCs, Dialogen und Quests,
+  installierbar als AddOn.
+- **Outcome:** Spielerische, motivierende und barrierearme Erkundung des
+  Studienstandorts und der Studiengänge für Interessierte und Studierende.
+- **Benefit:** Erhöhung des Bekanntheitsgrads der DHSN Leipzig und
+  zielgerichtete Bewerbergewinnung; möglicherweise Vorstellung im Rahmen von
+  Aktionstagen (z. B. Tag der offenen Tür).
+
+## 3. Arbeitspakete & Teams
+
+| Team | Arbeitspaket | Verantwortlich | SDLC-Modell |
+| :--- | :--- | :--- | :--- |
+| Orga-Team | Organisation, Leitung und Infrastruktur | Lucas | Kanban / Service |
+| Recherche-Team | Recherche, Publishing und Studiengänge | TBD | Scrumban / Kanban |
+| Builder-Team | Bauen der Campuswelt | TBD | noch offen (TBD) |
+| Coding-Team | Interaktionsprogrammierung | TBD | noch offen (TBD) |
+| Asset-Team | Design und Bereitstellung von Assets | TBD | noch offen (TBD) |
+| Story-Team | Inhalt und Story-Design | TBD | inkrementell / agil |
+
+## 4. Gesamtanforderungen
+
+Anforderungen, die das Gesamtprodukt oder mehrere Arbeitspakete übergreifend
+betreffen:
+
+| Kennung | Gesamtanforderung | Betroffene Teams | Status | Priorität |
+| :--- | :--- | :--- | :--- | :--- |
+| `orga#4` | Der Entwicklungs-Server muss stabil laufen, damit alle Teams kollaborativ am AddOn arbeiten können. | Orga, alle Teams | umgesetzt (Server aktiv) | Urgent |
+| `assets#7` | Alle Custom-Texturen, Blöcke und Modelle müssen stilistisch konsistent sein und dem Erscheinungsbild der DHSN entsprechen. | Assets, Builder, Recherche | in Abstimmung | High |
+| `recherche#23` | Die Wissensvermittlung zu den Studiengängen (Informatik, Technik, Wirtschaft) muss inhaltlich korrekt und didaktisch aufbereitet sein. | Recherche, Story, Coding | in Recherche | High |
+| `orga#21` | Es muss eine automatisierte Sicherung (Backup & Rollback) vorliegen, um Baufortschritte und Spielstände zu sichern. | Orga, Builder | umgesetzt | High |
+
+## 5. Produktkontext und Architektur
+
+Das Gesamtprodukt ist ein eigenständig installierbares Minecraft Bedrock
+AddOn (bestehend aus Welt-Template, Resource-Pack und Behavior-Pack). Die
+Komponenten gliedern sich wie folgt:
+1. **Entwicklungsumgebung & Packaging (Orga):** Entwicklungs-Server für den
+   Bau, Export- und Packaging-Pipeline zum herunterladbaren AddOn, Docusaurus.
+2. **Welt & Architektur (Builder):** Campusgebäude, Außenanlagen und
+   Raumaufteilung der DHSN Leipzig als bauliche Basis des AddOns.
+3. **Visuelle Elemente & Identität (Assets):** Resource-Pack mit 3D-Modellen
+   für Lehrende, Einrichtungsgegenständen, Texturen und Sounds.
+4. **Story & Content (Recherche & Story):** Studiengangsdaten,
+   Quest-Storylines, Dialoge und Rätsel.
+5. **Gameplay & Logik (Coding):** Behavior-Pack mit Interaktionsmechaniken,
+   Dialogsystemen, Minispielen und Event-Hooks.
+
+## 6. Zentrale Schnittstellen
+
+| Kennung | Anbieter | Nachfrager | Gegenstand / Daten | Status |
+| :--- | :--- | :--- | :--- | :--- |
+| `assets#10` | Asset-Design | Bau-Team | Custom-Blöcke und 3D-Modelle zur Platzierung | abgestimmt |
+| `assets#34` | Asset-Design | Coding-Team | Entitäten, Animationen und Behavior-Definitionen | in Klärung |
+| `recherche#23` | Recherche-Team | Story-Team | Fakten, Modulinhalte und Dozierenden-Profile | in Recherche |
+| `story#24` | Story-Team | Coding-Team | Questabläufe, Dialogbäume und Trigger-Events | in Konzeption |
+| `orga#4` | Orga-Team | Alle Teams | Serverzugänge, Deployment-Pipelines und Doku | umgesetzt |
+
+## 7. Meilensteine und Termine
+
+| Termin | Ereignis / Meilenstein | Betroffene Teams |
+| :--- | :--- | :--- |
+| **30.10.2026** | **Aufgabe 1:** Abgabe der ausgefüllten `team-goals.mdx` aller Teams | Alle Teams |
+| **30.10.2026** | Start der wöchentlichen Statusberichte des RI-Teams an die Betreuerin | Orga-Team |
+| **Prüfungszeitraum** | Einreichung des finalen Anforderungsstands und Gesamtdokumentation | Alle Teams |
+| **Prüfungszeitraum** | Abschlusspräsentation und Produktabnahme | Alle Teams |
+
+## 8. Relevante Änderungen (Change Log)
+
+Bisher liegen keine formellen Change Requests vor.
+
+## 9. Wichtige Entscheidungen (Decision Log)
+
+| Datum | Fragestellung & Entscheidung | Beteiligte |
+| :--- | :--- | :--- |
+| 06.10.2026 | Wahl der Plattform: Minecraft Bedrock Edition | Alle Teams |
+| 15.10.2026 | Dokumentationsformat: Markdown im Git-Repo statt Word | Orga, Betreuerin |
+| 15.10.2026 | Einheitliche Kennungen: `TEAM#Issue-ID` ohne Typ-Kürzel | Alle Teams |
+| 15.10.2026 | Prioritätensystem: `Low`, `Medium`, `High`, `Urgent` | Orga |
+
+## 10. Projektweite offene Punkte
+
+| Kennung / Frage | Offener Punkt | Verantwortlich | Frist |
+| :--- | :--- | :--- | :--- |
+| `orga#37` | Ausfüllen der `team-goals.mdx` durch die verbleibenden Teams | Alle Teamleads | 30.10.2026 |
+| `orga#34` | Festlegung des Resource-Pack Deployment-Workflows | Orga, Assets | 23.10.2026 |
