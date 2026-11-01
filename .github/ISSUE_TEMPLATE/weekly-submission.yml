@@ -1,0 +1,47 @@
+name: "Weekly Submission Tracking"
+description: "Tracking issue for monitoring team submissions for the weekly deadline."
+title: "[Tracking] Weekly Submission - Week n"
+labels: ["documentation"]
+body:
+  - type: input
+    id: deadline
+    attributes:
+      label: "📅 Deadline Date & Time"
+      description: "Specify the exact deadline (e.g., 2026-11-06 23:59)"
+      placeholder: "YYYY-MM-DD HH:MM"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: team_checklist
+    attributes:
+      label: "👥 Team PR Status Checklist"
+      description: "Check off teams once their PR is merged and ready for submission."
+      options:
+        - label: "**Organisation** - PR: #____"
+        - label: "**Research** - PR: #____"
+        - label: "**Builder** - PR: #____"
+        - label: "**Coding** - PR: #____"
+        - label: "**Asset-Design** - PR: #____"
+        - label: "**Story-Writers** - PR: #____"
+
+  - type: textarea
+    id: quick_links
+    attributes:
+      label: "🔗 Quick Links & Documentation"
+      description: "Add relevant links"
+      value: |
+        - [How-To: status report](https://cs24-sopr.github.io/project/project/statusberichte/anleitung)
+    validations:
+      required: false
+
+  - type: textarea
+    id: team_discussion
+    attributes:
+      label: "💬 Notes & Blockers"
+      value: |
+        > [!IMPORTANT]
+        > For all teams: If you have updates, blocking issues, or additional context for this submission week, please add a comment on this issue so everything stays in one place, thanks!
+      placeholder: "best kept empty :p"
+    validations:
+      required: false
