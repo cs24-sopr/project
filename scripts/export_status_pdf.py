@@ -22,9 +22,9 @@ from gi.repository import Pango, PangoCairo
 
 PAGE_WIDTH = 595.28  # A4 width in points (72 dpi)
 PAGE_HEIGHT = 841.89  # A4 height in points
-MARGIN_X = 45.0
-MARGIN_TOP = 36.0
-MARGIN_BOTTOM = 36.0
+MARGIN_X = 40.0
+MARGIN_TOP = 30.0
+MARGIN_BOTTOM = 30.0
 CONTENT_WIDTH = PAGE_WIDTH - 2 * MARGIN_X
 CONTENT_HEIGHT = PAGE_HEIGHT - MARGIN_TOP - MARGIN_BOTTOM
 
@@ -175,21 +175,24 @@ class MDXCollectionRenderer:
             if line.startswith("# ") and not line.startswith("## "):
                 title_text = line.lstrip("#").strip()
                 layout.set_markup(
-                    f'<span font="Sans Bold 13" color="#0f172a">'
+                    f'<span font="Sans Bold 14" color="#0f172a">'
                     f'{escape_pango(title_text)}</span>'
                 )
-                self.check_page_break(35.0)
+                _, rect = layout.get_extents()
+                th = (rect.height / Pango.SCALE)
+                self.check_page_break(th + 16.0)
                 cr.move_to(MARGIN_X, self.current_y)
                 PangoCairo.show_layout(cr, layout)
 
-                # Underline below H1
-                cr.set_source_rgb(0.8, 0.85, 0.9)
+                # Clean divider below title
+                line_y = self.current_y + th + 4.0
+                cr.set_source_rgb(0.85, 0.88, 0.92)
                 cr.set_line_width(0.75)
-                cr.move_to(MARGIN_X, self.current_y + 20.0)
-                cr.line_to(PAGE_WIDTH - MARGIN_X, self.current_y + 20.0)
+                cr.move_to(MARGIN_X, line_y)
+                cr.line_to(PAGE_WIDTH - MARGIN_X, line_y)
                 cr.stroke()
 
-                self.current_y += 26.0
+                self.current_y = line_y + 8.0
                 idx += 1
                 continue
 
@@ -197,22 +200,19 @@ class MDXCollectionRenderer:
             if line.startswith("## ") or line.startswith("### "):
                 header_text = line.lstrip("#").strip()
                 layout.set_markup(
-                    f'<span font="Sans Bold 9" color="#1e293b">'
+                    f'<span font="Sans Bold 9.5" color="#1e293b">'
                     f'{escape_pango(header_text)}</span>'
                 )
+                _, rect = layout.get_extents()
+                hh = (rect.height / Pango.SCALE)
                 # Ensure heading stays with at least first item
-                self.check_page_break(32.0)
-                cr.move_to(MARGIN_X, self.current_y + 3.0)
+                self.check_page_break(hh + 18.0)
+
+                # Add comfortable spacing before heading
+                self.current_y += 4.0
+                cr.move_to(MARGIN_X, self.current_y)
                 PangoCairo.show_layout(cr, layout)
-
-                # Light divider line
-                cr.set_source_rgb(0.88, 0.9, 0.94)
-                cr.set_line_width(0.5)
-                cr.move_to(MARGIN_X, self.current_y + 15.0)
-                cr.line_to(PAGE_WIDTH - MARGIN_X, self.current_y + 15.0)
-                cr.stroke()
-
-                self.current_y += 18.0
+                self.current_y += hh + 3.0
                 idx += 1
                 continue
 
@@ -226,7 +226,7 @@ class MDXCollectionRenderer:
                 layout.set_width(int((CONTENT_WIDTH - 20.0) * Pango.SCALE))
                 layout.set_wrap(Pango.WrapMode.WORD_CHAR)
                 _, rect = layout.get_extents()
-                lh = (rect.height / Pango.SCALE) + 6.0
+                lh = (rect.height / Pango.SCALE) + 4.0
                 self.check_page_break(lh)
 
                 # Left bar
@@ -277,7 +277,7 @@ class MDXCollectionRenderer:
                 layout.set_width(int(w * Pango.SCALE))
                 layout.set_wrap(Pango.WrapMode.WORD_CHAR)
                 _, rect = layout.get_extents()
-                lh = (rect.height / Pango.SCALE) + 1.2
+                lh = (rect.height / Pango.SCALE) + 0.8
                 self.check_page_break(lh)
 
                 cr.move_to(indent_x, self.current_y)
@@ -296,7 +296,7 @@ class MDXCollectionRenderer:
                 layout.set_width(int(CONTENT_WIDTH * Pango.SCALE))
                 layout.set_wrap(Pango.WrapMode.WORD_CHAR)
                 _, rect = layout.get_extents()
-                lh = (rect.height / Pango.SCALE) + 2.0
+                lh = (rect.height / Pango.SCALE) + 1.5
                 self.check_page_break(lh)
 
                 cr.move_to(MARGIN_X, self.current_y)
@@ -436,7 +436,7 @@ class MDXCollectionRenderer:
 
             self.current_y += max_cell_h
 
-        self.current_y += 8.0
+        self.current_y += 5.0
 
     def generate(self) -> None:
         """Render all team files sequentially with page breaks in between."""
