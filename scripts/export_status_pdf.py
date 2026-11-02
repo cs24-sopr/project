@@ -451,10 +451,15 @@ class MDXCollectionRenderer:
 
 
 def collect_report_files(
-    status_dir: str, sprint_num: int
+    status_dir: str, sprint_num: int, include_ri: bool = False
 ) -> List[Tuple[str, str]]:
     """Gather all available MDX reports across teams."""
     files = []
+    if include_ri:
+        ri_dir = os.path.join(status_dir, "ri-wochenberichte")
+        ri_file = find_team_report(ri_dir, sprint_num)
+        if ri_file and os.path.exists(ri_file):
+            files.append(("ri-wochenberichte", ri_file))
     for team_id in TEAM_DIRS:
         team_dir = os.path.join(status_dir, team_id)
         report_file = find_team_report(team_dir, sprint_num)
@@ -464,10 +469,13 @@ def collect_report_files(
 
 
 def export_pdf(
-    status_dir: str, sprint_num: int, output_path: str
+    status_dir: str,
+    sprint_num: int,
+    output_path: str,
+    include_ri: bool = False,
 ) -> Tuple[int, List[Tuple[str, str]]]:
     """Execute two-pass rendering to produce bundled PDF."""
-    files = collect_report_files(status_dir, sprint_num)
+    files = collect_report_files(status_dir, sprint_num, include_ri)
     if not files:
         print("Keine Statusberichte gefunden.")
         return 0, []
@@ -518,6 +526,11 @@ def main() -> None:
         action="store_true",
         help="List found files without generating PDF",
     )
+    parser.add_argument(
+        "--include-ri",
+        action="store_true",
+        help="Include RI update as leading report in bundle",
+    )
 
     args = parser.parse_args()
 
@@ -531,7 +544,9 @@ def main() -> None:
     else:
         out_path = os.path.abspath(args.output)
 
-    files = collect_report_files(status_dir, args.sprint)
+    files = collect_report_files(
+        status_dir, args.sprint, include_ri=args.include_ri
+    )
 
     print("=" * 70)
     print(f"Gefundene Berichte für Sprint {args.sprint}:")
@@ -551,7 +566,9 @@ def main() -> None:
         return
 
     print("\nGeneriere gebündeltes PDF...")
-    total_pages, _ = export_pdf(status_dir, args.sprint, out_path)
+    total_pages, _ = export_pdf(
+        status_dir, args.sprint, out_path, include_ri=args.include_ri
+    )
     print(f"Erfolg! PDF gespeichert: {out_path}")
     print(f"Enthaltene Berichte: {len(files)} Teams")
     print(f"Gesamtseiten: {total_pages}")
