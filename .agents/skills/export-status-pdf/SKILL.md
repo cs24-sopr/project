@@ -53,3 +53,4 @@ Markdown-Layout (Überschriften, Listen, Checkboxen, Tabellen) formatiert.
 Optionale Parameter:
 - `--sprint <NUMMER>`: Sprintnummer (Standard: 1).
 - `--output <PFAD>`: Zielpfad für die PDF-Datei.
+- `--no-ri`: Schließt das RI-Wochenupdate aus (standardmäßig enthalten).

@@ -216,6 +216,19 @@ class MDXCollectionRenderer:
                 idx += 1
                 continue
 
+            # Horizontal rule: ---, ***, ___
+            if re.match(r"^(\*{3,}|-{3,}|_{3,})$", line.strip()):
+                self.check_page_break(10.0)
+                cr.set_source_rgb(0.88, 0.9, 0.94)
+                cr.set_line_width(0.5)
+                line_y = self.current_y + 3.0
+                cr.move_to(MARGIN_X, line_y)
+                cr.line_to(PAGE_WIDTH - MARGIN_X, line_y)
+                cr.stroke()
+                self.current_y = line_y + 5.0
+                idx += 1
+                continue
+
             # Blockquote: > ...
             if line.startswith(">"):
                 quote_text = line.lstrip("> ").strip()
@@ -451,7 +464,7 @@ class MDXCollectionRenderer:
 
 
 def collect_report_files(
-    status_dir: str, sprint_num: int, include_ri: bool = False
+    status_dir: str, sprint_num: int, include_ri: bool = True
 ) -> List[Tuple[str, str]]:
     """Gather all available MDX reports across teams."""
     files = []
@@ -472,7 +485,7 @@ def export_pdf(
     status_dir: str,
     sprint_num: int,
     output_path: str,
-    include_ri: bool = False,
+    include_ri: bool = True,
 ) -> Tuple[int, List[Tuple[str, str]]]:
     """Execute two-pass rendering to produce bundled PDF."""
     files = collect_report_files(status_dir, sprint_num, include_ri)
@@ -527,9 +540,11 @@ def main() -> None:
         help="List found files without generating PDF",
     )
     parser.add_argument(
-        "--include-ri",
-        action="store_true",
-        help="Include RI update as leading report in bundle",
+        "--no-ri",
+        dest="include_ri",
+        action="store_false",
+        default=True,
+        help="Exclude RI update from the bundle (included by default)",
     )
 
     args = parser.parse_args()
