@@ -554,7 +554,10 @@ def main() -> None:
 
     if args.output is None:
         out_path = os.path.join(
-            status_dir, f"Sprint_{args.sprint}_Statusberichte.pdf"
+            workspace_root,
+            "exports",
+            "statusberichte",
+            f"Sprint_{args.sprint}_Statusberichte.pdf",
         )
     else:
         out_path = os.path.abspath(args.output)

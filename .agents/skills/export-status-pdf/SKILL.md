@@ -45,7 +45,7 @@ python3 scripts/export_status_pdf.py --sprint 1
 ```
 
 Erzeugt standardmäßig:
-`docs/content/project/statusberichte/Sprint_1_Statusberichte.pdf`.
+`exports/statusberichte/Sprint_1_Statusberichte.pdf`.
 
 Jeder Teambericht beginnt auf einer neuen Seite und wird mit originalgetreuem
 Markdown-Layout (Überschriften, Listen, Checkboxen, Tabellen) formatiert.
