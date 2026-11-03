@@ -1,0 +1,47 @@
+---
+sidebar_position: 1
+---
+
+import ReleaseCompare from './ReleaseCompare';
+
+# Leitfaden: Gameplay Tests
+
+> Unabhängige wöchentliche Prüfung des Gesamtstands. Diese Seite beschreibt
+> die dritte und abschließende Testinstanz aus dem
+> [Qualitätsmanagement](../../richtlinien/qualitaetsmanagement.mdx).
+
+## 1. Zuständigkeit und Rhythmus
+
+Die unabhängige Prüfung übernimmt eine teamübergreifende Testergruppe. Sie ist
+bewusst von Coding und Story getrennt, damit Fehler und Lücken im Gesamtstand
+unvoreingenommen auffallen.
+
+- **Rhythmus:** Einmal pro Woche, aber nur wenn seit dem letzten Test relevante
+  Änderungen vorhanden sind.
+- **Besetzung:** Round-robin, pro Testwoche übernimmt jeweils eine Person.
+- **Ergebnis:** Ein Test-Report nach
+  [Vorlage: Gameplay-Test-Report](../../vorlagen/test-report.mdx).
+
+## 2. Ablauf
+
+1. **Änderungen ermitteln:** Vergleichs-URL für die aktuelle Kalenderwoche
+   erzeugen (siehe unten).
+2. **Änderungen prüfen:** Gibt es keine relevanten Änderungen, entfällt der
+   Test für diese Woche. Das wird kurz vermerkt.
+3. **Testen:** Den geänderten Umfang (Storys, Mechaniken, Bauwerke) auf dem
+   aktuellen Stand durchspielen.
+4. **Report schreiben:** Ergebnisse mit der Vorlage festhalten und im Team
+   ablegen.
+5. **Fehler erfassen:** Jeden Befund als GitHub Issue mit `TEAM#Issue-ID`
+   anlegen oder einem bestehenden Issue zuordnen und dem zuständigen Team
+   zuweisen.
+
+## 3. Änderungen ermitteln
+
+Erzeugt die GitHub-Vergleichs-URL für die aktuelle Kalenderwoche inklusive
+der letzten drei Tage der vorherigen Woche.
+
+<ReleaseCompare />
+<br/>
+
+Alternativ: [Release Seite](https://github.com/cs24-sopr/dhsn-minecraft-assets/releases) des Asset Repositories.

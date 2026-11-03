@@ -1,0 +1,63 @@
+---
+sidebar_position: 9
+---
+
+# Vorlage: Gameplay-Test-Report
+
+> Für die wöchentliche unabhängige Prüfung durch die
+> Testergruppe (Instanz 3). Siehe
+> [Leitfaden: Gameplay Tests](../statusberichte/gameplay-tests/README.mdx).
+
+```markdown
+# Gameplay-Test-Report: KW [XX]
+
+- **Datum:** [YYYY-MM-DD]
+- **Tester:** [Name]
+- **Getesteter Stand:** [Release-Tag / Commit]
+
+### 1. Umfang
+
+- **Relevante Änderungen vorhanden?**
+  - [ ] Ja
+  - [ ] Nein, Test entfällt (kurze Begründung)
+- **Geprüfte Änderungen / Storys:** [Liste mit Issue-Refs, z. B. `coding#45`,
+  `builder#12`]
+
+### 2. Testergebnis
+
+| ID | Bereich / Story | Erwartetes Verhalten | Ergebnis | Schweregrad | Geöffnetes Issue |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| T1 | [z. B. Interaktion mit NPC] | [Erwartung] | bestanden / fehlgeschlagen / blockiert | Low / Medium / High / Urgent | `coding#45` (neu / bereits vorhanden) |
+
+### 3. Befunde
+
+#### Befund 1: [Kurztitel]
+- **Schweregrad:** Low / Medium / High / Urgent
+- **Betroffene Änderung:** `TEAM#Issue-ID`
+- **Schritte zur Reproduktion:**
+  1. [Schritt 1]
+  2. [Schritt 2]
+- **Erwartetes Verhalten:** [Erwartung]
+- **Tatsächliches Verhalten:** [Beobachtung]
+- **Nachweis:** [Screenshot, Video oder Log]
+- **GitHub Issue:** `TEAM#Issue-ID` (neu / bereits vorhanden)
+
+### 4. Story-Abdeckung
+
+- [ ] Alle für diese Woche relevanten Storys wurden geprüft.
+- [ ] Nicht geprüfte Storys sind unten mit Grund aufgeführt.
+
+| Story | Geprüft? | Anmerkung |
+| :--- | :--- | :--- |
+| [Story / Issue-Ref] | Ja / Nein | [Grund, z. B. blockiert durch `builder#12`] |
+
+### 5. Gesamtbewertung
+
+- [ ] 🟢 **bestanden** (keine offenen Befunde)
+- [ ] 🟡 **bestanden mit Einschränkungen** (Befunde mit niedriger Priorität)
+- [ ] 🔴 **nicht bestanden** (Blocker oder mehrere schwerwiegende Befunde)
+
+**Zusammenfassung:** [Kurzfazit in 2 bis 3 Sätzen]
+
+**Empfehlung:** [z. B. Änderungen übernehmen, Nachtest erforderlich]
+```
