@@ -1,0 +1,125 @@
+name: "Task / Feature"
+description: "Standard template for tasks, features, and requirements."
+title: "[TASK] "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please fill out this form to create a new task, feature, or
+        requirement. Issues serve as our primary operational workflow
+        and single source of truth (`TEAM#Issue-ID`).
+
+  - type: dropdown
+    id: type
+    attributes:
+      label: "📋 Type / Category"
+      description: "Select the category that best describes this issue."
+      options:
+        - "Task (Standard-Arbeitspaket)"
+        - "Feature (Neues Feature / Erweiterung)"
+        - "Requirement / Use Case (Fachliche Anforderung)"
+        - "Interface Agreement (Schnittstelle zwischen Teams)"
+        - "Change Request (Änderungsantrag)"
+        - "Spike / Investigation (Recherche & Analyse)"
+        - "Bug / Fix (Fehlerbehebung)"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: team
+    attributes:
+      label: "👥 Assigned Team"
+      description: "Which team is primarily responsible for this task?"
+      options:
+        - "Organisation / Lead / Infra"
+        - "Builder"
+        - "Coding & Interactions"
+        - "Asset-Design"
+        - "Story-Writers"
+        - "Recherche"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: "⚡ Priority"
+      description: "Set priority according to project board conventions."
+      options:
+        - "Medium (Normal priority, planned in sprint)"
+        - "Low (Minor priority / nice-to-have)"
+        - "High (Core functionality for milestone)"
+        - "Urgent (Critical blocker)"
+    validations:
+      required: true
+
+  - type: textarea
+    id: what
+    attributes:
+      label: "📌 WHAT (Goal / Requirement)"
+      description: |
+        What should be built, changed, or fixed? What problem are we
+        solving? Describe the user story and objective (WAS, nicht WIE).
+      placeholder: |
+        - Goal:
+        - Scope / Problem description:
+    validations:
+      required: true
+
+  - type: textarea
+    id: how
+    attributes:
+      label: "🛠 HOW (Implementation / Technical Approach)"
+      description: |
+        How should this be implemented? Relevant files, APIs,
+        architecture, data structures, or steps (WIE).
+      placeholder: |
+        - Implementation approach:
+        - Affected files / components:
+    validations:
+      required: false
+
+  - type: textarea
+    id: test
+    attributes:
+      label: "✅ TEST / Expected Behavior (Acceptance Criteria)"
+      description: |
+        How do we verify that this task is completed successfully?
+        Concrete, testable acceptance criteria (Definition of Done).
+      placeholder: |
+        - [ ] Expected behavior / test case 1
+        - [ ] Expected behavior / test case 2
+    validations:
+      required: true
+
+  - type: input
+    id: actors
+    attributes:
+      label: "👤 Actors & Stakeholders"
+      description: "Who interacts with this feature? (optional)"
+      placeholder: "e.g., Student, Player, Tutor, specific Team"
+    validations:
+      required: false
+
+  - type: textarea
+    id: interfaces_dependencies
+    attributes:
+      label: "🔄 Interfaces & Dependencies"
+      description: |
+        Does this task depend on other teams, tickets, or external
+        interfaces? (Providing / consuming team, contract schema).
+      placeholder: |
+        - Depends on:
+        - Provides to:
+    validations:
+      required: false
+
+  - type: textarea
+    id: references
+    attributes:
+      label: "🔗 References & Notes"
+      description: "Links to documentation, guidelines, or assets."
+      placeholder: "- Link to relevant doc or PR..."
+    validations:
+      required: false

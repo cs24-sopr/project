@@ -1,0 +1,168 @@
+---
+sidebar_position: 6
+---
+
+# Issue-Templates & GitHub-Formulare
+
+> Leitfaden für strukturierte Aufgaben, Anforderungen und Vorlagen im Projekt.
+
+GitHub Issues sind unser zentraler operativer Arbeitsablauf für alle
+Aufgaben, fachlichen Anforderungen und teamübergreifenden Absprachen. Um die
+Qualität unserer Tickets hochzuhalten und nahtlose Übergänge zur
+Kursdokumentation sowie zu automatisierten Auswertungen zu ermöglichen, nutzen
+wir strukturierte **GitHub Issue Forms** im YAML-Format (`.yml`).
+
+---
+
+## 1. Warum strukturierte YAML-Formulare?
+
+Klassische Markdown-Vorlagen (`.md`) erzeugen beim Öffnen lediglich statischen
+Freitext mit HTML-Kommentaren. Dies führt in der Praxis häufig zu unvollständig
+ausgefüllten Tickets, vergessenen Akzeptanzkriterien oder fehlenden
+Metadaten.
+
+GitHub Issue Forms im YAML-Format bieten entscheidende Vorteile:
+
+- **Geführte Eingabemaske:** Interaktive Web-Formulare direkt in GitHub.
+- **Pflichtfelder (Validierung):** Unvollständige Tickets können nicht
+  abgesendet werden (z. B. müssen WAS und Akzeptanzkriterien ausgefüllt sein).
+- **Strukturierte Auswahllisten:** Dropdown-Menüs für Team-Zuweisung,
+  Priorität und Aufgaben-Kategorie verhindern Tippfehler und vereinfachen
+  die Projektverwaltung.
+- **Einheitliche Struktur:** Jedes Issue folgt demselben Aufbau, was die
+  Lesbarkeit für alle Teammitglieder und Reviewer drastisch verbessert.
+
+---
+
+## 2. Der Standard-Aufbau: WHAT, HOW und TEST
+
+Jedes Issue im zentralen Repository folgt dem bewährten Dreiklang:
+
+```text
++-------------------------------------------------------------+
+| 📌 WHAT: Fachlicher Bedarf & Ziel (WAS, nicht WIE)          |
++-------------------------------------------------------------+
+| 🛠 HOW:  Technischer Lösungsansatz & Architektur (WIE)       |
++-------------------------------------------------------------+
+| ✅ TEST: Prüfbare Akzeptanzkriterien (Definition of Done)    |
++-------------------------------------------------------------+
+```
+
+### 📌 WHAT (Goal / Requirement)
+
+Beschreibt das fachliche Ziel oder Problem aus Nutzersicht.
+- **Fokus:** Was soll gebaut, geändert oder erforscht werden? Welcher Nutzen
+  entsteht?
+- **Trennung gem. Anforderungsmanagement:** Hier wird bewusst das **WAS**
+  festgehalten, noch nicht die konkrete Implementierungszeile.
+
+### 🛠 HOW (Implementation / Technical Approach)
+
+Beschreibt den technischen Lösungsweg (WIE).
+- **Inhalt:** Betroffene Komponenten, Dateien, Mod-Konfigurationen, APIs,
+  Datenstrukturen oder Einzelschritte.
+- **Flexibilität:** Die technische Lösung kann im Verlauf des Sprints
+  verfeinert oder angepasst werden, während das Ziel (WHAT) stabil bleibt.
+
+### ✅ TEST / Expected Behavior (Acceptance Criteria)
+
+Definiert konkrete und überprüfbare Abnahmekriterien.
+- **Frage:** Woran prüfen wir bei der Abnahme, ob die Aufgabe erfolgreich
+  abgeschlossen ist?
+- **Format:** Vorzugsweise als Markdown-Checkliste (`- [ ] Kriterium`).
+- **Verbindung zur DoD:** Erst wenn alle Kriterien erfüllt sind und die
+  teaminterne Definition of Done greift, darf das Ticket auf `DONE`
+  verschoben werden.
+
+---
+
+## 3. Strukturierte Felder & Kursausrichtung
+
+Neben den Textbereichen erfasst das Formular standardisierte Metadaten:
+
+- **📋 Type / Category (Dropdown, Pflicht):**
+  Fachliche Einordnung (`Task`, `Feature`, `Requirement / Use Case`,
+  `Interface Agreement`, `Change Request`, `Spike`, `Bug`).
+- **👥 Assigned Team (Dropdown, Pflicht):**
+  Zuständiges Team (Organisation, Builder, Coding, Asset-Design,
+  Story-Writers, Recherche).
+- **⚡ Priority (Dropdown, Pflicht):**
+  Vierstufige Skala des Project Boards (`Low`, `Medium`, `High`, `Urgent`).
+- **👤 Actors & Stakeholders (Text, optional):**
+  Wer nutzt die Funktion? (z. B. Spieler, Studierende, Dozentin, Team).
+- **🔄 Interfaces & Dependencies (Text, optional):**
+  Zuarbeiten anderer Teams (`TEAM#Issue-ID`) oder Schnittstellenverträge.
+- **🔗 References & Notes (Text, optional):**
+  Verlinkung auf Richtlinien, Vorlagen oder PRs.
+
+### Traceability mit `TEAM#Issue-ID`
+
+Jedes Arbeitspaket erhält durch die Issue-Nummer eine eindeutige Kennung
+gemäß unserem Namensschema:
+
+```text
+TEAM#Issue-ID (z. B. orga#47, assets#12, coding#15, builder#8)
+```
+
+Es existieren keine parallelen Nummernkreise für Anforderungen oder
+Schnittstellen. Alle Dokumente in `docs/content/project/` referenzieren
+direkt diese Issue-Kennungen.
+
+---
+
+## 4. Automatisierung & KI-Unterstützung
+
+Strukturierte Issue Forms bilden das Fundament für automatisierte Workflows im
+Projekt:
+
+1. **Maschinenlesbarkeit:** Da jedes Formularfeld als eindeutige Überschrift
+   im Markdown-Text generiert wird (z. B. `### 📌 WHAT (Goal / Requirement)`),
+   können Skripte und KI-Agenten Tickets fehlerfrei parsen.
+2. **Synchronisation mit Kursdokumenten:** Aus fertigen Issues können
+   Anforderungslisten, Schnittstellenregister und wöchentliche Statusberichte
+   automatisiert generiert werden (Single Source of Truth).
+3. **Vermeidung redundanter Papierarbeit:** Teammitglieder müssen Daten
+   nicht doppelt in Word/Markdown und GitHub einpflegen. Das GitHub Issue
+   ist das führende Arbeitsmedium.
+
+---
+
+## 5. Übersicht der Templates in der Organisation
+
+Die Organisation stellt für verschiedene Zwecke spezialisierte Vorlagen
+bereit:
+
+### `cs24-sopr/project` (Zentrales Repository)
+- **Task / Feature** (`.github/ISSUE_TEMPLATE/task.yml`):
+  Standard-Formular für Aufgaben, Features und Anforderungen aller Teams.
+- **Weekly Submission Tracking**:
+  `.github/ISSUE_TEMPLATE/weekly-submission.yml`
+  Wöchentliches Tracking der Teambeiträge und PR-Freigaben für die Orga.
+
+### `cs24-sopr/dhsn-minecraft-assets`
+- **Anfrage: Asset** (`.github/ISSUE_TEMPLATE/asset-request.yml`):
+  Anforderung neuer 3D-Modelle, Blöcke oder Items an das Asset-Team.
+
+### `cs24-sopr/recherche`
+- **Research Request** (`.github/ISSUE_TEMPLATE/research_request.yml`):
+  Recherche-Aufträge zu Studiengängen, Modulen oder Gebäudedaten.
+
+### `cs24-sopr/story`
+- **Quest DoD**:
+  `.github/ISSUE_TEMPLATE/definition-of-done-for-quest-creation.md`
+  Qualitäts- und Abnahmekriterien für Story-Quests.
+
+---
+
+## 6. Best Practices für gute Issues
+
+- **Titel prägnant wählen:** Verwende ein klares Präfix in eckigen Klammern,
+  z. B. `[TASK]`, `[FEATURE]`, `[BUG]`, gefolgt von einer präzisen
+  Kurzbeschreibung auf Englisch.
+- **Keine technischen Details im WHAT:** Beschreibe das Ziel, nicht den
+  Code.
+- **Messbare Akzeptanzkriterien:** Formuliere Kriterien so, dass ein
+  Außenstehender ohne Rückfragen verifizieren kann, ob das Ziel erreicht wurde.
+- **Abhängigkeiten sofort verlinken:** Wenn ein Ticket Blöcke aus dem Asset-Repo
+  oder Infos aus der Recherche benötigt, trage die Issue-Nummer direkt im
+  Abschnitt `Interfaces & Dependencies` ein.
