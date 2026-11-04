@@ -1,7 +1,6 @@
 name: "Task / Feature"
 description: "Standard template for tasks, features, and requirements."
 title: "[TASK] "
-labels: []
 body:
   - type: markdown
     attributes:
