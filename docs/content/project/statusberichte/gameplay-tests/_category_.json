@@ -1,0 +1,8 @@
+{
+  "label": "Gameplay Tests",
+  "position": 99,
+  "link": {
+    "type": "generated-index",
+    "description": "Informationen und Protokolle bzgl. des Gameplay-Testing."
+  }
+}

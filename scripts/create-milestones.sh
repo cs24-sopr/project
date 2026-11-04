@@ -1,0 +1,128 @@
+#!/usr/bin/env bash
+#
+# Create the project milestones via the GitHub CLI.
+#
+# Usage:
+#   ./scripts/create-milestones.sh [--dry-run]
+#
+# Requirements:
+#   - gh, authenticated with `gh auth login`
+#   - GNU date (coreutils)
+#
+# All deadlines below are local times in Europe/Berlin. The script converts
+# them to UTC because the GitHub API expects UTC timestamps.
+
+set -euo pipefail
+
+readonly TIMEZONE="Europe/Berlin"
+DRY_RUN=false
+
+usage() {
+  cat <<'EOF'
+Usage: ./scripts/create-milestones.sh [--dry-run]
+
+Options:
+  --dry-run   Print the milestones that would be created, without creating them.
+  -h, --help  Show this help.
+
+Environment:
+  REPO        Target repository in owner/name form. Defaults to the repository
+              of the current working directory.
+EOF
+}
+
+for arg in "$@"; do
+  case "$arg" in
+    --dry-run)
+      DRY_RUN=true
+      ;;
+    -h|--help)
+      usage
+      exit 0
+      ;;
+    *)
+      echo "Unknown option: $arg" >&2
+      usage >&2
+      exit 1
+      ;;
+  esac
+done
+
+command -v gh >/dev/null 2>&1 || {
+  echo "Error: gh is required but not installed." >&2
+  exit 1
+}
+
+command -v date >/dev/null 2>&1 || {
+  echo "Error: date is required but not installed." >&2
+  exit 1
+}
+
+REPO="${REPO:-$(gh repo view --json nameWithOwner --jq '.nameWithOwner')}"
+
+# Convert a Europe/Berlin local timestamp to a UTC ISO 8601 timestamp.
+#
+# Note: `date --utc --date="..."` interprets the input as UTC, so the timezone
+# has to be applied while parsing the local time first, then converted via its
+# epoch value.
+to_utc() {
+  local local_datetime="$1"
+  local epoch
+
+  epoch="$(TZ="$TIMEZONE" date --date="$local_datetime" +%s)"
+  date --utc --date="@$epoch" +%Y-%m-%dT%H:%M:%SZ
+}
+
+# Format: title|Europe/Berlin deadline|description
+MILESTONES=(
+  # Weekly status reports
+  "Week 1 Submission|2026-10-30 23:59:59|Milestone tracking for Week 1 submissions"
+  "Week 2 Submission|2026-11-06 23:59:59|Milestone tracking for Week 2 submissions"
+  "Week 3 Submission|2026-11-13 23:59:59|Milestone tracking for Week 3 submissions"
+  "Week 4 Submission|2026-11-20 23:59:59|Milestone tracking for Week 4 submissions"
+  "Week 5 Submission|2026-11-27 23:59:59|Milestone tracking for Week 5 submissions"
+  "Week 6 Submission|2026-12-04 23:59:59|Milestone tracking for Week 6 submissions"
+
+  # Exams
+  "Exam Group 1|2026-12-09 23:59:59|Milestone for exam group 1"
+  "Exam Group 2|2026-12-11 23:59:59|Milestone for exam group 2"
+
+  # Gameplay testing reports
+  "Gameplay Testing Week 1|2026-11-07 23:59:59|Milestone tracking for Week 1 gameplay testing reports"
+  "Gameplay Testing Week 2|2026-11-14 23:59:59|Milestone tracking for Week 2 gameplay testing reports"
+  "Gameplay Testing Week 3|2026-11-21 23:59:59|Milestone tracking for Week 3 gameplay testing reports"
+  "Gameplay Testing Week 4|2026-11-28 23:59:59|Milestone tracking for Week 4 gameplay testing reports"
+  "Gameplay Testing Week 5|2026-12-05 23:59:59|Milestone tracking for Week 5 gameplay testing reports"
+)
+
+echo "Repository: $REPO"
+
+existing_titles="$(gh api --paginate "repos/$REPO/milestones?state=all&per_page=100" --jq '.[].title')"
+
+for entry in "${MILESTONES[@]}"; do
+  IFS='|' read -r title local_deadline description <<<"$entry"
+  due_on="$(to_utc "$local_deadline")"
+
+  if grep -Fxq "$title" <<<"$existing_titles"; then
+    echo "Skipping existing milestone: $title"
+    continue
+  fi
+
+  if $DRY_RUN; then
+    printf 'Would create: %s (due %s, %s %s)\n' \
+      "$title" "$due_on" "$TIMEZONE" "$local_deadline"
+    continue
+  fi
+
+  url="$(gh api \
+    --method POST \
+    -H "Accept: application/vnd.github+json" \
+    "repos/$REPO/milestones" \
+    -f title="$title" \
+    -f state="open" \
+    -f description="$description" \
+    -f due_on="$due_on" \
+    --jq '.html_url')"
+
+  printf 'Created: %s (due %s)\n  %s\n' "$title" "$due_on" "$url"
+done
