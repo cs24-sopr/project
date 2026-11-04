@@ -1,0 +1,80 @@
+---
+sidebar_position: 79
+---
+
+# 79. Automatisierter PDF-Export für Statusberichte
+
+## Hintergrund und Zielstellung
+
+Fuer die woechentliche Abgabe an die Dozentin muessen alle
+Statusberichte der einzelnen Teilteams gebuendelt eingereicht
+werden. Bislang geschah dies manuell oder unstrukturiert.
+
+Mit Issue #79 und PR #78 wurde ein durchgaengig automatisierter
+Workflow geschaffen:
+- Sammeln aller vorliegenden Team-MDX-Dateien eines Sprints.
+- Voranstellen des konsolidierten RI-Wochenberichts (Seite 1).
+- Vektorbasiertes A4-PDF ohne unnoetige Deckblaetter oder KI-Floskeln.
+- Bereitstellung als CLI-Skript, Agent-Skill und GitHub Action.
+
+---
+
+## 1. CLI-Skript: `scripts/export_status_pdf.py`
+
+Das Skript nutzt `cairo` (PyCairo) und `pango` (PangoCairo) fuer ein
+praezises typografisches Rendering der Markdown- und MDX-Inhalte.
+
+### Unterstuetzte Funktionen
+- Automatisches Auffinden der Statusberichte aller 6 Teilteams.
+- Voranstellen des RI-Updates (`ri-wochenberichte/kw*.mdx`).
+- Markdown-Tabellen, Checkboxen, Formatierungen und Listen.
+- Zweiphasiges Rendering (Pass 1 ermittelt Seitenzahl, Pass 2
+  rendert die Seitennummerierung `Seite X von Y`).
+- Ablage des generierten PDFs unter `exports/statusberichte/`.
+
+### Aufruf und Parameter
+
+```bash
+# Nur gefundene Berichte anzeigen (Trockenlauf)
+python3 scripts/export_status_pdf.py --sprint 1 --check-only
+
+# PDF fuer Sprint 1 generieren
+python3 scripts/export_status_pdf.py --sprint 1
+
+# Optional: Spezifischer Ausgabepfad
+python3 scripts/export_status_pdf.py --sprint 1 --output /tmp/export.pdf
+
+# Optional: RI-Uebersicht ausschliessen
+python3 scripts/export_status_pdf.py --sprint 1 --no-ri
+```
+
+---
+
+## 2. Agent-Skill: `/export-status-pdf`
+
+Fuer automatisierte Agentenlaeufe steht der Skill
+`.agents/skills/export-status-pdf/SKILL.md` bereit.
+
+Er erlaubt es, die Berichte ueber den Slash-Command
+`/export-status-pdf` direkt im Chat aufzurufen. Der Skill holt
+zuvor die neuesten Remote-Stoffe via Git ab und fuehrt das
+Python-Skript aus.
+
+---
+
+## 3. GitHub Action: Export auf Knopfdruck
+
+Fuer Teammitglieder ohne lokale Python- oder Cairo-Installation
+existiert der GitHub-Actions-Workflow `.github/workflows/export-status-pdf.yml`.
+
+### Ablauf der Action
+1. **Trigger:** Manuell via `workflow_dispatch` (unter "Actions"
+   im GitHub-Webinterface).
+2. **Eingaben:**
+   - `sprint`: Sprint-Nummer (Standard: `1`).
+   - `commit_changes`: Erzeugtes PDF direkt als Commit ins Repository
+     pushen (Standard: `true`).
+3. **Abhaengigkeiten:** Installiert Cairo- und Pango-Pakete per apt.
+4. **Ergebnis:** Das generierte PDF wird unter
+   `exports/statusberichte/Sprint_<N>_Statusberichte.pdf` committet und
+   zusaetzlich als Workflow-Artefakt zum Download bereitgestellt.

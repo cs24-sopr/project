@@ -1,0 +1,69 @@
+name: Export Status Report PDF
+
+on:
+  workflow_dispatch:
+    inputs:
+      sprint:
+        description: 'Sprint number to bundle (e.g. 1)'
+        required: true
+        default: '1'
+        type: string
+      commit_changes:
+        description: 'Commit and push exported PDF to repository'
+        required: false
+        default: true
+        type: boolean
+
+permissions:
+  contents: write
+
+jobs:
+  export-pdf:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+
+      - name: Install system dependencies for Cairo and Pango
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            python3-gi \
+            python3-gi-cairo \
+            python3-cairo \
+            gir1.2-pango-1.0
+
+      - name: Generate consolidated PDF report
+        run: |
+          python3 scripts/export_status_pdf.py \
+            --sprint "${{ inputs.sprint }}"
+
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Sprint_${{ inputs.sprint }}_Statusberichte
+          path: exports/statusberichte/Sprint_${{ inputs.sprint }}_*.pdf
+          if-no-files-found: error
+
+      - name: Commit and push PDF export
+        if: ${{ inputs.commit_changes }}
+        env:
+          SPRINT_NUM: ${{ inputs.sprint }}
+        run: |
+          OUT_DIR="exports/statusberichte"
+          PDF_NAME="Sprint_${SPRINT_NUM}_Statusberichte.pdf"
+          PDF_PATH="${OUT_DIR}/${PDF_NAME}"
+          git config user.name "github-actions[bot]"
+          git config user.email \
+            "github-actions[bot]@users.noreply.github.com"
+          git add "${PDF_PATH}"
+          if git diff --staged --quiet; then
+            echo "No changes to commit (PDF is already up to date)."
+          else
+            COMMIT_MSG="docs(status): update Sprint ${SPRINT_NUM} PDF [skip ci]"
+            git commit -m "${COMMIT_MSG}"
+            git push
+          fi
