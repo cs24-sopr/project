@@ -1,6 +1,7 @@
 name: "Task / Feature"
 description: "Standard template for tasks, features, and requirements."
 title: "[TASK] "
+projects: ["cs24-sopr/3"]
 body:
   - type: markdown
     attributes:

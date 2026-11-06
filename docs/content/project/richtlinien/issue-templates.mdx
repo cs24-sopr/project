@@ -95,6 +95,15 @@ Neben den Textbereichen erfasst das Formular standardisierte Metadaten:
 - **🔗 References & Notes (Text, optional):**
   Verlinkung auf Richtlinien, Vorlagen oder PRs.
 
+:::info Abgrenzung zu GitHub Project Metadaten
+Eingaben aus Formular-Feldern (`type: dropdown`, `input`, etc.) werden
+von GitHub als Markdown in den Issue-Body gerendert (z. B. für Skripte und
+Agenten). Sie belegen nicht automatisch die benutzerdefinierten Spalten auf
+dem Project Board (wie `Assigned Team` oder `Status`). Das Issue wird jedoch
+über `projects: ["cs24-sopr/3"]` automatisch dem Board hinzugefügt; die
+Board-Felder werden wie gewohnt im Project Board gepflegt.
+:::
+
 ### Traceability mit `TEAM#Issue-ID`
 
 Jedes Arbeitspaket erhält durch die Issue-Nummer eine eindeutige Kennung
