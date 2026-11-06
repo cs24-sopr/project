@@ -12,29 +12,43 @@ import ReleaseCompare from './ReleaseCompare';
 
 ## 1. Zuständigkeit und Rhythmus
 
-Die unabhängige Prüfung übernimmt eine teamübergreifende Testergruppe. Sie ist
-bewusst von Coding und Story getrennt, damit Fehler und Lücken im Gesamtstand
-unvoreingenommen auffallen.
+Die Prüfung bleibt bewusst von Coding und Story getrennt, damit Fehler und
+Lücken im Gesamtstand unvoreingenommen auffallen.
 
 - **Rhythmus:** Einmal pro Woche, aber nur wenn seit dem letzten Test relevante
   Änderungen vorhanden sind.
-- **Besetzung:** Round-robin, pro Testwoche übernimmt jeweils eine Person.
+- **Besetzung:** Standardmäßig zwei zufällig ausgewählte Personen mit
+  Repository-Zugriff; die Anzahl ist beim Workflow-Start anpassbar. AimPizza und
+  probablyjassin sind immer als Backup-Reviewer eingetragen.
 - **Ergebnis:** Ein Test-Report nach
   [Vorlage: Gameplay-Test-Report](../../vorlagen/test-report.mdx).
 
 ## 2. Ablauf
 
-1. **Änderungen ermitteln:** Vergleichs-URL für die aktuelle Kalenderwoche
-   erzeugen (siehe unten).
-2. **Änderungen prüfen:** Gibt es keine relevanten Änderungen, entfällt der
+1. **Workflow starten:** Ein Administrator startet den Workflow "Create
+   Gameplay Test Report" manuell. Er legt einen Pull Request mit einem neuen
+   Report für die aktuelle oder eine angegebene Kalenderwoche unter
+   `docs/content/project/statusberichte/gameplay-tests/kwXX.mdx` an und weist
+   die konfigurierte Anzahl an Personen zu.
+2. **Änderungen prüfen:** Vergleichs-URL für die aktuelle Kalenderwoche
+   erzeugen (siehe unten). Gibt es keine relevanten Änderungen, entfällt der
    Test für diese Woche. Das wird kurz vermerkt.
 3. **Testen:** Den geänderten Umfang (Storys, Mechaniken, Bauwerke) auf dem
    aktuellen Stand durchspielen.
 4. **Report schreiben:** Ergebnisse mit der Vorlage festhalten und im Team
    ablegen.
-5. **Fehler erfassen:** Jeden Befund als GitHub Issue mit `TEAM#Issue-ID`
+5. **Fehler erfassen:** Jeden Befund als GitHub Issue 
    anlegen oder einem bestehenden Issue zuordnen und dem zuständigen Team
    zuweisen.
+
+### Regeln
+
+- Reagieren die zugewiesenen Personen nicht innerhalb von zwei Tagen, wird die
+  Zuweisung neu ausgelost und die Abweichung vermerkt.
+- Niemand ist verpflichtet, zwei Tests zu übernehmen. Eine Person kann eine
+  Neuauslosung anfragen, damit jemand anderes sie ersetzt.
+- Die Neuauslosung erfolgt über `./scripts/pick-gameplay-testers.sh`. Bereits
+  zugewiesene Personen lassen sich mit `--exclude` ausschließen.
 
 ## 3. Änderungen ermitteln
 
@@ -44,4 +58,4 @@ der letzten drei Tage der vorherigen Woche.
 <ReleaseCompare />
 <br/>
 
-Alternativ: [Release Seite](https://github.com/cs24-sopr/dhsn-minecraft-assets/releases) des Asset Repositories.
+Alternativ: Zeitstrahl der [Commits auf main](https://github.com/cs24-sopr/dhsn-minecraft-assets/commits/main/) im Asset Repository.
