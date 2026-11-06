@@ -18,19 +18,17 @@ wir strukturierte **GitHub Issue Forms** im YAML-Format (`.yml`).
 
 Klassische Markdown-Vorlagen (`.md`) erzeugen beim Öffnen lediglich statischen
 Freitext mit HTML-Kommentaren. Dies führt in der Praxis häufig zu unvollständig
-ausgefüllten Tickets, vergessenen Akzeptanzkriterien oder fehlenden
-Metadaten.
+ausgefüllten Tickets oder vergessenen Akzeptanzkriterien.
 
 GitHub Issue Forms im YAML-Format bieten entscheidende Vorteile:
 
 - **Geführte Eingabemaske:** Interaktive Web-Formulare direkt in GitHub.
 - **Pflichtfelder (Validierung):** Unvollständige Tickets können nicht
-  abgesendet werden (z. B. müssen WAS und Akzeptanzkriterien ausgefüllt sein).
-- **Strukturierte Auswahllisten:** Dropdown-Menüs für Team-Zuweisung,
-  Priorität und Aufgaben-Kategorie verhindern Tippfehler und vereinfachen
-  die Projektverwaltung.
+  abgesendet werden (WAS und Akzeptanzkriterien sind Pflichtangaben).
+- **Automatische Board-Zuweisung:** Über `projects: ["cs24-sopr/3"]` wird
+  jedes erstellte Issue direkt auf das zentrale GitHub Project Board gesetzt.
 - **Einheitliche Struktur:** Jedes Issue folgt demselben Aufbau, was die
-  Lesbarkeit für alle Teammitglieder und Reviewer drastisch verbessert.
+  Lesbarkeit für alle Teammitglieder und Reviewer sicherstellt.
 
 ---
 
@@ -69,40 +67,24 @@ Beschreibt den technischen Lösungsweg (WIE).
 Definiert konkrete und überprüfbare Abnahmekriterien.
 - **Frage:** Woran prüfen wir bei der Abnahme, ob die Aufgabe erfolgreich
   abgeschlossen ist?
-- **Format:** Vorzugsweise als Markdown-Checkliste (`- [ ] Kriterium`).
+- **Format:** Als Markdown-Checkliste (`- [ ] Kriterium`).
 - **Verbindung zur DoD:** Erst wenn alle Kriterien erfüllt sind und die
   teaminterne Definition of Done greift, darf das Ticket auf `DONE`
   verschoben werden.
 
 ---
 
-## 3. Strukturierte Felder & Kursausrichtung
+## 3. Project Board Integration & Traceability
 
-Neben den Textbereichen erfasst das Formular standardisierte Metadaten:
+### Metadaten auf dem Project Board
 
-- **📋 Type / Category (Dropdown, Pflicht):**
-  Fachliche Einordnung (`Task`, `Feature`, `Requirement / Use Case`,
-  `Interface Agreement`, `Change Request`, `Spike`, `Bug`).
-- **👥 Assigned Team (Dropdown, Pflicht):**
-  Zuständiges Team (Organisation, Builder, Coding, Asset-Design,
-  Story-Writers, Recherche).
-- **⚡ Priority (Dropdown, Pflicht):**
-  Vierstufige Skala des Project Boards (`Low`, `Medium`, `High`, `Urgent`).
-- **👤 Actors & Stakeholders (Text, optional):**
-  Wer nutzt die Funktion? (z. B. Spieler, Studierende, Dozentin, Team).
-- **🔄 Interfaces & Dependencies (Text, optional):**
-  Zuarbeiten anderer Teams (`TEAM#Issue-ID`) oder Schnittstellenverträge.
-- **🔗 References & Notes (Text, optional):**
-  Verlinkung auf Richtlinien, Vorlagen oder PRs.
+Da GitHub Issue Forms ausschließlich den Textkörper (Body) des Issues
+befüllen, werden alle operativen Board-Metadaten wie gewohnt direkt im
+[GitHub Project Board](./project-board.mdx) bzw. in der Seitenleiste gepflegt:
 
-:::info Abgrenzung zu GitHub Project Metadaten
-Eingaben aus Formular-Feldern (`type: dropdown`, `input`, etc.) werden
-von GitHub als Markdown in den Issue-Body gerendert (z. B. für Skripte und
-Agenten). Sie belegen nicht automatisch die benutzerdefinierten Spalten auf
-dem Project Board (wie `Assigned Team` oder `Status`). Das Issue wird jedoch
-über `projects: ["cs24-sopr/3"]` automatisch dem Board hinzugefügt; die
-Board-Felder werden wie gewohnt im Project Board gepflegt.
-:::
+- **Assigned Team:** Zuständiges Team für das Issue.
+- **Status:** `BACKLOG`, `TODO`, `IN PROGRESS`, `DONE`.
+- **Sprint & Story Points:** Zuordnung im Sprint Planning.
 
 ### Traceability mit `TEAM#Issue-ID`
 
@@ -130,9 +112,8 @@ Projekt:
 2. **Synchronisation mit Kursdokumenten:** Aus fertigen Issues können
    Anforderungslisten, Schnittstellenregister und wöchentliche Statusberichte
    automatisiert generiert werden (Single Source of Truth).
-3. **Vermeidung redundanter Papierarbeit:** Teammitglieder müssen Daten
-   nicht doppelt in Word/Markdown und GitHub einpflegen. Das GitHub Issue
-   ist das führende Arbeitsmedium.
+3. **Vermeidung redundanter Papierarbeit:** Das GitHub Issue ist das
+   führende Arbeitsmedium.
 
 ---
 
@@ -143,7 +124,7 @@ bereit:
 
 ### `cs24-sopr/project` (Zentrales Repository)
 - **Task / Feature** (`.github/ISSUE_TEMPLATE/task.yml`):
-  Standard-Formular für Aufgaben, Features und Anforderungen aller Teams.
+  Schlankes Formular für Aufgaben, Features und Anforderungen aller Teams.
 - **Weekly Submission Tracking**:
   `.github/ISSUE_TEMPLATE/weekly-submission.yml`
   Wöchentliches Tracking der Teambeiträge und PR-Freigaben für die Orga.
@@ -172,6 +153,3 @@ bereit:
   Code.
 - **Messbare Akzeptanzkriterien:** Formuliere Kriterien so, dass ein
   Außenstehender ohne Rückfragen verifizieren kann, ob das Ziel erreicht wurde.
-- **Abhängigkeiten sofort verlinken:** Wenn ein Ticket Blöcke aus dem Asset-Repo
-  oder Infos aus der Recherche benötigt, trage die Issue-Nummer direkt im
-  Abschnitt `Interfaces & Dependencies` ein.

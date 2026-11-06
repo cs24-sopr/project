@@ -10,50 +10,6 @@ body:
         requirement. Issues serve as our primary operational workflow
         and single source of truth (`TEAM#Issue-ID`).
 
-  - type: dropdown
-    id: type
-    attributes:
-      label: "📋 Type / Category"
-      description: "Select the category that best describes this issue."
-      options:
-        - "Task (Standard-Arbeitspaket)"
-        - "Feature (Neues Feature / Erweiterung)"
-        - "Requirement / Use Case (Fachliche Anforderung)"
-        - "Interface Agreement (Schnittstelle zwischen Teams)"
-        - "Change Request (Änderungsantrag)"
-        - "Spike / Investigation (Recherche & Analyse)"
-        - "Bug / Fix (Fehlerbehebung)"
-    validations:
-      required: true
-
-  - type: dropdown
-    id: team
-    attributes:
-      label: "👥 Assigned Team"
-      description: "Which team is primarily responsible for this task?"
-      options:
-        - "Organisation / Lead / Infra"
-        - "Builder"
-        - "Coding & Interactions"
-        - "Asset-Design"
-        - "Story-Writers"
-        - "Recherche"
-    validations:
-      required: true
-
-  - type: dropdown
-    id: priority
-    attributes:
-      label: "⚡ Priority"
-      description: "Set priority according to project board conventions."
-      options:
-        - "Medium (Normal priority, planned in sprint)"
-        - "Low (Minor priority / nice-to-have)"
-        - "High (Core functionality for milestone)"
-        - "Urgent (Critical blocker)"
-    validations:
-      required: true
-
   - type: textarea
     id: what
     attributes:
@@ -92,34 +48,3 @@ body:
         - [ ] Expected behavior / test case 2
     validations:
       required: true
-
-  - type: input
-    id: actors
-    attributes:
-      label: "👤 Actors & Stakeholders"
-      description: "Who interacts with this feature? (optional)"
-      placeholder: "e.g., Student, Player, Tutor, specific Team"
-    validations:
-      required: false
-
-  - type: textarea
-    id: interfaces_dependencies
-    attributes:
-      label: "🔄 Interfaces & Dependencies"
-      description: |
-        Does this task depend on other teams, tickets, or external
-        interfaces? (Providing / consuming team, contract schema).
-      placeholder: |
-        - Depends on:
-        - Provides to:
-    validations:
-      required: false
-
-  - type: textarea
-    id: references
-    attributes:
-      label: "🔗 References & Notes"
-      description: "Links to documentation, guidelines, or assets."
-      placeholder: "- Link to relevant doc or PR..."
-    validations:
-      required: false

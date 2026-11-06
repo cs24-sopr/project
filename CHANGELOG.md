@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2026-11-06]
+
+### Changed
+
+- Streamlined GitHub Issue Form `task.yml` to focus strictly on essential
+  fields (WHAT, HOW, TEST) and automated board linking (`projects`), removing
+  redundant pseudo-metadata form fields.
+
 ## [2026-11-04]
 
 ### Added
