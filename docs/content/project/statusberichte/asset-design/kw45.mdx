@@ -1,0 +1,83 @@
+---
+sidebar_position: 3
+---
+
+# Wöchentliches Update: Asset-Design
+
+- **Datum:** 2026-11-07
+- **Sprint / Berichtszeitraum:** ASSET-SPRINT-4 / KW 45
+- **Verantwortliche Ansprechperson:** Aljoscha Burger
+
+### 1. Gesamtstatus
+
+- [ ] 🟢 **stabil** (im Zeitplan, keine wesentlichen Hindernisse)
+- [x] 🟡 **Risiken / Klärungen** (kurze Umsetzungsfrist für neue Quest-Assets)
+- [ ] 🔴 **relevante Blocker** (Arbeit stockt, externe Hilfe nötig)
+
+In dieser Woche wurde aufgrund der Belastung durch andere Module die Erstellung neuer Assets nicht priorisiert.
+Stattdessen wurde der Code gewartet und Planungsaufgaben bzw. Absprachen mit anderen Teams erledigt.
+Es sind zunächst nur wenige neue Tickets eingegangen.
+Am Freitag, dem 6.11., kam kurzfristig eine größere Anfrage für die Bibliotheksquest hinzu.
+Die dafür benötigten Assets sollen bis Dienstag, den 10.11., fertig sein, damit das Bau-Team diese platzieren und das
+Coding-Team mit der Quest-Implementierung beginnen kann.
+
+### 2. Fortschritt im aktuellen Sprint
+
+- **Seit dem letzten Bericht erledigt:**
+    - `dhsn-minecraft-assets#48`: Prettier (Code-Formatter) für das Repository eingerichtet
+    - `dhsn-minecraft-assets#39`: Branding-Aufgabe abgeschlossen
+    - `dhsn-minecraft-assets#50`: Tisch
+- **Weiterhin offen:**
+    - `dhsn-minecraft-assets#49`: Roter Stuhl
+    - `dhsn-minecraft-assets#51`: Smartboard
+- **Neu eingegangen:**
+    - `dhsn-minecraft-assets#60`: Bücherregale für die Studiengänge
+    - `dhsn-minecraft-assets#61`: Bücher als unterscheidbare Inventar-Items
+    - `dhsn-minecraft-assets#62`: Bibliothekarin als NPC
+
+### 3. Änderungen an Anforderungen seit letzter Woche
+
+| Issue                                | Art der Änderung | Begründung                                                                             | Betrifft Nachbarteams?                          |
+| :----------------------------------- | :--------------- | :------------------------------------------------------------------------------------- | :---------------------------------------------- |
+| `project#92`                         | neu              | Für die Bibliotheksquest werden Bücherregale, Bücher und eine Bibliothekarin benötigt. | Ja (Story-, Coding-, Build- und Recherche-Team) |
+| `dhsn-minecraft-assets#60` bis `#62` | neu              | Die konkreten Asset-Aufträge wurden am 6.11. aus der Quest-Anfrage abgeleitet.         | Ja (Coding- und Recherche-Team)                 |
+
+### 4. Schnittstellen (neu, geändert oder abgestimmt)
+
+- `project#92`: Übergeordnete Anfrage des Story-Teams für Assets zur
+  Bibliotheksquest.
+- `dhsn-minecraft-assets#60` und `#61`: Die Auswahl und Benennung der Regale und
+  Bücher muss mit dem Recherche-Team abgestimmt werden, damit die Studiengänge
+  passend abgedeckt sind.
+- `dhsn-minecraft-assets#61`: Das Bücher-Ticket sieht nicht platzierbare Items vor.
+  Da die nötige Item-Infrastruktur im Asset-Repository noch fehlt, muss die
+  technische Umsetzbarkeit kurzfristig geklärt werden.
+- `dhsn-minecraft-assets#62`: Das Aussehen der Bibliothekarin wird vom Asset-Team
+  gestaltet; Interaktionen und Quest-Logik sollen mit dem Coding-Team abgestimmt
+  werden.
+- `project#93`: Raumaufteilung und Platz für Bibliothekarin, Arbeitstisch, Regale
+  und Interaktionen mit dem Build-Team abstimmen.
+
+### 5. Blocker & Risiken
+
+- **Risiko:** Die drei neuen Assets sollen bis Dienstag, 10.11., fertig sein. Wegen
+  der eingeschränkten Kapazität in dieser Woche ist die Frist knapp.
+- **Klärungsbedarf:** Für Bücher und Regale fehlen noch abgestimmte Informationen zu
+  Studiengängen, Titeln und Farben (`project#94`). Auch die Item-Infrastruktur für
+  Bücher und die Schnittstelle für NPC-Interaktionen müssen rechtzeitig geklärt
+  werden.
+
+### 6. Geplante Aufgaben bis nächste Woche
+
+- Bücherregale, Bücher und Bibliothekarin aus `dhsn-minecraft-assets#60` bis `#62`
+  priorisieren und nach Möglichkeit bis zum 10.11. fertigstellen.
+- Studiengangsdaten und passende Buchtitel mit dem Recherche-Team über `project#94`
+  abstimmen.
+- Item-Umsetzung der Bücher sowie benötigte Interaktionen mit dem Coding-Team
+  klären.
+- Platzierung und benötigte Fläche der Assets mit dem Build-Team über `project#93`
+  abstimmen.
+- Die offenen Assets `dhsn-minecraft-assets#49` bis `#51` weiterverfolgen.
+- Der Workflow bezüglich der für Quests benötigte Assets bzw. der Realisierung von Quests
+  muss teamübergreifend abgestimmt werden. In Hinblick auf verbleibende Zeit und Umfang
+  der geplanten Quests sind Abstimmungen und Priorisierungen notwendig.
