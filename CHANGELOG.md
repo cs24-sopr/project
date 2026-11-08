@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2026-11-08]
+
+### Changed
+
+- Updated Docusaurus callout syntax across guideline documents.
+- Removed redundant issue creation steps in `agiles-arbeiten.mdx` in favour of
+  direct references.
+
 ## [2026-11-06]
 
 ### Changed
