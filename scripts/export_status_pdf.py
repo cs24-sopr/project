@@ -573,7 +573,7 @@ def main() -> None:
             workspace_root,
             "exports",
             "statusberichte",
-            f"Sprint_{args.sprint}_Statusberichte.pdf",
+            f"Wochenbericht_{args.sprint}.pdf",
         )
     else:
         out_path = os.path.abspath(args.output)

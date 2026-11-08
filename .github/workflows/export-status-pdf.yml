@@ -44,8 +44,8 @@ jobs:
       - name: Upload PDF artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Sprint_${{ inputs.sprint }}_Statusberichte
-          path: exports/statusberichte/Sprint_${{ inputs.sprint }}_*.pdf
+          name: Wochenbericht_${{ inputs.sprint }}
+          path: exports/statusberichte/Wochenbericht_${{ inputs.sprint }}.pdf
           if-no-files-found: error
 
       - name: Commit and push PDF export
@@ -54,7 +54,7 @@ jobs:
           SPRINT_NUM: ${{ inputs.sprint }}
         run: |
           OUT_DIR="exports/statusberichte"
-          PDF_NAME="Sprint_${SPRINT_NUM}_Statusberichte.pdf"
+          PDF_NAME="Wochenbericht_${SPRINT_NUM}.pdf"
           PDF_PATH="${OUT_DIR}/${PDF_NAME}"
           git config user.name "github-actions[bot]"
           git config user.email \
