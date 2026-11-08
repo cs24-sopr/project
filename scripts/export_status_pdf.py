@@ -83,19 +83,35 @@ def find_team_report(team_path: str, sprint_num: int) -> Optional[str]:
     if not os.path.isdir(team_path):
         return None
 
-    # Priority 1: sprint-{num}.mdx
-    sprint_file = os.path.join(team_path, f"sprint-{sprint_num}.mdx")
-    if os.path.exists(sprint_file):
-        return sprint_file
+    # Priority 1: sprint-{num}.mdx or sprint-{num}.md
+    for ext in (".mdx", ".md"):
+        sprint_file = os.path.join(team_path, f"sprint-{sprint_num}{ext}")
+        if os.path.exists(sprint_file):
+            return sprint_file
 
-    # Priority 2: kw files (kw44.mdx, kw41.mdx, etc.)
-    kw_files = [f"kw{kw}.mdx" for kw in range(41, 46)]
-    for kw_f in kw_files:
-        candidate = os.path.join(team_path, kw_f)
-        if os.path.exists(candidate):
-            return candidate
+    # Priority 2: corresponding kw files for this sprint
+    # (Sprint 1 -> KW44, Sprint 2 -> KW45)
+    target_kw = 43 + sprint_num
+    candidates = [
+        f"kw{target_kw}.mdx",
+        f"kw{target_kw}.md",
+        f"KW{target_kw}.mdx",
+        f"KW{target_kw}.md",
+    ]
+    for cand in candidates:
+        p = os.path.join(team_path, cand)
+        if os.path.exists(p):
+            return p
 
-    # Priority 3: any other non-README mdx/md file
+    # Priority 3: any other kw files in reverse order
+    for kw in range(48, 40, -1):
+        for ext in (".mdx", ".md"):
+            for prefix in ("kw", "KW"):
+                candidate = os.path.join(team_path, f"{prefix}{kw}{ext}")
+                if os.path.exists(candidate):
+                    return candidate
+
+    # Priority 4: any other non-README mdx/md file
     all_files = [
         f
         for f in os.listdir(team_path)
