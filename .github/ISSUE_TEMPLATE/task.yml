@@ -1,0 +1,50 @@
+name: "Task / Feature"
+description: "Standard template for tasks, features, and requirements."
+title: "[TASK] "
+projects: ["cs24-sopr/3"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please fill out this form to create a new task, feature, or
+        requirement. Issues serve as our primary operational workflow
+        and single source of truth (`TEAM#Issue-ID`).
+
+  - type: textarea
+    id: what
+    attributes:
+      label: "📌 WHAT (Goal / Requirement)"
+      description: |
+        What should be built, changed, or fixed? What problem are we
+        solving? Describe the user story and objective (WAS, nicht WIE).
+      placeholder: |
+        - Goal:
+        - Scope / Problem description:
+    validations:
+      required: true
+
+  - type: textarea
+    id: how
+    attributes:
+      label: "🛠 HOW (Implementation / Technical Approach)"
+      description: |
+        How should this be implemented? Relevant files, APIs,
+        architecture, data structures, or steps (WIE).
+      placeholder: |
+        - Implementation approach:
+        - Affected files / components:
+    validations:
+      required: false
+
+  - type: textarea
+    id: test
+    attributes:
+      label: "✅ TEST / Expected Behavior (Acceptance Criteria)"
+      description: |
+        How do we verify that this task is completed successfully?
+        Concrete, testable acceptance criteria (Definition of Done).
+      placeholder: |
+        - [ ] Expected behavior / test case 1
+        - [ ] Expected behavior / test case 2
+    validations:
+      required: true
