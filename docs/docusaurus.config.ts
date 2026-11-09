@@ -7,8 +7,8 @@ import type * as Preset from '@docusaurus/preset-classic';
 const PROJECT_NAME = 'DHSN-Craft';
 
 const config: Config = {
-    title: PROJECT_NAME, // TODO
-    favicon: 'img/favicon.ico', // TODO
+    title: PROJECT_NAME,
+    favicon: 'img/dhsn_craft.ico',
 
     // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
     future: {
@@ -52,8 +52,7 @@ const config: Config = {
     ],
 
     themeConfig: {
-        // TODO: social card?
-        image: 'img/docusaurus-social-card.jpg',
+        image: 'img/dhsn_craft_banner.png',
         colorMode: {
             respectPrefersColorScheme: true,
         },
@@ -61,8 +60,7 @@ const config: Config = {
             title: PROJECT_NAME,
             logo: {
                 alt: 'Site Logo',
-                // TODO: actual logo?
-                src: 'img/kristursion.png',
+                src: 'img/dhsn_craft_logo.png',
             },
             items: [
                 {
