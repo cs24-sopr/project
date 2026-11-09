@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2026-11-09]
+
+### Added
+
+- Skill `.agents/skills/weekly-status-report/SKILL.md` for automated weekly
+  status report creation by AI agents based on closed GitHub issues.
+- CLI tool `scripts/create_weekly_status.py` with interactive prompting and
+  strict template adherence.
+- Unit tests for weekly status generator in
+  `tests/test_create_weekly_status.py`.
+- Documentation in `docs/content/project/statusberichte/anleitung.mdx` and
+  internal note in `docs/content/project/teams/orga-lead-infra/`
+  `notizen/84-weekly-status-skill.mdx`.
+- Announcement templates for Discord and WhatsApp.
+
 ## [2026-11-08]
 
 ### Changed

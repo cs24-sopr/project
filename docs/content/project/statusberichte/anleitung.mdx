@@ -54,7 +54,23 @@ unter `statusberichte/ri-wochenberichte/` archiviert.
 
 ---
 
-## 5. Automatisierter PDF-Export
+## 5. Automatisierte Erstellung (Skill & CLI)
+
+Teams können ihren wöchentlichen Statusbericht automatisiert vorbefüllen
+lassen, indem abgeschlossene GitHub Issues ausgewertet werden:
+- **Agent:** Slash-Command `/weekly-status-report` im Chat aufrufen.
+- **Lokal / CLI:**
+  `python3 scripts/create_weekly_status.py --team <team> --sprint <sprint>`
+- **Verbindliche Regel:** Bei unklaren Angaben (z. B. Ampelstatus,
+  Blocker oder noch nicht erfasste Anforderungen) fragt der Agent bzw.
+  das Skript nach, anstatt Vermutungen aufzustellen.
+
+Details zur Implementierung finden sich in den
+[internen Notizen](../teams/orga-lead-infra/notizen/84-weekly-status-skill.mdx).
+
+---
+
+## 6. Automatisierter PDF-Export
 
 Zur wöchentlichen Abgabe bündelt das Organisationsteam alle
 vorliegenden Teamberichte automatisiert in ein einheitliches
