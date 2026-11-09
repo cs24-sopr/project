@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Pick random gameplay testers from the repository collaborators.
+# Pick random gameplay testers from users who can be assigned to repository issues.
 #
 # Usage:
 #   ./scripts/pick-gameplay-testers.sh [--count N] [--repo OWNER/NAME]
@@ -27,7 +27,7 @@ Usage: ./scripts/pick-gameplay-testers.sh [options]
 Options:
   --count N            Number of testers to pick. Defaults to 2.
   --exclude LOGINS     Comma-separated logins to exclude. May be repeated.
-  --repo OWNER/NAME    Repository whose collaborators are used. Defaults to the
+  --repo OWNER/NAME    Repository whose assignable users are used. Defaults to the
                        repository of the current working directory.
   -h, --help           Show this help.
 
@@ -89,20 +89,23 @@ for login in "${EXCLUDES[@]}"; do
   fi
 done
 
-if ! collaborators_output="$(
-  gh api --paginate "repos/$REPO/collaborators?per_page=100" \
+# The assignees endpoint reflects the users that can actually be assigned to a
+# pull request. The collaborators endpoint can omit inherited/team access and
+# therefore produce an empty pool even when assignments are possible.
+if ! assignable_output="$(
+  gh api --paginate "repos/$REPO/assignees?per_page=100" \
     --jq '.[] | select(.type == "User") | .login'
 )"; then
-  die "failed to list collaborators for $REPO"
+  die "failed to list assignable users for $REPO"
 fi
 
-collaborators=()
-if [[ -n "$collaborators_output" ]]; then
-  mapfile -t collaborators <<<"$collaborators_output"
+assignable=()
+if [[ -n "$assignable_output" ]]; then
+  mapfile -t assignable <<<"$assignable_output"
 fi
 
 candidates=()
-for login in "${collaborators[@]}"; do
+for login in "${assignable[@]}"; do
   if [[ "$login" == *"[bot]" ]]; then
     continue
   fi
@@ -116,7 +119,7 @@ for login in "${collaborators[@]}"; do
 done
 
 if ((${#candidates[@]} < COUNT)); then
-  die "need $COUNT candidates but only ${#candidates[@]} are available"
+  die "need $COUNT candidates but only ${#candidates[@]} are available (assignable users: ${#assignable[@]})"
 fi
 
 printf '%s\n' "${candidates[@]}" | shuf -n "$COUNT"
