@@ -1,0 +1,250 @@
+name: Create Gameplay Test Report
+
+on:
+  workflow_dispatch:
+    inputs:
+      week:
+        description: "ISO calendar week override, for example 45 (default: current week)"
+        required: false
+        type: string
+      tester_count:
+        description: "Number of testers to assign (1 to 10)"
+        required: false
+        type: number
+        default: 2
+      dry_run:
+        description: "Render the report only, do not create a branch or pull request"
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: gameplay-test-report
+  cancel-in-progress: false
+
+env:
+  GH_TOKEN: ${{ github.token }}
+  TZ: Europe/Berlin
+  REPORT_DIR: docs/content/project/statusberichte/gameplay-tests
+  TEMPLATE: docs/content/project/vorlagen/test-report.mdx
+
+jobs:
+  create-report:
+    name: Create report and pull request
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+
+      - name: Compute report metadata
+        id: meta
+        env:
+          INPUT_WEEK: ${{ inputs.week }}
+        run: |
+          set -euo pipefail
+
+          if [[ -n "$INPUT_WEEK" ]]; then
+            if [[ ! "$INPUT_WEEK" =~ ^[0-9]{1,2}$ ]]; then
+              echo "::error::week must be a number between 1 and 53"
+              exit 1
+            fi
+
+            week="$((10#$INPUT_WEEK))"
+            if ((week < 1 || week > 53)); then
+              echo "::error::week must be a number between 1 and 53"
+              exit 1
+            fi
+
+            week="$(printf '%02d' "$week")"
+          else
+            week="$(date +%V)"
+          fi
+
+          report_date="$(date +%F)"
+          report_file="$REPORT_DIR/kw${week}.mdx"
+          branch="docs/gameplay-test-kw${week}"
+
+          {
+            echo "week=$week"
+            echo "date=$report_date"
+            echo "file=$report_file"
+            echo "branch=$branch"
+            echo "skip=false"
+          } >>"$GITHUB_OUTPUT"
+
+          if [[ -f "$report_file" ]]; then
+            echo "::notice::$report_file already exists on main. Nothing to do."
+            echo "skip=true" >>"$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          existing_pr="$(gh pr list --head "$branch" --state open --json url --jq '.[0].url // ""')"
+          if [[ -n "$existing_pr" ]]; then
+            echo "::notice::An open pull request already exists: $existing_pr"
+            echo "skip=true" >>"$GITHUB_OUTPUT"
+          fi
+
+      - name: Select testers
+        id: testers
+        if: steps.meta.outputs.skip != 'true'
+        env:
+          INPUT_TESTER_COUNT: ${{ inputs.tester_count }}
+        run: |
+          set -euo pipefail
+
+          tester_count="${INPUT_TESTER_COUNT:-2}"
+          if [[ ! "$tester_count" =~ ^[0-9]+$ ]]; then
+            echo "::error::tester_count must be a number between 1 and 10"
+            exit 1
+          fi
+
+          tester_count="$((10#$tester_count))"
+          if ((tester_count < 1 || tester_count > 10)); then
+            echo "::error::tester_count must be a number between 1 and 10"
+            exit 1
+          fi
+
+          if ! testers_output="$(scripts/pick-gameplay-testers.sh --count "$tester_count")"; then
+            echo "::error::Could not select $tester_count testers"
+            exit 1
+          fi
+
+          mapfile -t testers <<<"$testers_output"
+          if ((${#testers[@]} != tester_count)); then
+            echo "::error::Expected $tester_count testers, got ${#testers[@]}"
+            exit 1
+          fi
+
+          for tester in "${testers[@]}"; do
+            if [[ -z "$tester" ]]; then
+              echo "::error::Selected an empty tester login"
+              exit 1
+            fi
+          done
+
+          testers_csv="$(IFS=,; echo "${testers[*]}")"
+          echo "testers=$testers_csv" >>"$GITHUB_OUTPUT"
+
+          {
+            echo "### Gameplay-Test-Report KW ${{ steps.meta.outputs.week }}"
+            echo
+            echo "Selected testers ($tester_count):"
+            for tester in "${testers[@]}"; do
+              echo "- @$tester"
+            done
+          } >>"$GITHUB_STEP_SUMMARY"
+
+      - name: Render report from template
+        if: steps.meta.outputs.skip != 'true'
+        env:
+          WEEK: ${{ steps.meta.outputs.week }}
+          REPORT_DATE: ${{ steps.meta.outputs.date }}
+          REPORT_FILE: ${{ steps.meta.outputs.file }}
+        run: |
+          set -euo pipefail
+
+          {
+            echo '---'
+            echo "sidebar_label: KW $WEEK"
+            echo '---'
+            echo
+            awk '/^```markdown$/{inside=1;next} /^```$/{inside=0} inside' "$TEMPLATE" \
+              | sed -e "s/\[XX\]/$WEEK/g" -e "s/\[YYYY-MM-DD\]/$REPORT_DATE/g"
+          } >"$REPORT_FILE"
+
+          if [[ ! -s "$REPORT_FILE" ]] || ! grep -q '^# Gameplay-Test-Report: KW ' "$REPORT_FILE"; then
+            echo "::error::Could not render the report from $TEMPLATE"
+            exit 1
+          fi
+
+      - name: Show generated report
+        if: steps.meta.outputs.skip != 'true' && inputs.dry_run
+        env:
+          REPORT_FILE: ${{ steps.meta.outputs.file }}
+        run: cat "$REPORT_FILE"
+
+      - name: Commit report
+        if: steps.meta.outputs.skip != 'true' && !inputs.dry_run
+        env:
+          BRANCH: ${{ steps.meta.outputs.branch }}
+          REPORT_FILE: ${{ steps.meta.outputs.file }}
+          WEEK: ${{ steps.meta.outputs.week }}
+        run: |
+          set -euo pipefail
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -B "$BRANCH"
+          git add "$REPORT_FILE"
+          git commit -m "docs(gameplay-tests): add test report KW $WEEK"
+          git push --force origin "$BRANCH"
+
+      - name: Create pull request
+        if: steps.meta.outputs.skip != 'true' && !inputs.dry_run
+        env:
+          BRANCH: ${{ steps.meta.outputs.branch }}
+          WEEK: ${{ steps.meta.outputs.week }}
+          TESTERS: ${{ steps.testers.outputs.testers }}
+        run: |
+          set -euo pipefail
+
+          IFS=',' read -r -a testers <<<"$TESTERS"
+          assignees=()
+          mentions=()
+          for tester in "${testers[@]}"; do
+            assignees+=(--assignee "$tester")
+            mentions+=("@$tester")
+          done
+
+          body="$(cat <<EOF
+          ## Related Issue
+
+          Relates to the gameplay test for KW $WEEK.
+
+          ## Summary of Changes
+
+          - Add the Gameplay-Test-Report stub for KW $WEEK.
+          - Testers: ${mentions[*]}
+
+          ## Checklist for Testers
+
+          - [ ] Review the relevant changes for KW $WEEK.
+          - [ ] Complete the report.
+          - [ ] Create or assign issues for findings.
+          - [ ] Approve this pull request.
+
+          ## Rules
+
+          - If the assignees do not respond within two days, the assignment is rerolled.
+          - Nobody is required to perform two tests. If you are assigned again, request a reroll.
+
+          Template: [Vorlage: Gameplay-Test-Report](https://github.com/cs24-sopr/project/blob/main/docs/content/project/vorlagen/test-report.mdx)
+          Guide: [Leitfaden: Gameplay Tests](https://github.com/cs24-sopr/project/blob/main/docs/content/project/statusberichte/gameplay-tests/README.mdx)
+          EOF
+          )"
+
+          pull_request_url="$(
+            gh pr create \
+              --base main \
+              --head "$BRANCH" \
+              --title "docs(gameplay-tests): add test report KW $WEEK" \
+              --body "$body" \
+              --reviewer "AimPizza" \
+              --reviewer "probablyjassin" \
+              "${assignees[@]}"
+          )"
+
+          echo "Created pull request: $pull_request_url"
+          {
+            echo
+            echo "Pull request: $pull_request_url"
+          } >>"$GITHUB_STEP_SUMMARY"
