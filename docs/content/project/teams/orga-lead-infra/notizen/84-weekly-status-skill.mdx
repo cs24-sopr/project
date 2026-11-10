@@ -1,0 +1,109 @@
+---
+sidebar_position: 84
+---
+
+# 84. Skill und CLI für wöchentliche Statusberichte
+
+## Hintergrund und Zielstellung
+
+Jedes Teilteam muss wöchentlich einen Statusbericht für das gemeinsame
+Semesterprojekt abgeben. Das manuelle Anlegen der MDX-Dateien führte
+gelegentlich zu Formatierungsabweichungen, unvollständigen Ticketlisten
+oder Verzögerungen bei der Einreichung.
+
+Mit Issue #84 wurde ein automatisierter Workflow geschaffen:
+- Auslesen der abgeschlossenen und aktiven GitHub Issues je Teilteam.
+- Einheitliche Formatierung gemäss `vorlagen/team-update.mdx`.
+- Automatische Erkennung von Folgesprint, Kalenderwoche und Sidebar-Position.
+- Striktes Verbot von Halluzinationen (gezieltes Nachfragen bei Unklarheiten).
+- Bereitstellung als CLI-Werkzeug und als Agent-Skill.
+
+---
+
+## 1. CLI-Skript: `scripts/create_weekly_status.py`
+
+Das Skript wertet GitHub Issues aus und generiert die passende MDX-Datei
+im Teamordner (`docs/content/project/statusberichte/<team>/`).
+
+### Unterstützte Funktionen
+- Automatische Ermittlung der nächsten Sequenznummer (Sprint/KW).
+- Abfrage der GitHub Issues über das `gh` CLI anhand des Teamlabels.
+- Übernahme konkreter Issue-IDs (`--issues 61,62,73`).
+- Interaktiver Modus (`--interactive`) mit Rückfragen bei fehlenden Feldern.
+- Vorschau ohne Schreibzugriff (`--dry-run`).
+- Einhaltung der maximalen Zeilenlänge von 80 Zeichen.
+
+### Aufruf und Parameter
+
+```bash
+# Bericht im Trockenlauf prüfen
+python3 scripts/create_weekly_status.py --team builder --dry-run
+
+# Bericht interaktiv erstellen (fragt bei Unsicherheiten nach)
+python3 scripts/create_weekly_status.py --team coding --interactive
+
+# Bericht mit festen Parametern anlegen
+python3 scripts/create_weekly_status.py \
+  --team assets \
+  --sprint 2 \
+  --kw 45 \
+  --status yellow \
+  --author "Aljoscha Burger"
+```
+
+---
+
+## 2. Agent-Skill: `/weekly-status-report`
+
+In `.agents/skills/weekly-status-report/SKILL.md` ist der Workflow
+für KI-Agenten hinterlegt.
+
+### Grundregel: Nachfragen statt Halluzinieren
+Der Agent darf bei fehlenden oder mehrdeutigen Angaben (z. B. Ampelstatus,
+Blocker, Schnittstellenänderungen) keine Annahmen erfinden, sondern muss
+den Nutzer direkt im Dialog um Klärung bitten.
+
+---
+
+## 3. Team-Benachrichtigungen (Discord & WhatsApp)
+
+Für die Information aller Projektteams stehen folgende Textvorlagen
+bereit.
+
+### Vorlage für Discord
+
+```text
+📢 **Neues Feature: Automatisierte Statusberichte per Skill & CLI**
+
+Ab sofort könnt ihr euren wöchentlichen Statusbericht für die
+Sonntags-/Montags-Abgabe automatisiert vorbefüllen lassen!
+
+🛠 **Option 1 (Im Chat mit dem Agenten):**
+Einfach `/weekly-status-report` aufrufen oder den Agenten bitten:
+> "Erstelle den Statusbericht für unser Team für Sprint X."
+Der Agent liest eure erledigten GitHub Issues aus und fragt euch
+bei Unklarheiten (z. B. Ampelstatus, Blocker) direkt nach.
+
+💻 **Option 2 (Direkt im Terminal):**
+`python3 scripts/create_weekly_status.py --team <team> --interactive`
+
+📖 Leitfaden im Repo: `docs/project/statusberichte/anleitung`
+Bei Fragen wendet euch gerne an das Orga-Team!
+```
+
+### Vorlage für WhatsApp
+
+```text
+Hallo zusammen! 📢
+
+Ab sofort gibt es ein neues Tool für die wöchentlichen Statusberichte:
+
+1. Per Agent: Einfach im Chat "/weekly-status-report" eingeben. Der Agent
+zieht eure fertigen GitHub-Tickets und fragt bei Unklarheiten kurz nach.
+2. Per Skript: "python3 scripts/create_weekly_status.py --team <team>"
+
+Die Berichte landen direkt im richtigen Format im Repo. Details findet ihr
+im Leitfaden unter statusberichte/anleitung.
+
+Euer Orga-Team 🚀
+```
