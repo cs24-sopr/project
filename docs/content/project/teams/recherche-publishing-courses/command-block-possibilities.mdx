@@ -1,0 +1,21 @@
+# Command Block Possibilities & Reference
+
+Overview of essential commands usable via Command Blocks for story events, mechanics, and player management.
+
+| Command | In-Game Use Case | Example Syntax |
+| :--- | :--- | :--- |
+| `/dialogue` | NPC interactions, dialogue trees, triggering actions on button click | `/dialogue open @e[tag=guide,c=1] @p` |
+| `/titleraw` / `/title` | Screen titles, subtitle hints, and styled system messages | `/titleraw @a actionbar {"rawtext":[{"text":"Campus Tour started"}]}` |
+| `/camerashake` | Environmental impacts, explosions, dramatic narrative beats | `/camerashake add @a 0.5 2 positional` |
+| `/camera` | Custom cutscenes, smooth transitions, fixed camera angles | `/camera @p set minecraft:free pos ~ ~3 ~-5 rot 15 0` |
+| `/playsound` | Triggering SFX or custom event audio at exact player/world positions | `/playsound custom.bell @a ~ ~ ~ 1 1` |
+| `/structure` | Loading/saving dynamic world elements, clearing areas, spawning setups | `/structure load campus_stage ~ ~ ~` |
+| `/tp` | Teleporting players between scenes, rooms, or resetting spawns | `/tp @p 120 64 -35` |
+| `/tag` | Tracking player quest states without complex redstone | `/tag @p add quest_completed` |
+| `/scoreboard` | Numeric tracking (money, timers, counters, triggers) | `/scoreboard players add @p points 1` |
+
+---
+
+### Visualization & Tutorials
+- **Camera & Dialogue Systems:** [Minecraft Bedrock Camera & Dialogue Tutorial](https://www.youtube.com/results?search_query=minecraft+bedrock+camera+command+cutscene)
+- **Advanced Actionbar & Rawtext:** [Minecraft Titleraw Guide](https://www.youtube.com/results?search_query=minecraft+titleraw+command+tutorial)
