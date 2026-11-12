@@ -1,0 +1,30 @@
+# Plugins & Erweiterungsmöglichkeiten (Minecraft Bedrock)
+
+> **Zugehöriges Issue:** [cs24-sopr/recherche#6](https://github.com/cs24-sopr/recherche/issues/6)
+
+## Recherche-Zusammenfassung
+
+### 1. Wichtig vorab: Bedrock vs. Java Plugins
+Klassische Minecraft-Plugins (Spigot, Paper, Bukkit) sind für die **Java Edition** entwickelt und funktionieren in der **Bedrock Edition** nicht nativ. In Bedrock werden Erweiterungen primär über **Add-ons** und die offizielle **Script API** realisiert.
+
+---
+
+### 2. Relevante Erweiterungen & Tools für unser Projekt
+
+| Tool / Erweiterung | Typ | Einsatzzweck im Projekt | Visualisierung / Referenz |
+| :--- | :--- | :--- | :--- |
+| **Bedrock Script API (`@minecraft/server` & `@minecraft/server-ui`)** | Offizielle API (Behavior Pack) | Komplexe Quest-Logik, eigene UI-Menüs (Formulare/Dialoge), Custom-Interaktionen (z. B. Sitzen auf Blöcken, Bücher-Systeme). | [YouTube: Bedrock Script API UI & Forms Tutorial](https://www.youtube.com/results?search_query=minecraft+bedrock+script+api+server+ui+tutorial) |
+| **WorldEdit (Bedrock Edition Add-on)** | Builder-Add-on | Schnelles Kopieren, Spiegeln und Errichten von Gebäudeteilen beim Nachbau des DHSN-Campus. | [YouTube: WorldEdit Bedrock Addon Showcase](https://www.youtube.com/results?search_query=worldedit+bedrock+addon+tutorial) |
+| **GeyserMC + Floodgate** *(Optional)* | Server-Bridge (Java-Server) | Ermöglicht Bedrock-Spielern den Beitritt auf einen Java-Paper-Server, falls zwingend Java-Plugins (z. B. *Citizens* für NPCs oder *Quests*) genutzt werden sollen. | [YouTube: GeyserMC & Floodgate Setup Guide](https://www.youtube.com/results?search_query=geysermc+floodgate+setup+tutorial) |
+| **PocketMine-MP / Nukkit** *(Nicht empfohlen)* | Alternative Bedrock-Server | Unterstützen zwar PHP/Java-Plugins für Bedrock, bieten aber **keine** vollständige Unterstützung für Vanilla-Redstone, Mobs und moderne Add-on-Features. | – |
+
+---
+
+### 3. Fazit & Empfehlung für Story- und Programmierteam
+* **Klarer Fokus auf native Add-ons & Script API:** Da wir bereits mit Custom Blocks, Custom Items und Command Blocks arbeiten, deckt die Kombination aus **Behavior Packs + `@minecraft/server-ui`** alle Anforderungen für NPCs, Quests und Dialoge sauber und ohne externe Server-Workarounds ab.
+* **WorldEdit Bedrock:** Empfiehlt sich stark für das Asset-/Building-Team zur Beschleunigung des Campus-Baus.
+* **Von GeyserMC / PocketMine wird abgeraten**, da dies die Architektur unnötig verkompliziert und bestehende Bedrock-Add-on-Mechaniken einschränkt.
+
+## Ressourcen
+* **Issue:** [#6 - [Research Request]: plugins or other](https://github.com/cs24-sopr/recherche/issues/6)
+* **Referenz:** [Microsoft Learn – Script API Overview](https://learn.microsoft.com/en-us/minecraft/creator/documents/scriptingintroduction)
