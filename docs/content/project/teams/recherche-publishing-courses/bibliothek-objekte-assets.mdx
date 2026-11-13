@@ -1,0 +1,77 @@
+# Bibliothek-Objekte & Bücher-Zuordnung für ASSETS
+
+> **Zugehöriges Issue:** [cs24-sopr/project#94](https://github.com/cs24-sopr/project/issues/94)
+
+## Recherche-Zusammenfassung
+
+### 1. Studiengänge an der DHSN (Anzahl: 5 Bücherregale)
+Für die Library-Quest werden 5 Regale bzw. Fächer benötigt, basierend auf den Kernstudiengängen der DHSN Leipzig:
+1. **Informatik**
+2. **Steuerberatung / Tax Advice**
+3. **Nachhaltige Ingenieurwissenschaften (Sustainable Engineering)**
+4. **Controlling & Finance**
+5. **Immobilienwirtschaft (Real Estate)**
+
+---
+
+### 2. Vorgaben für die Bücher (Titel, Farben, Lore & Fachquellen)
+
+| Studiengang | Buchtitel | Vorgeschlagene Farbe | Item-Lore (Minecraft Description) | Reale Fachliteratur / Quelle |
+| :--- | :--- | :--- | :--- | :--- |
+| **Informatik** | *Data Analytics & Python* | 🟦 Blau | *"Enthält Grundlagen zu Algorithmen, Datenstrukturen und Python-Skripten."* | McKinney, W.: *Python for Data Analysis*, O'Reilly. |
+| **Steuerberatung** | *Steuerrecht & BGB* | 🟨 Gelb | *"Paragraphen, BGB-Gutachtenstil und Grundlagen des deutschen Steuerrechts."* | Bornhofen, M. / Bornhofen, M. C.: *Steuerlehre 1 & 2*, Springer Gabler; BGB Gesetzestext. |
+| **Nachhaltige Ingenieurwissenschaften** | *Regelungstechnik & Ökologie* | 🟩 Grün | *"Systemanalysen, Regelkreise und nachhaltige Produktionsverfahren."* | Lunze, J.: *Regelungstechnik 1*, Springer Vieweg; Hauff, M.: *Nachhaltige Entwicklung*, De Gruyter. |
+| **Controlling & Finance** | *Kosten- und Leistungsrechnung* | 🟧 Orange / Gold | *"Bilanzen, Finanzströme, GuV und unternehmerische Kennzahlen."* | Coenenberg, A. G. et al.: *Kostenrechnung und Kostenanalyse*, Schäffer-Poeschel. |
+| **Immobilienwirtschaft** | *Immobilienökonomie & Statistik* | 🟪 Lila / Grau | *"Marktwertermittlung, Objektmanagement und angewandte Wirtschaftsstatistik."* | Gondring, H.: *Immobilienwirtschaft: Handbuch für Studium und Praxis*, Vahlen. |
+
+---
+
+### 3. Technische Umsetzung für Item-Beschreibungen (Minecraft Bedrock)
+
+#### Umsetzungsmöglichkeiten:
+1. **Custom Item Definition (`format_version: "1.20.80"`):**
+   * Über die Komponente `minecraft:display_name` (inkl. Zeilenumbruch `\n`) und `minecraft:hover_text_color` lässt sich der Tooltip direkt im Item-JSON hinterlegen:
+     ```json
+     {
+       "format_version": "1.20.80",
+       "minecraft:item": {
+         "description": {
+           "identifier": "dhsn:book_cs",
+           "category": "items"
+         },
+         "components": {
+           "minecraft:hover_text_color": "aqua",
+           "minecraft:display_name": {
+             "value": "Data Analytics & Python\n§7Enthält Grundlagen zu Algorithmen, Datenstrukturen und Python-Skripten."
+           }
+         }
+       }
+     }
+     ```
+2. **Bedrock Script API (`@minecraft/server`):**
+   * Dynamisches Setzen der mehrzeiligen Item-Lore per Skript über `ItemStack.setLore()`:
+     ```javascript
+     import { ItemStack } from "@minecraft/server";
+
+     const item = new ItemStack("minecraft:book", 1);
+     item.nameTag = "§9Data Analytics & Python";
+     item.setLore([
+       "§7Enthält Grundlagen zu Algorithmen,",
+       "§7Datenstrukturen und Python-Skripten."
+     ]);
+     ```
+
+#### Textlängen-Guideline:
+* Max. 2 bis 3 Zeilen Text, damit das Tooltip-Fenster im Inventar nicht den Bildschirmrand überragt.
+* Bedrock-Farbcodes (`§7` für Grau/Standard-Lore, Farbcodes passend zum Studiengang) nutzen.
+
+---
+
+## Ressourcen & Quellen
+* **GitHub Issues:**
+  * [#94 - Bibliothek Objekte an ASSETS nachforschen](https://github.com/cs24-sopr/project/issues/94)
+  * `project#40` & `recherche#10`–`#14` (Studiengangs-Informationen DHSN)
+* **Bedrock Dokumentation (Lore & Display):**
+  * [Microsoft Learn: ItemStack Class (Script API – setLore)](https://learn.microsoft.com/en-us/minecraft/creator/scriptapi/minecraft/server/itemstack)
+  * [Microsoft Learn: Item Components Documentation](https://learn.microsoft.com/en-us/minecraft/creator/reference/content/itemreference/examples/itemcomponents/)
+  * [Bedrock Wiki: Item Components & Display Name](https://wiki.bedrock.dev/items/item-components)
