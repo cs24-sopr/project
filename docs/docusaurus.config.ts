@@ -15,6 +15,8 @@ const config: Config = {
         v4: true, // Improve compatibility with the upcoming Docusaurus v4
     },
 
+    plugins: ["@cmfcmf/docusaurus-search-local"],
+
     // TODO: Set the production url of your site here
     url: 'https://cs24-sopr.github.io',
 
