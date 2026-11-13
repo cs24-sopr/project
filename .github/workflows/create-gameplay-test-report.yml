@@ -218,17 +218,14 @@ jobs:
           ## Checklist for Testers
 
           - [ ] Review the relevant changes for KW $WEEK.
-          - [ ] Complete the report.
           - [ ] Create or assign issues for findings.
-          - [ ] Approve this pull request.
 
           ## Rules
 
           - If the assignees do not respond within two days, the assignment is rerolled.
           - Nobody is required to perform two tests. If you are assigned again, request a reroll.
 
-          Template: [Vorlage: Gameplay-Test-Report](https://github.com/cs24-sopr/project/blob/main/docs/content/project/vorlagen/test-report.mdx)
-          Guide: [Leitfaden: Gameplay Tests](https://github.com/cs24-sopr/project/blob/main/docs/content/project/statusberichte/gameplay-tests/README.mdx)
+          Guide: [Leitfaden: Gameplay Tests](https://cs24-sopr.github.io/project/project/statusberichte/gameplay-tests/)
           EOF
           )"
 
@@ -238,6 +235,7 @@ jobs:
               --head "$BRANCH" \
               --title "docs(gameplay-tests): add test report KW $WEEK" \
               --body "$body" \
+              --draft \
               --reviewer "AimPizza" \
               --reviewer "probablyjassin" \
               "${assignees[@]}"
