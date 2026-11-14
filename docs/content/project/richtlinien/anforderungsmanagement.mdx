@@ -96,6 +96,9 @@ wider:
 
 ```text
 [BACKLOG] -> [TODO] -> [IN PROGRESS] -> [DONE]
+                          |   ^
+                          v   |
+                        [BLOCKED]
 ```
 
 - **BACKLOG:** Vorgeschlagene Idee oder Anforderung, im Team oder mit
@@ -103,6 +106,9 @@ wider:
 - **TODO:** Fachlich abgestimmt, Akzeptanzkriterien definiert und für den
   aktuellen Sprint eingeplant.
 - **IN PROGRESS:** Aktiv in Entwicklung / Bearbeitung.
+- **BLOCKED:** Wegen einer externen Abhängigkeit oder einer offenen Frage nicht
+  weiter bearbeitbar. Der Blocker und die zuständige Kontaktperson werden im
+  Issue dokumentiert. Nach Klärung geht es zurück auf `IN PROGRESS`.
 - **DONE:** Fertig implementiert, getestet und gemäß teaminterner Definition of
   Done (DoD) abgenommen.
 

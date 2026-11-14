@@ -1,0 +1,20 @@
+---
+sidebar_position: 146
+---
+
+# 146. Neuer Status BLOCKED
+
+## Ausgangslage
+
+- Issue [#146](https://github.com/cs24-sopr/project/issues/146) fordert einen Status für Issues, die wegen einer externen Abhängigkeit oder offenen Frage nicht weiterbearbeitet werden können.
+- Beispiel: Eine Rückfrage zu einem Asset blockiert die Fertigstellung, bis eine Antwort vorliegt.
+- Bisher endet der Workflow mit `BACKLOG`, `TODO`, `IN PROGRESS` und `DONE`; es gibt keinen sichtbaren Wartezustand.
+
+## Entscheidung
+
+- Neuer Status: `BLOCKED`.
+- Einordnung im Board: nach `IN PROGRESS`, vor `DONE`.
+- Übergang: `IN PROGRESS` -> `BLOCKED` -> `IN PROGRESS`. `DONE` erst nach Auflösung des Blockers und Erfüllung der DoD.
+- Pflichtangaben im Issue: Blocker, zuständige Kontaktperson oder Team und Datum.
+- Abgrenzung: Der Ampelstatus in den wöchentlichen Statusberichten bleibt unverändert.
+- Offener Schritt: Die Statusoption `BLOCKED` muss zusätzlich in den Einstellungen des GitHub Project Boards unter `Status` angelegt werden.
