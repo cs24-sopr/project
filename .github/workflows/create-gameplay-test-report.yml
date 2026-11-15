@@ -113,7 +113,7 @@ jobs:
             exit 1
           fi
 
-          if ! testers_output="$(scripts/pick-gameplay-testers.sh --count "$tester_count")"; then
+          if ! testers_output="$(python3 scripts/pick_gameplay_testers.py --count "$tester_count")"; then
             echo "::error::Could not select $tester_count testers"
             exit 1
           fi
@@ -224,6 +224,7 @@ jobs:
 
           - If the assignees do not respond within two days, the assignment is rerolled.
           - Nobody is required to perform two tests. If you are assigned again, request a reroll.
+          - After completing a report, you may remove yourself from the tester list in `scripts/gameplay-testers.txt`.
 
           Guide: [Leitfaden: Gameplay Tests](https://cs24-sopr.github.io/project/project/statusberichte/gameplay-tests/)
           EOF
