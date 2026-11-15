@@ -1,11 +1,8 @@
 # Eligible gameplay testers, one GitHub login per line.
 # After completing a report, you may remove yourself from this list.
 pufflinmuffin
-godhcrsclf
 Kraetzi
 TheAdeptusCodes
-Luk255
-sozialanxiety
 Tracksuit02
 TheItsNameless
 lkraeusslich
