@@ -1,0 +1,18 @@
+# Eligible gameplay testers, one GitHub login per line.
+# After completing a report, you may remove yourself from this list.
+pufflinmuffin
+Kraetzi
+TheAdeptusCodes
+Tracksuit02
+TheItsNameless
+lkraeusslich
+kliqkqr
+bohdancho
+ju1e03
+KayconXx
+Pazuta
+probablyjassin
+Restor646
+Novumares
+NanaMiyu
+AimPizza

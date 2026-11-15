@@ -40,6 +40,8 @@ Lücken im Gesamtstand unvoreingenommen auffallen.
 5. **Fehler erfassen:** Jeden Befund als GitHub Issue 
    anlegen oder einem bestehenden Issue zuordnen und dem zuständigen Team
    zuweisen.
+6. **In Review geben & selbst mergen:** Den PR als `ready` markieren, sodass jemand aus dem 
+   Orga-Team abnehmen kann. Nach Approval selbständig mergen.
 
 ### Regeln
 
@@ -47,8 +49,8 @@ Lücken im Gesamtstand unvoreingenommen auffallen.
   Zuweisung neu ausgelost und die Abweichung vermerkt.
 - Niemand ist verpflichtet, zwei Tests zu übernehmen. Eine Person kann eine
   Neuauslosung anfragen, damit jemand anderes sie ersetzt.
-- Die Neuauslosung erfolgt über `./scripts/pick-gameplay-testers.sh`. Bereits
-  zugewiesene Personen lassen sich mit `--exclude` ausschließen.
+- Die Neuauslosung erfolgt über `python3 scripts/pick_gameplay_testers.py`.
+  Bereits zugewiesene Personen lassen sich mit `--exclude` ausschließen.
 
 ## 3. Änderungen ermitteln
 
