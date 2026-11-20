@@ -2,6 +2,8 @@
 #
 # Create the project milestones via the GitHub CLI.
 #
+# - Milestones with an existing title are skipped.
+#
 # Usage:
 #   ./scripts/create-milestones.sh [--dry-run]
 #
@@ -88,11 +90,16 @@ MILESTONES=(
   "Exam Group 2|2026-12-11 23:59:59|Milestone for exam group 2"
 
   # Gameplay testing reports
-  "Gameplay Testing Week 1|2026-11-07 23:59:59|Milestone tracking for Week 1 gameplay testing reports"
+  # SKIPPED # "Gameplay Testing Week 1|2026-11-07 23:59:59|Milestone tracking for Week 1 gameplay testing reports"
   "Gameplay Testing Week 2|2026-11-14 23:59:59|Milestone tracking for Week 2 gameplay testing reports"
   "Gameplay Testing Week 3|2026-11-21 23:59:59|Milestone tracking for Week 3 gameplay testing reports"
   "Gameplay Testing Week 4|2026-11-28 23:59:59|Milestone tracking for Week 4 gameplay testing reports"
   "Gameplay Testing Week 5|2026-12-05 23:59:59|Milestone tracking for Week 5 gameplay testing reports"
+
+  # Quest deadlines
+  "1. Quest: Das Erwachen|2026-11-24 23:59:59|all issues across teams related to that quest"
+  "2. Quest: Operation Erstsemester|2026-11-26 23:59:59|all issues across teams related to that quest"
+  "3. Quest: final quest|2026-11-29 23:59:59|all issues across teams related to that quest"
 )
 
 echo "Repository: $REPO"
