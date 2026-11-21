@@ -1,0 +1,499 @@
+---
+sidebar_position: 97
+---
+
+# 97. Veröffentlichungsmöglichkeiten
+
+## Ausgangslage
+
+Issue [#97](https://github.com/cs24-sopr/project/issues/97) untersucht, auf
+welchen Plattformen und Wegen der virtuelle Nachbau der DHSN Leipzig für
+Studieninteressierte veröffentlicht werden kann. Ziel ist eine fundierte
+Entscheidungsgrundlage für das Orga-Team auf Basis der jeweiligen
+Anforderungen, AGBs, Vor- und Nachteile.
+
+Wichtige Rahmenbedingungen des Projekts (Stand: 21.11.2026):
+
+- **Plattform:** Minecraft: Bedrock Edition (`min_engine_version: [1, 26, 50]`)
+  mit Campus-Welt (`data/worlds/level/`), Behavior Pack (`@minecraft/server`
+  2.10.0) und Resource Pack (Blockbench-Modelle und -Texturen).
+- **Betriebsmodell (bewusste Abgrenzung):** Ausgeliefert wird ausschließlich
+  ein **wartungsfreies, herunterladbares AddOn-/Welt-Paket**. Ein eigener
+  öffentlicher Minecraft-Server sowie ein Minecraft Realm sind ausgeschlossen,
+  da nach Semesterende weder laufende Betriebskosten noch dauerhafte
+  Update-Wartung entstehen sollen.
+- **Organisatorischer Rahmen:** Nicht-kommerzielles studentisches Modulprojekt
+  (`5CS-SOPR-50`), kein eigenes Gewerbe, deutschsprachige Zielgruppe (insb.
+  Studieninteressierte in Sachsen und im Raum Leipzig).
+
+---
+
+## Technisches Paketformat und Endgeräte
+
+In der Projektdokumentation wird häufig allgemein von "AddOn" gesprochen. Für
+die Veröffentlichung sind die exakten Bedrock-Dateiformate entscheidend:
+
+| Format | Inhalt | Importverhalten | Eignung |
+| :--- | :--- | :--- | :--- |
+| `.mcaddon` | Nur Behavior Pack + Resource Pack (ohne Welt) | Installiert nur Packs; Nutzende müssen selbst eine Welt anlegen und Packs aktivieren | Als alleinige Datei ungeeignet, da der Campus-Nachbau fehlt |
+| `.mcworld` | Komplette Welt inkl. eingebetteter `behavior_packs/` und `resource_packs/` | Doppelklick (Windows) bzw. Antippen (Android/iOS) importiert sofort die spielfertige Welt | Sehr gut für den direkten Einstieg |
+| `.mctemplate` | Welt-Vorlage inkl. eingebetteter Packs | Erscheint unter "Neue Welt erstellen -> Vorlagen"; beliebig oft frisch startbar | Sehr gut für wiederholbares Spielen (z. B. Tag der offenen Tür) |
+
+:::note
+Beim In-Game-Export aus Minecraft werden aktive Packs teilweise nicht physisch
+in das Archiv übernommen. In der Export-Pipeline sollten `behavior_packs/` und
+`resource_packs/` direkt in das `.mcworld`- bzw. `.mctemplate`-Archiv
+eingebettet und über `world_behavior_packs.json` sowie
+`world_resource_packs.json` gebunden werden. So genügt ein einzelner Download.
+:::
+
+### Endgeräte-Kompatibilität bei reinem Download
+
+| Endgerät | Direkter Import (`.mcworld` / `.mctemplate`) | Hinweis |
+| :--- | :--- | :--- |
+| Windows PC | Ja (Doppelklick) | Vollständig unterstützt |
+| Android / iOS | Ja (Antippen / "Öffnen mit Minecraft") | Vollständig unterstützt |
+| Xbox | Nur über instabile Drittanbieter-Workarounds | Kein offizieller Datei-Import |
+| PlayStation / Nintendo Switch | Nein (plattformseitig gesperrt) | Ohne Marketplace nicht erreichbar |
+
+Da kein Server/Realm betrieben wird und der reguläre Marketplace praktisch
+entfällt (siehe Abschnitt [Minecraft Marketplace](#minecraft-marketplace-bedrock-store)),
+erreicht das wartungsfreie Paket regulär **Windows PC, Android und iOS**, nicht
+aber Konsolen.
+
+---
+
+## Rechtliche Rahmenbedingungen (Minecraft Usage Guidelines)
+
+Unabhängig von der gewählten Plattform gelten die offiziellen
+[Minecraft Usage Guidelines](https://www.minecraft.net/en-us/usage-guidelines)
+von Mojang / Microsoft sowie deutsches Urheber- und Markenrecht:
+
+1. **Pflicht-Disclaimer:** Auf jeder Download-Seite, Projekt-Website und
+   Plattform-Beschreibung muss gut sichtbar stehen (inkl. Angabe der
+   Verantwortlichen bzw. Kontaktmöglichkeit):
+   ```text
+   NOT AN OFFICIAL MINECRAFT PRODUCT. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT
+   ```
+2. **Namens- und Markenregeln:**
+   - "Minecraft" darf nur als Sekundärtitel oder Beschreibung genutzt werden,
+     nicht als dominanter Markenname.
+   - Offizielle Minecraft-Logos, Box-Arts oder geschützte Schriftarten dürfen
+     nicht in Projekt-Icons, Bannern oder Thumbnails verwendet werden.
+   - Die Nutzung von DHSN-Name und -Logo erfordert die Freigabe durch
+     Betreuerin bzw. Hochschulleitung (siehe Issue
+     [#142](https://github.com/cs24-sopr/project/issues/142)).
+3. **Einschränkung für Organisations- und Markenwerbung:**
+   - Die Minecraft Usage Guidelines schließen Unternehmen, Marken,
+     Werbeagenturen, Non-Profits und Behörden von den allgemeinen
+     Fan-Nutzungsrechten aus, wenn Minecraft-Welten als Werbe- oder
+     Marketinginstrument für externe Produkte, Dienste oder Institutionen
+     erstellt werden.
+   - **Einordnung für das Projekt:** Das Paket sollte nach außen klar als
+     nicht-kommerzielles studentisches Modulprojekt (`5CS-SOPR-50`) mit
+     Pflicht-Disclaimer auftreten, nicht als bezahlte Hochschul-Werbekampagne.
+     Vor einer offiziellen Einbindung auf `dhsn.de` sollte dies mit Betreuerin
+     bzw. Hochschulleitung abgestimmt werden.
+4. **Lizenz und Drittinhalte (Issue #142):**
+   - Alle Texturen, 3D-Modelle, Sounds und Skripte müssen selbst erstellt oder
+     rechtssicher lizenziert sein. Originaldateien von Mojang dürfen nicht
+     weiterverteilt werden.
+   - Eine `LICENSE`-Datei im Repository ist Voraussetzung für seriöse
+     Plattformen wie CurseForge.
+
+---
+
+## Sonderprüfung: Marketplace-Angebote für Bildungsinstitutionen
+
+Eine zentrale Frage für das Projekt ist, ob der Minecraft Marketplace eigene
+Programme oder vereinfachte Konditionen für Hochschulen anbietet.
+
+**Ergebnis: Nein, es gibt kein offenes Self-Service-Programm für Hochschulen
+im Minecraft Marketplace.**
+
+Microsoft trennt zwischen zwei getrennten Angeboten:
+
+1. **Minecraft Marketplace (Bedrock Store) und "Education Collection":**
+   - Das [Minecraft Partner Program](https://www.minecraft.net/en-us/partner)
+     ist explizit ein kommerzielles Programm (eingetragenes Gewerbe, Steuer-ID,
+     Vertragsverhältnis im Microsoft Partner Center, Umsatzbeteiligung über
+     Minecoins). Es gibt keinen vereinfachten oder kostenlosen Hochschultarif
+     für eigene Uploads.
+   - Die im Marketplace enthaltene "Education Collection" (teils kostenlose
+     Lernwelten, z. B. von NASA, BBC oder Museen) entsteht nicht durch freie
+     Hochschul-Einreichungen, sondern ausschließlich über direkte
+     Einzel-Partnerschaften mit Microsoft/Mojang oder über zertifizierte
+     kommerzielle Marketplace-Partnerstudios (z. B. Blockworks, Pathway
+     Studios).
+   - Dieser Weg setzt formale Hochschulverträge, langen Vorlauf, in der Regel
+     Budget und ein allgemeines Bildungs-Curriculum statt einer
+     Standortvorstellung voraus.
+2. **Minecraft Education (`education.minecraft.net`):**
+   - Das eigentliche Bildungsangebot von Microsoft ist
+     [Minecraft Education](https://education.minecraft.net/) (eigene Edition
+     mit Lizenzen über Microsoft 365 Education).
+   - Hochschulen können dort über das Portal Partnership Proposals einreichen
+     oder Lernwelten samt Unterrichtsplan (PDF) für die Lesson Library
+     vorschlagen.
+   - **Einschränkung:** Zum Spielen in Minecraft Education ist zwingend eine
+     **Minecraft-Education-Lizenz** (Schul-/Hochschul-M365-Konto) nötig.
+     Reguläre Studieninteressierte mit normalem Minecraft Bedrock zuhause
+     können darüber nicht ohne Weiteres spielen.
+
+---
+
+## Übersicht aller Veröffentlichungsmöglichkeiten
+
+### Gesamtvergleich
+
+| Plattform / Kanal | Bedrock-Dateien | Kosten | Login für Download | Sprache | Bewertung |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| GitHub Releases + Produkt-Website + DHSN-Kanäle | `.mcworld` / `.mctemplate` (bis 2 GiB) | 0 EUR | Nein | Deutsch (frei) | Primärkanal (Must-Have) |
+| CurseForge | `.mcworld` / `.mcaddon` (bis 2 GB) | 0 EUR | Nein | Englisch Pflicht (+ DE ergänzbar) | Empfohlene Ergänzung |
+| Planet Minecraft (PMC) | Direkt bis 15 MB, sonst Link auf GitHub | 0 EUR | Nein | Englisch üblich | Empfohlene Ergänzung |
+| MinecraftMaps.com | `.mcworld` / `.zip` (oder externer Link) | 0 EUR | Nein | Englisch | Gut geeignet (ergänzend) |
+| MCPEDL | `.mcworld` / `.mcaddon` / `.zip` | 0 EUR | Nein | Englisch | Bedingt geeignet (Werbung) |
+| ModBay | `.mcworld` / `.mcaddon` | 0 EUR | Nein | Englisch | Optional (niedrige Priorität) |
+| Mobile Companion-Apps (z. B. Addons for Minecraft) | `.mcworld` / `.mcaddon` (Einreichung) | 0 EUR | Nein (App nötig) | Englisch | Optional (Mobile-Komfort) |
+| itch.io | Alle Formate (1 GB, erweiterbar) | 0 EUR | Nein | Deutsch möglich | Optional / meist redundant |
+| GameBanana | `.mcworld` / `.mcaddon` (ca. 1,5 GB) | 0 EUR | Nein | Englisch | Geringe Bedrock-Relevanz |
+| Nexus Mods | `.mcworld` / `.mcaddon` (kein hartes Limit) | 0 EUR | Ja (über 1 MB) | Englisch | Ungünstig (Account-Zwang) |
+| Minecraft Marketplace (inkl. Education Collection) | Ja (strenge QA) | Gewerbe / Partnervertrag | Microsoft-Konto | Mehrsprachig | Nicht umsetzbar |
+| Minecraft Education (Lesson Library) | `.mcworld` (EDU-kompatibel) | M365-EDU-Lizenz | Ja (EDU-Lizenz) | Englisch / lokalisiert | Als Hauptkanal ungeeignet |
+| Modrinth | Nein (nur Java Edition) | - | - | - | Technisch ausgeschlossen |
+
+---
+
+### Eigenes Hosting: GitHub Releases + Produkt-Website + DHSN-Kanäle
+
+- **Quellen / AGBs:**
+  [GitHub Terms of Service](https://docs.github.com/en/site-policy/github-terms/github-terms-of-service),
+  [GitHub Releases Quotas](https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases#storage-and-bandwidth-quotas).
+- **Anforderungen:**
+  - Maximal 2 GiB pro Release-Asset; keine Weiterverteilung geschützter
+    Mojang-Originaldateien; das Repository muss erkennbar ein
+    Software-/Mod-Projekt sein (kein reiner Medien-CDN-Missbrauch).
+  - Produkt- und Installationsseite (in Issue
+    [#139](https://github.com/cs24-sopr/project/issues/139) unter
+    `docs/content/product` geplant) mit Download-Button, unterstützter
+    Minecraft-Version, Screenshots und Mojang-Pflicht-Disclaimer.
+  - Klare Lizenz (`LICENSE`, Issue `#142`) sowie Impressum/Datenschutz bei
+    Einbindung über `dhsn.de` oder eine eigene Domain.
+- **Vorteile:**
+  - Infrastruktur (GitHub, CI/CD, Docusaurus / GitHub Pages) ist bereits
+    vorhanden; 0 EUR Kosten; dauerhaft wartungsfrei.
+  - Sofortige Veröffentlichung ohne externe Moderation; kein Login für
+    Interessierte.
+  - Vollständig auf Deutsch, werbefrei und seriös - direkt nutzbar für
+    `dhsn.de`, Social Media sowie QR-Codes auf Flyern, Studienmessen und am
+    Tag der offenen Tür.
+- **Nachteile:**
+  - Keine eigene Suchplattform-Reichweite (Auffindbarkeit nur über
+    DHSN-Kanäle, Suchmaschinen oder externe Verlinkungen).
+  - Manueller Datei-Import durch Nutzende; kein Konsolen-Import.
+
+---
+
+### CurseForge (Minecraft Bedrock)
+
+- **Quellen / AGBs:**
+  [Overwolf / CurseForge Terms](https://www.overwolf.com/legal/terms),
+  [CurseForge Moderation Policies](https://support.curseforge.com/en/support/solutions/articles/9000197281-project-moderation-policies).
+- **Anforderungen:**
+  - Kostenloser Author-Account und Einhaltung der Minecraft EULA.
+  - **Englische Sprache zwingend** für Titel, Kurzbeschreibung und
+    Hauptbeschreibung (deutsche Übersetzung darf darunter ergänzt werden).
+  - Eigenes quadratisches Projekt-Logo (mind. 400x400 px PNG, kein
+    Mojang-Logo), eindeutiger Name ohne Versionsnummern, verbindliche
+    Lizenzauswahl sowie eigene Rechte an allen Assets.
+  - Korrekte Bedrock-Kategorie (Worlds / Add-ons); Dateilimit 2 GB pro Datei.
+  - Externe Links (GitHub, Website) nur am Seitenende erlaubt; keine
+    Ad-Shortener; keine Exklusivitätspflicht.
+  - Manuelle Moderation vor Freischaltung.
+- **Vorteile:**
+  - Seriöseste große Drittplattform für Minecraft Bedrock ohne betrügerische
+    Werbelinks.
+  - Kostenloses Datei-Hosting ohne Account-Zwang für Nutzende, gute
+    Auffindbarkeit, Versionierung und Download-Statistiken.
+  - Paralleles Hosting neben GitHub Releases ist zulässig.
+- **Nachteile:**
+  - Englische Primärbeschreibung zwingend erforderlich.
+  - Manuelle Moderation kann bei unklaren Lizenzen oder Markenfragen zu
+    Rückfragen oder Verzögerungen führen.
+
+---
+
+### Planet Minecraft (PMC)
+
+- **Quellen / AGBs:**
+  [Planet Minecraft Site Rules](https://www.planetminecraft.com/rules/).
+- **Anforderungen:**
+  - Kostenloser Account, eigene Original-Map, Screenshots, Beschreibung,
+    Minecraft EULA.
+  - **Upload-Limit 15 MB:** Bei größeren `.mcworld`-Dateien ist ein direkter
+    externer Download-Link (z. B. auf unser GitHub Release) erlaubt und
+    üblich.
+  - Link-Shortener, Ad-Walls und Paywalls sind strikt verboten.
+- **Vorteile:**
+  - Große Community speziell für Architektur- und Real-Life-Nachbauten.
+  - Geringer Aufwand, da der Download direkt auf GitHub Releases verweisen
+    kann (kein doppeltes Datei-Management).
+  - Gute Sichtbarkeit in Suchmaschinen (Google).
+- **Nachteile:**
+  - Direktupload auf 15 MB begrenzt; international/englischsprachig;
+    Publikum tendenziell stärker Java-orientiert.
+
+---
+
+### MinecraftMaps.com
+
+- **Quellen / AGBs:** [MinecraftMaps.com](https://www.minecraftmaps.com/)
+  (inkl. Bedrock-Sektion).
+- **Anforderungen:**
+  - Vollständig spielbare, getestete Original-Map als `.mcworld` oder `.zip`
+    inkl. eingebetteter Packs.
+  - Keine Ad-Shortener (z. B. adf.ly); saubere externe Download-Links
+    zulässig; schlanke Dateigröße empfohlen (unbenutzte Chunks entfernen).
+  - Manuelle Sichtung vor Veröffentlichung.
+- **Vorteile:**
+  - Rein auf fertige Spielwelten und Adventure-/Quest-Maps spezialisiertes
+    Portal; Download ohne Account-Pflicht.
+- **Nachteile:**
+  - Schwerpunkt liegt auf Java Edition, Bedrock-Bereich kleiner als auf
+    CurseForge oder MCPEDL; englischsprachig.
+
+---
+
+### MCPEDL (mcpedl.com)
+
+- **Quellen / AGBs:** [MCPEDL Guidelines](https://mcpedl.com/guidelines/).
+- **Anforderungen:**
+  - Kostenloser Creator-Account, Einhaltung der Minecraft EULA und
+    Urheberrechte.
+  - Formate: `.mcworld`, `.mcaddon`, `.mcpack`, `.zip` (keine `.exe`).
+  - Mindestens 3 gute In-Game-Screenshots, Beschreibung, Versionsangaben und
+    Installationsanleitung.
+  - Externe Download-Links zulässig (max. 1 Klick/Weiterleitung, keine
+    Malware oder irreführende Seiten).
+  - Manuelle Moderation (typisch 1 bis 7 Werktage).
+- **Vorteile:**
+  - Größtes dediziertes Bedrock-Portal mit hoher Reichweite bei PC- und
+    Mobile-Spielenden.
+- **Nachteile:**
+  - Stark werbelastiges Umfeld; wirkt im Hochschulkontext (z. B. auf
+    `dhsn.de` verlinkt) deutlich unseriöser als GitHub oder CurseForge.
+  - Zielgruppe fast ausschließlich international/englischsprachig (geringe
+    Zielgruppengenauigkeit für Leipzig/Sachsen).
+  - Moderationswartezeit bei jeder Änderung.
+
+---
+
+### ModBay (modbay.org)
+
+- **Quellen / AGBs:** [ModBay Rules](https://modbay.org/rules.html).
+- **Anforderungen:**
+  - Kostenloser Account; Pflichtfelder: Titel, Kurzbeschreibung (ca. 100-150
+    Zeichen), Hauptbeschreibung, Cover-Bild, exakte Minecraft-Version und
+    Kategorie (nachträglich nicht änderbar).
+  - Verbot von Spam, unerlaubter Werbung und unsicheren Links; manuelle
+    Moderation; Cross-Posting erlaubt.
+- **Vorteile:**
+  - Auf Minecraft Bedrock spezialisiert und aufgeräumter als MCPEDL.
+- **Nachteile:**
+  - Deutlich geringere Bekanntheit und Reichweite als CurseForge, PMC oder
+    MCPEDL; englischsprachig; zusätzlicher Pflegeaufwand.
+
+---
+
+### Mobile Companion-Apps (z. B. "Addons for Minecraft" von Kayen Works)
+
+- **Quellen / AGBs:** Einreichung bei [Kayen Works](https://kayenworks.com/)
+  (iOS/Android App "Addons for Minecraft").
+- **Anforderungen:**
+  - Einreichung des gepackten `.mcworld`/`.mcaddon`/`.zip`-Archivs per E-Mail
+    (`addons@kayenworks.com`) inkl. Projektbeschreibung, Credits und Link zur
+    Original-Downloadseite.
+  - Inhalt muss jugendfrei (all ages) sein und wird vom Betreiber geprüft.
+- **Vorteile:**
+  - Sehr einfacher 1-Tap-Import direkt auf Android und iOS ohne manuellen
+    Dateimanager.
+- **Nachteile:**
+  - Stark werbefinanzierte Drittanbieter-Apps; keine Garantie auf Aufnahme;
+    wenig Kontrolle über Updates und Darstellung; ungeeignet als offizieller
+    Hochschul-Hauptlink.
+
+---
+
+### itch.io
+
+- **Quellen / AGBs:**
+  [itch.io Terms of Service](https://itch.io/docs/legal/terms).
+- **Anforderungen:**
+  - Kostenloser Account; 100 % Rechteverbleib bei den Autoren, kein DRM, keine
+    Exklusivität; Einhaltung der Minecraft EULA.
+  - Dateilimit standardmäßig 1 GB pro Datei (auf Anfrage beim Support
+    erweiterbar).
+- **Vorteile:**
+  - Sehr saubere, werbefreie Projektseite ohne Download-Account-Zwang;
+    deutsche Sprache problemlos möglich; sofortige Veröffentlichung ohne
+    Warteschlange; automatisierbarer Upload über CLI (`butler`).
+- **Nachteile:**
+  - Kaum organische Minecraft-Reichweite.
+  - Gegenüber unserer eigenen Docusaurus-Produktseite + GitHub Releases
+    weitgehend redundant.
+
+---
+
+### GameBanana
+
+- **Quellen / AGBs:**
+  [GameBanana Rules](https://gamebanana.com/wikis?name=Rules).
+- **Anforderungen:**
+  - Kostenloser Account, exakte Kategorisierung (Maps / Mods), verpflichtende
+    Credits aller Beteiligten mit Rollen.
+  - Direktupload-Limit ca. 1,46 bis 1,6 GB für fertige Releases (WIP-Seiten
+    max. 200 MB).
+  - Verbot permanenter Paywalls; kostenloser Download ohne Account-Zwang.
+- **Vorteile:**
+  - Etablierte, moderat beworbene Modding-Plattform ohne Login-Hürde beim
+    Download.
+- **Nachteile:**
+  - Minecraft Bedrock spielt dort nur eine kleine Nischenrolle;
+    englischsprachig.
+
+---
+
+### Nexus Mods
+
+- **Quellen / AGBs:**
+  [Nexus Mods File Submission Guidelines](https://help.nexusmods.com/article/28-file-submission-guidelines).
+- **Anforderungen:**
+  - Kostenloser Account, Rechte/Erlaubnis an allen Assets, saubere Credits.
+  - **Pflicht zur KI-Offenlegung (AI Disclosure):** Einsatz generativer
+    KI-Tools für Texturen, Skripte, Code oder Texte muss verpflichtend
+    gekennzeichnet werden.
+  - Keine harte Dateigrößenbegrenzung.
+- **Vorteile:**
+  - Sehr bekannte, seriöse Modding-Plattform.
+- **Nachteile:**
+  - **Account-Zwang für Downloads über 1 MB:** Studieninteressierte müssten
+    sich vor dem Download registrieren und erhalten im Free-Tarif gedrosselte
+    Geschwindigkeit mit Wartezeit.
+  - Für Minecraft Bedrock deutlich weniger verbreitet als CurseForge oder
+    MCPEDL.
+
+---
+
+### Minecraft Marketplace (Bedrock Store)
+
+- **Quellen / AGBs:**
+  [Minecraft Partner Program](https://www.minecraft.net/en-us/partner),
+  Marketplace Guidelines, Minecraft Usage Guidelines.
+- **Anforderungen:**
+  - Aufnahme ins kommerzielle Minecraft Partner Program: eingetragenes
+    Gewerbe, Steuer-ID, Geschäftskonto, Mindestalter 18, nachweisbares
+    Portfolio bereits veröffentlichter Original-Werke, professionelle
+    Marketing-Assets (Key Art, Trailer, Screenshots).
+  - Strenge mehrstufige QA-Prüfung (20 TPS auf Low-End-Mobile, striktes
+    Namespacing, keine losen Dateien, UI-Skalierung auf allen Endgeräten,
+    Altersfreigabe ESRB E10+ / PEGI 7).
+  - Reguläre Partnerinhalte werden in Minecoins bepreist; freie kostenlose
+    Einzel-Maps sowie Institutions-/Markenwerbung sind ohne direkte
+    Microsoft-Sondervereinbarung nicht zulässig.
+  - Kein offenes Bildungsprogramm für Hochschulen (siehe Abschnitt
+    [Sonderprüfung](#sonderprüfung-marketplace-angebote-für-bildungsinstitutionen)).
+- **Vorteile:**
+  - Einziger direkter In-Game-Vertriebskanal inklusive Xbox, PlayStation und
+    Switch; höchstes Vertrauen und automatische Updates.
+- **Nachteile:**
+  - Ohne Gewerbe, Portfolio, Budget und Microsoft-Partnerschaft für ein
+    studentisches Modulprojekt faktisch nicht umsetzbar.
+  - Lange Bewerbungs- und QA-Vorlaufzeiten passen nicht zum Semesterrahmen.
+
+---
+
+### Minecraft Education (Lesson Library)
+
+- **Quellen / AGBs:** [Minecraft Education](https://education.minecraft.net/)
+  und Minecraft Education Usage Guidelines.
+- **Anforderungen:**
+  - Verifizierter Educator-Account (Microsoft 365 Education) bzw. formales
+    Partnership Proposal durch die Hochschule.
+  - Kompatibilität mit Minecraft Education (Version und Script API weichen oft
+    von Standard-Bedrock 1.26.50 ab) sowie ausgearbeiteter Unterrichtsplan
+    (PDF).
+  - **Nutzungsvoraussetzung:** Spielende benötigen eine gültige
+    Minecraft-Education-Lizenz (Schul-/Hochschulkonto).
+- **Vorteile:**
+  - Offizieller Bildungsrahmen von Microsoft; nutzbar an Schulen mit
+    bestehenden M365-EDU-Lizenzen.
+- **Nachteile:**
+  - Schließt reguläre Minecraft-Spielende ohne Schullizenz komplett aus.
+  - Zusätzlicher Portierungs-, Test- und Dokumentationsaufwand.
+
+---
+
+### Ausschlussprüfungen
+
+- **Modrinth:** Unterstützt ausschließlich Minecraft: Java Edition und bietet
+  keine native Unterstützung für `.mcworld` oder `.mcaddon` -> **technisch
+  ausgeschlossen**.
+- **Unseriöse Repost-/Scraper-Seiten (z. B. 9Minecraft, MinecraftSix):**
+  Bewusst vermeiden (Urheberrechtsverstöße, aggressive Werbung,
+  Malware-Risiko).
+
+---
+
+## Empfehlung und offene Punkte für das Orga-Meeting
+
+Die Zielgruppe (Studieninteressierte für die DHSN Leipzig) wird das Projekt
+vor allem über **DHSN-Kanäle, Google-Suche, Social Media und
+Vor-Ort-Veranstaltungen** finden, nicht primär über englischsprachige
+Mod-Portale.
+
+### Empfohlenes Vorgehen
+
+1. **Pflicht-Basis (wartungsfrei, 0 EUR):**
+   - Automatisierter Export als **`.mcworld`** (und optional **`.mctemplate`**)
+     mit fest eingebettetem Behavior- und Resource-Pack über **GitHub
+     Releases**.
+   - Deutsche **Produkt- und Installationsseite** (Issue
+     [#139](https://github.com/cs24-sopr/project/issues/139)) mit direktem
+     Download-Link, Screenshots, getesteter Bedrock-Version und
+     Mojang-Pflicht-Disclaimer.
+   - Verbreitung über **DHSN-Kanäle** (`dhsn.de`, Social Media, QR-Codes am
+     Tag der offenen Tür und auf Studienmessen).
+2. **Sinnvolle Community-Ergänzung (einmaliger Zusatzaufwand):**
+   - **CurseForge** als seriöseste Bedrock-Drittplattform (erfordert englische
+     Primärbeschreibung, `LICENSE` aus Issue
+     [#142](https://github.com/cs24-sopr/project/issues/142) und eigenes
+     400x400-Icon).
+   - **Planet Minecraft** als aufwandsarmes Schaufenster mit direktem Link auf
+     das GitHub Release (gute Google-Sichtbarkeit).
+   - *Optional:* MinecraftMaps.com (passend für Quest-Welten) oder MCPEDL
+     (nur wenn das werbelastige Umfeld akzeptiert wird).
+3. **Klare Absagen:**
+   - Kein Minecraft Marketplace, keine primäre Ausrichtung auf Minecraft
+     Education, kein Nexus Mods, kein Modrinth.
+
+### Entscheidungsfragen für das Orga-Meeting
+
+:::info
+Die finale Entscheidung wird gemäß den Akzeptanzkriterien von Issue
+[#97](https://github.com/cs24-sopr/project/issues/97) im Orga-Meeting
+getroffen und im Anschluss hier bzw. im Decision Log festgehalten.
+:::
+
+1. **Konsolen-Verzicht:** Ist es für Orga-Team und Betreuerin akzeptabel, dass
+   der reine Download offiziell nur **Windows PC, Android und iOS** abdeckt
+   (keine PlayStation, Switch, Xbox)?
+2. **Rechtliches & Branding (mit Betreuerin / DHSN klären, vgl. Issue #142):**
+   - Besteht Freigabe für die öffentliche Nutzung von DHSN-Name und -Logo auf
+     GitHub sowie auf Drittplattformen wie CurseForge und Planet Minecraft?
+   - Welche Lizenz wird gewählt, und ist die Positionierung als studentisches
+     Lehrprojekt mit Pflicht-Disclaimer abgestimmt?
+3. **Release-Artefakt:** Liefern wir `.mcworld`, `.mctemplate` oder beides
+   über die Release-Pipeline aus?
+4. **Plattform-Auswahl:** Bleiben wir bei GitHub Releases + Produkt-Website +
+   DHSN-Kanälen, oder pflegen wir zusätzlich CurseForge und Planet Minecraft
+   (inkl. englischer Projektbeschreibung)?
