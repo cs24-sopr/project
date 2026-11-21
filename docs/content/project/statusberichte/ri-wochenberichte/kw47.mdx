@@ -1,0 +1,106 @@
+---
+sidebar_position: 5
+---
+
+# RI Wöchentliches Update: KW 47
+
+- **Projekt:** Virtueller Nachbau der DHSN Leipzig
+- **Datum:** 2026-11-21
+- **Berichtszeitraum:** KW 47
+- **RI-Team / Ersteller:** Organisation, Leitung und Infrastruktur (Lucas)
+
+---
+
+### Gesamtstatus
+- [x] 🟢 **stabil**
+- [ ] 🟡 **Risiken / Klärungen**
+- [ ] 🔴 **relevante Blocker**
+
+---
+
+### Wichtige Änderungen
+- `orga#9` / PR `#143` & `dhsn-minecraft-assets` PR `#109`:
+  Vulnerability-Checking-Pipeline (Dependabot und Dependency Review) in
+  `project` und `dhsn-minecraft-assets` aktiviert sowie lokale
+  Docusaurus-Suche ergänzt.
+- `orga#127` / PR `#135`: Gameplay-Test-Workflow verbessert; der
+  Gameplay-Test-Report KW 47 liegt als Draft PR `#154` vor (T1
+  Questerkennungstest bestanden, Hinweis auf noch fehlende Quest-Integration
+  im Spiel).
+- `coding-interactions`: Quest-Basis (`dhsn-minecraft-assets` PR `#84`
+  Questlog / `project#105` und PR `#96` Questereignisse / `#78`) erfolgreich
+  gemerged; PR `#99` (`project#91` Quest Library) im Review.
+- `asset-design`: 13 Asset-Tickets seit dem letzten Bericht abgeschlossen
+  und gemerged (`dhsn-minecraft-assets#69`, `#70`, `#72`-`#74`, `#77`, `#81`,
+  `#86`, `#88`, `#89`, `#91`, `#98` sowie `project#115`).
+- `recherche`: Studiengangs- und Recherche-Tickets (`#8`, `#12`, `#13`,
+  `#40`, `#94`) sowie PR `#128` (Controlling & Finance) und PR `#70`
+  (Sustainable Engineering) abgeschlossen und gemerged.
+- `builder` (PR `#171`): Neun Bau-Tickets abgeschlossen (u. a. Bibliothek
+  `#93`, Raum 100 `#157`, Raum 113/114 `#122`, Raum 109 `#166`, Startinsel
+  `#107`, Volleyballfeld `#155`, Feuertreppe `#153`).
+- `story-design` (PR `#186`): Zahlreiche Quest-Konzepte abgeschlossen
+  (u. a. Operation Erstsemester, Zahlenchaos im Hörsaal, Netzprobleme,
+  Mensa-Quest und Redstone-Rätsel `project#138`).
+
+### Neue / geänderte Schnittstellen
+- `orga#175` (PR `#185`): Neue Quest-Meilensteine für alle Teams in
+  Vorbereitung (24.11., 26.11. und 29.11.2026); das Asset-Team schlägt zudem
+  den 06.12.2026 als gemeinsame Add-on-Deadline vor.
+- `orga#9`: Automatisierte Dependency-Review-Checks auf Pull Requests in
+  `project` und `dhsn-minecraft-assets`.
+- `builder` / `recherche` (`recherche#9`): Das Builder-Team benötigt weitere
+  Raumfotos vom Recherche-Team für die Inneneinrichtung.
+- `asset-design` / `coding-interactions` / `builder`: Laufende Abstimmung zu
+  Lieferumfang und NPC-Interaktionen offener Quest-Assets.
+
+### Konflikte / offene Entscheidungen
+- **Priorisierung und Zeitplanung (Asset-Design / Story / Orga):**
+  Verbindliche Festlegung der Quest-Prioritäten, Liefertermine (PR `#185`)
+  und einer gemeinsamen Add-on-Deadline (Vorschlag 06.12.2026) erforderlich.
+- **Publikation und Lizenzierung (`orga#97`, `#142`):** Auswertung der
+  Publikationsoptionen (PR `#187` im Review) und Klärung der
+  Lizenz-Compliance stehen noch aus.
+- **Ausstehende KW-47-Teamberichte (`project#170`):** Builder (PR `#171`)
+  und Story (PR `#186`) warten auf Merge; der Sprint-4-Bericht des
+  Coding-Teams steht noch aus.
+
+### Blocker
+- **Fehlende Raumfotos (`builder` / `recherche#9`):** Dem Builder-Team
+  fehlen Fotos mehrerer Räume zur Fortsetzung der Inneneinrichtung.
+- **Teamkapazität (`recherche`):** Laut Wochenbericht KW 47 bleibt die
+  Mitarbeit eines Teammitglieds weiterhin aus.
+
+### Wichtige Termine
+- **24.11.2026 (23:59 Uhr):** Quest-Meilenstein 1 (Das Erwachen, PR `#185`).
+- **26.11.2026 (23:59 Uhr):** Quest-Meilenstein 2 (Operation Erstsemester,
+  PR `#185`).
+- **27.11.2026 (23:59 Uhr):** Abgabefrist für Week 5 Submission (KW 48).
+- **28.11.2026 (23:59 Uhr):** Abgabefrist für Gameplay Testing Week 4.
+- **29.11.2026 (23:59 Uhr):** Quest-Meilenstein 3 (Finale Quest, PR `#185`).
+- **04.12.2026 (23:59 Uhr):** Abgabefrist für Week 6 Submission (KW 49).
+- **09.12.2026 / 11.12.2026:** Prüfungstermine (Exam Group 1 & 2).
+
+### Maßnahmen bis zur nächsten Woche
+- Quest-Meilensteine (PR `#185`) finalisieren, mit allen Teams kommunizieren
+  und gemeinsame Add-on-Deadline mit Asset-Design und Story abstimmen.
+- Offene KW-47-Berichts-PRs (`#171` Builder, `#186` Story) sowie den
+  ausstehenden Coding-Bericht nachverfolgen und `Wochenbericht_4.pdf`
+  aktualisieren.
+- Fortschritt bei der Quest-Integration im Spiel (`coding-interactions`) und
+  Bereitstellung der fehlenden Raumfotos (`recherche#9` für `builder`)
+  begleiten.
+- Draft PR `#154` (Gameplay-Test KW 47), PR `#187` (`orga#97`) und
+  Präsentationsabstimmung (`orga#126`) weiterführen.
+
+### Teams mit besonderem Klärungsbedarf
+- `asset-design`: Benötigt verbindliche Quest-Prioritäten, Liefertermine und
+  frühzeitige Tickets für verbleibende Assets.
+- `builder`: Benötigt weitere Raumfotos (`recherche#9`) für die
+  Inneneinrichtung; Gameplay-Test KW 47 vermerkt Bauverzug.
+- `recherche-publishing-courses`: Offene Raumfotos (`recherche#9`),
+  Commandblock-Recherche (`recherche#5`) und anhaltend fehlende Mitarbeit
+  eines Teammitglieds.
+- `coding-interactions`: Sprint-4-Bericht steht noch aus; erste vollständige
+  Quests müssen zeitnah ins Spiel integriert werden (vgl. Gameplay-Test
+  KW 47).
