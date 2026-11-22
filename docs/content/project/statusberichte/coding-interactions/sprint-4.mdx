@@ -1,0 +1,108 @@
+---
+sidebar_position: 4
+---
+
+# Wöchentliches Update: Coding
+
+- **Datum:** 2026-11-22
+- **Sprint / Berichtszeitraum:** CODE-SPRINT-4 / KW 47
+- **Verantwortliche Ansprechperson:** Bohdan Chornokondratenko
+
+### 1. Gesamtstatus
+
+- [ ] 🟢 **stabil** (im Zeitplan, keine wesentlichen Hindernisse)
+- [x] 🟡 **Risiken / Klärungen** (Klärungsbedarf vorhanden, bremst leicht)
+- [ ] 🔴 **relevante Blocker** (Arbeit stockt, externe Hilfe nötig)
+
+### 2. Fortschritt in Sprints
+
+- **Sprint 1 bis 3 - erledigt:**
+  - `dhsn-minecraft-assets#32`: Toilette benutzbar gemacht
+  - `dhsn-minecraft-assets#34`: Grünen Stuhl benutzbar gemacht
+  - `project#41`: Kinematografische Kamera
+  - `dhsn-minecraft-assets#56`: Refactor für Funktionalität von Tür
+  - `dhsn-minecraft-assets#57`: Template für Anfragen erstellt
+  - `project#65`: Check `frontdoor.js` Skript
+  - `project#86`: Custom Entitäten immun gegen Schaden machen
+
+- **Sprint 4 - erledigt:**
+  - `dhsn-minecraft-assets#78`: Questereignisse erkennen. Pull Request
+    `#96` am 17.11. gemergt. Damit stehen allen Quests wiederverwendbare
+    Bausteine zur Verfügung: Item aufheben, Item in Trichter, Item in
+    Regal, Block platzieren, Bereich betreten.
+  - `project#105`: Questlog. Pull Request `dhsn-minecraft-assets#84` am
+    17.11. gemergt.
+  - `project#169`: Testskript am Ersti-Coach-NPC entfernt.
+
+- **Sprint 4 - in Arbeit:**
+  - `project#91`: Quest - Bibliothek. Pull Request
+    `dhsn-minecraft-assets#99` ist offen. Die Quest wurde nach der
+    internen Besprechung überarbeitet:
+    - zufällige Anzahl Bücher pro Runde, ein Buch pro Regal
+    - Bücher können nicht mehr herausgenommen werden
+    - die Bibliothekarin meldet falsche Regale
+    - Reset beim Verlassen der Bibliothek, mit 5-Sekunden-Countdown
+    - wiederholbare Challenge auf Zeit mit Highscore-Schild
+    - Spielstand wird in der Map gespeichert
+
+    Der aktuelle Stand von `main` ist eingearbeitet. Der Test im Spiel
+    steht noch aus.
+  - `dhsn-minecraft-assets#79`: Quest - Operation Erstsemester. Schritt 1 (Begrüßung durch Ersti-Coach Lucas) und 2 (Interaktion mit Studienorganisation)
+      sind umgesetzt und überarbeitet:
+    - Betritt der Spieler die Startzone, wird er festgehalten, und die
+      Kamera richtet sich auf Lucas. Die Erkennung nutzt den Baustein
+      „Bereich betreten“ aus `dhsn-minecraft-assets#78`.
+    - Lucas hüpft, dreht sich zum Spieler und läuft per Wegfindung zu ihm.
+    - Dialog mit Studienorganisation und übergabe von Questitems
+    - Dafür gibt es wiederverwendbare Hilfsfunktionen für
+      Quest-Sequenzen, z. B. Spieler festhalten, Blick lenken, NPC zu
+      einem Ziel laufen lassen.
+    - Dazu Debug-Hilfen zum Zurücksetzen von Spieler und NPCs.
+
+    Liegt auf Branch `79-quest-operation-erstsemester`, noch ohne Pull
+    Request.
+  - `project#106`: Quest - Das Erwachen. Erste Fassung mit Testaufbau auf
+    Branch `106-quest-das-erwachen`, noch ohne Pull Request.
+  - `project#121`: ECTS aus XP. Umsetzungsplan steht, Branch
+    `121-feature-ects-from-xp` ist angelegt.
+
+### 3. Änderungen an Anforderungen seit letzter Woche
+
+| Issue | Anforderung | Art der Änderung | Begründung | Betrifft Nachbarteams? |
+| :---- | :---------- | :--------------- | :--------- | :--------------------- |
+| `dhsn-minecraft-assets#94`, `#97`, `#104`, `#107`, `#108`, `#124`, `#125` | Quests „Zahlenchaos im Hörsaal“, „Alles eine Frage der Ableitung“, „Sport ist Mord“, „Mission Ersatzball“, „Netzprobleme“, „Auf Wohnungssuche“, „Immobilien unter der Lupe“ | neu | Das Story-Team hat weitere Quests ausgearbeitet und zur Umsetzung angefragt. | Ja (Story-, Asset- und Building-Team) |
+| `dhsn-minecraft-assets#121` | Dialogfenster lassen sich per Knopf abbrechen | neu | Einige Dialogfenster in Quests lassen sich nicht mit einem Mausklick schließen. | Ja (Story-Team) |
+| `project#173` | Quest - Schaltalgebra | neu | Neue Quest vom Story-Team; der Raum dafür wird über `project#174` gebaut. | Ja (Story- und Building-Team) |
+| `project#121` | ECTS werden bei Questerfüllung per Befehl als Level vergeben statt über einen ECTS-Trank | angepasst | Eine XP-Flasche gibt zufällig 3 bis 11 Erfahrungspunkte, damit sind genau 180 ECTS nicht steuerbar. 1 ECTS = 1 Level ist exakt; die Anforderung erlaubt Befehle ausdrücklich. | Ja (Asset-Team: kein Trank-Asset nötig; Story-Team: ECTS pro Quest festlegen) |
+| `project#91` | Bibliotheks-Quest: Bücher nicht mehr herausnehmbar, Reset beim Verlassen, zufällige Bücherzahl, Challenge mit Highscores | angepasst | Rückmeldung aus der internen Besprechung | Nein |
+
+### 4. Schnittstellen (neu, geändert oder abgestimmt)
+
+- **Building-Team:**
+  - Für `project#91` werden die Koordinaten der Bibliothek und die Position des Highscore-Schildes gebraucht.
+  - `project#174` (Raum für die Schaltalgebra-Quest) und `project#123` (Personen der Quest Operation Erstsemester platzieren) betreffen ebenfalls Quests des Coding-Teams.
+- **Asset-Team:**
+  - Für `project#121` ist kein ECTS-Trank als Asset mehr nötig.
+  - Die Winkanimation des Ersti-Coaches wird im Add-on anders umgesetzt als im entfernten Testskript (`project#169`).
+- **Intern:**
+  - Für Operation Erstsemester (`dhsn-minecraft-assets#79`) sind allgemeine Hilfsfunktionen für Quest-Sequenzen entstanden: Spieler festhalten, Blick lenken, NPC laufen lassen. Andere Quests können sie mitnutzen.
+  - Die eigenen Bücherregale bieten Quests neue Funktionen: Einstellen verbieten (`setShelfInsertCheck`) und eigene Antworten auf abgelehnte Bücher (`onShelfRejected`).
+  - Für `project#121` ist eine Kopfzeile im Questlog (`project#105`) geplant, die „Titel: N ECTS“ anzeigt. Das ist mit dem Autor des Questlogs abzustimmen.
+
+### 5. Blocker & Risiken
+
+- [x] Keine aktuellen Blocker.
+- **Risiko:** Für die Bibliotheks-Quest (`project#91`) ist noch nicht im Spiel geprüft, ob die eigenen Bücherregale im Abenteuermodus der Map auf Rechtsklicks reagieren. Falls nicht, betrifft das jede Quest mit diesen Regalen.
+- **Risiko:** Ohne die Koordinaten vom Building-Team läuft `project#91` nur im Testaufbau.
+- **Hinweis zur Reihenfolge:** Die Branches von `project#106` und `project#121` bauen auf dem Branch der Bibliotheks-Quest (`project#91`) auf. Pull Request `dhsn-minecraft-assets#99` sollte deshalb zuerst gemergt werden.
+- **Hinweis zur Auslastung:** Seit letzter Woche sind acht neue Code-Issues dazugekommen, die noch niemandem zugewiesen sind.
+
+### 6. Geplante Aufgaben bis nächste Woche
+
+- `project#91`: Test im Spiel, Review abschließen und `dhsn-minecraft-assets#99` mergen
+- `dhsn-minecraft-assets#79`: Pull Request für Quest - Operation Erstsemester und testen in Welt
+- `project#106`: Quest - Das Erwachen fertigstellen, Pull Request
+- `project#121`: ECTS aus XP umsetzen (Limit 180, Titel, Anzeige, Anbindung an `project#91`)
+- `project#173`: Quest - Schaltalgebra beginnen
+- `dhsn-minecraft-assets#94`: Quest - Zahlenchaos im Hörsaal beginnen
+
